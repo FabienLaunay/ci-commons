@@ -1,10 +1,10 @@
 #!/bin/bash
 
-RED="\033[31m"
-YELLOW="\033[33m"
-BLUE="\033[94m"
-GREEN="\033[32m"
-NO_COLOR="\033[0m"
+RED="\e[31m"
+YELLOW="\e[33m"
+BLUE="\e[94m"
+GREEN="\e[32m"
+NO_COLOR="\e[0m"
 
 title(){
     MSG="$BLUE$1$NO_COLOR"
