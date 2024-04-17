@@ -15,7 +15,8 @@ class ImperativeMood(LineRule):
     def validate(self, line, commit):
         words = line.split(': ', 1)[-1].split()
         first_word = words[0].lower()
-        verbs = open('C:\\Temp\\Gitlint\\gitlintUserDefinedRules\\verbs.txt', 'r')
+        # verbs = open('C:\\Temp\\Gitlint\\gitlintUserDefinedRules\\verbs.txt', 'r')
+        verbs = open('cfg/gitlint/gitlintUserDefinedRules/verbs.txt', 'r')
         verbsList = verbs.read().splitlines()
         verbs.close()
         found = False
