@@ -2,3 +2,4 @@ build-job:
   image: jorisroovers/gitlint
   script:
     - echo "TEST"
+    - gitlint --debug
