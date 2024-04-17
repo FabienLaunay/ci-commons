@@ -1,8 +1,4 @@
 build-job:
-  image: node
+  image: jorisroovers/gitlint
   script:
-    - npm install
-    - npm run build
-  artifacts:
-    paths:
-      - "build/"
+    - echo "TEST"
