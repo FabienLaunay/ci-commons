@@ -7,7 +7,7 @@ commit-message:
     name: jorisroovers/gitlint:0.19.1
     entrypoint: [""]
   script:
-    - . .ci/common.sh
+    - . .ci/common.bash
     - title "*** Running gitlint..."
     - exit_code=0
     - RESULT=$(gitlint 2>&1) || exit_code=$?
