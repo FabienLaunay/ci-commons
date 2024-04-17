@@ -16,7 +16,7 @@ commit-message:
       echo "#########################"
       echo -e "$NO_COLOR"
     - exit_code=0
-    - RESULT=$(gitlint 2>&1) || exit_code=$?
+    - RESULT=$(gitlint --config cfg/gitlint/gitlint.cfg 2>&1) || exit_code=$?
     - handle_test_result $exit_code "$RESULT"
     - exit $exit_code
   needs: [ ]
