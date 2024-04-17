@@ -1,5 +1,11 @@
-build-job:
-  image: jorisroovers/gitlint
+stages:
+  - linting
+
+gitlint:
+  stage: linting
+  image:
+    name: jorisroovers/gitlint:0.19.1
+    entrypoint: [ "" ]
   script:
-    - echo "TEST"
+    - echo "############# TEST "#############"
     - gitlint --debug
