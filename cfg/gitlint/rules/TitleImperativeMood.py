@@ -15,7 +15,7 @@ class TitleImperativeMood(LineRule):
     def validate(self, line, commit):
         words = line.split(': ', 1)[-1].split()
         first_word = words[0].lower()
-        verbs = open('cfg/gitlint/gitlint/txt/Verbs.txt', 'r')
+        verbs = open('cfg/gitlint/txt/Verbs.txt', 'r')
         verbsList = verbs.read().splitlines()
         verbs.close()
         found = False
