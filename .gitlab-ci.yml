@@ -10,11 +10,11 @@ commit-message:
     - . .ci/common.bash
     - |
       #
-      echo $BLUE"BLUE"
-      echo "#########################"      
-      echo "#        Gitlint        #"
-      echo "#########################"
-      echo "$NO_COLOR"
+      echo -e $BLUE"BLUE"
+      echo -e "#########################"      
+      echo -e "#        Gitlint        #"
+      echo -e "#########################"
+      echo -e "$NO_COLOR"
     - exit_code=0
     - RESULT=$(gitlint 2>&1) || exit_code=$?
     - handle_test_result $exit_code "$RESULT"
