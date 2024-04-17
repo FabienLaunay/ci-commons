@@ -7,10 +7,14 @@ commit-message:
     name: jorisroovers/gitlint:0.19.1
     entrypoint: [ "" ]
   script:
-    - TERM=ansi
-    - echo -e "\e[31mThis text is red,\e[0m but this text isn't\e[31m however this text is red again."
     - . .ci/common.bash
-    - title "*** Running gitlint..."
+    - |
+      # comment
+      echo "$BLUE"
+      echo "#########################"      
+      echo "#        Gitlint        #"
+      echo "#########################"
+      echo "$NO_COLOR"
     - exit_code=0
     - RESULT=$(gitlint 2>&1) || exit_code=$?
     - handle_test_result $exit_code "$RESULT"
