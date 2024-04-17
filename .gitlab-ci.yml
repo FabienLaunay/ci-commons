@@ -9,8 +9,8 @@ commit-message:
   script:
     - . .ci/common.bash
     - |
-      # comment
-      echo "$BLUE"
+      #
+      echo $BLUE"BLUE"
       echo "#########################"      
       echo "#        Gitlint        #"
       echo "#########################"
