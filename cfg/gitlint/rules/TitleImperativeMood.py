@@ -1,15 +1,9 @@
-#  This material contains trade secrets or otherwise confidential information owned by
-#  Siemens Industry Software Inc. or its affiliates (collectively, "SISW"), or its licensors.
-#  Access to and use of this information is strictly limited as set forth in the Customer's
-#  applicable agreements with SISW.
-#
-#  Copyright 2024 Siemens
-
 from gitlint.rules import LineRule, RuleViolation, CommitMessageTitle
+
 
 class TitleImperativeMood(LineRule):
     name = "title-imperative-mood"
-    id = "Z1"
+    id = "UC1"
     target = CommitMessageTitle
 
     def validate(self, line, commit):
@@ -23,6 +17,6 @@ class TitleImperativeMood(LineRule):
             if first_word == verb:
                 found = True
                 break
-
         if not found:
-            return [RuleViolation(self.id,'Word after first ": " occurrence in title is not a verb in imperative mood.')]
+            return [RuleViolation(self.id,
+                                  'Word after first ": " occurrence in title is not a verb in imperative mood.')]
