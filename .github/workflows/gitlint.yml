@@ -1,0 +1,23 @@
+name: GitlintNamePlaceHolder
+run-name: Gitlint run name place holder
+on:
+  push:
+
+jobs:
+  gitlintJobNamePlaceHolder:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install gitlint
+        shell: bash
+        run: |
+          python -m pip install gitlint
+
+      - name: Run gitlint
+        shell: bash
+        run: |
+          # Lint everything from the base to the latest
+          gitlint --config cfg/gitlint/gitlint.cfg
