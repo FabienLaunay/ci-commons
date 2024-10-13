@@ -3,9 +3,14 @@ stages:
 
 LintGitCommitMessages:
   stage: lint
+  only:
+    - main
   image:
-    name: python:3.9-slim  # Use a different image with package manager
+    name: python:3.9-slim
     entrypoint: [""]
+  artifacts:
+    paths:
+      - cfg/gitlint/gitlint.cfg
   script:
     - apt-get update && apt-get install -y curl git
     - pip install gitlint
@@ -16,5 +21,3 @@ LintGitCommitMessages:
         curl --output cfg/gitlint/gitlint.cfg "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
       fi
     - gitlint --config cfg/gitlint/gitlint.cfg
-  only:
-    - main
