@@ -1,5 +1,12 @@
 stages:
+  - generate-config
   - lint
+
+GenerateGitlintConfig:
+  stage: generate-config
+  artifacts:
+    paths:
+      - cfg/gitlint/gitlint.cfg
 
 LintGitCommitMessages:
   stage: lint
