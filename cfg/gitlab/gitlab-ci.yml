@@ -1,8 +1,8 @@
 stages:
-  - Lint
+  - lint
 
 LintGitCommitMessages:
-  stage: Lint
+  stage: lint
   image:
     name: jorisroovers/gitlint:0.19.1
     entrypoint: [ "" ]
