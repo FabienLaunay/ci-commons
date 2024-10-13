@@ -3,12 +3,8 @@ name: LintGitCommitMessages
 run-name: Verify Git commit messages with Gitlint
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_call:
+    inputs: {}
 
 jobs:
   LintGitCommitMessages:
