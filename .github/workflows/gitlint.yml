@@ -27,7 +27,11 @@ jobs:
         with:
           image: jorisroovers/gitlint:0.19.1  # Use your Gitlint Docker image
           options: --entrypoint ""  # Override entrypoint to empty (if needed)
+          volumes: |
+            ${{ github.workspace }}:/repo  # Mount the GitHub workspace into /repo
           run: |
+            # Change to the /repo directory where the code is mounted
+            cd /repo
             # Lint everything from the base to the latest
             gitlint --config cfg/gitlint/gitlint.cfg
 #      - name: Setup python
