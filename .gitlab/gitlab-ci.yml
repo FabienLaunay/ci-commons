@@ -14,6 +14,8 @@ LintGitCommitMessages:
   stage: lint
   only:
     - main
+  dependencies:
+    - GenerateGitlintConfig
   image:
     name: python:3.9-slim
     entrypoint: [""]
