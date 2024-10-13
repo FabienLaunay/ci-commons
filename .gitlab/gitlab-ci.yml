@@ -10,3 +10,6 @@ LintGitCommitMessages:
     - gitlint --config cfg/gitlint/gitlint.cfg
   only:
     - main
+artifacts:
+  paths:
+    - cfg/gitlint/gitlint.cfg
