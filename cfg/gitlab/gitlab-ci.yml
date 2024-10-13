@@ -26,11 +26,11 @@ LintGitCommitMessages:
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
         echo "Downloading cfg/gitlint/gitlint.cfg from the ci-commons project..."
         mkdir -p cfg/gitlint
-        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/gitlint.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig"
+        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/gitlint.cfg "${CI_API_V4_URL}/projects/fabien.launay.private%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig"
         mkdir -p cfg/gitlint/rules
-        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/rules/TitleImperativeMood.py "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/rules/TitleImperativeMood.py?job=GenerateGitlintConfig"
-        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/rules/TitleVerbCapitalized.py "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/rules/TitleVerbCapitalized.py?job=GenerateGitlintConfig"
+        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/rules/TitleImperativeMood.py "${CI_API_V4_URL}/projects/fabien.launay.private%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/rules/TitleImperativeMood.py?job=GenerateGitlintConfig"
+        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/rules/TitleVerbCapitalized.py "${CI_API_V4_URL}/projects/fabien.launay.private%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/rules/TitleVerbCapitalized.py?job=GenerateGitlintConfig"
         mkdir -p cfg/gitlint/txt
-        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/txt/Verbs.txt "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/txt/Verbs.txt?job=GenerateGitlintConfig"
+        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/txt/Verbs.txt "${CI_API_V4_URL}/projects/fabien.launay.private%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/txt/Verbs.txt?job=GenerateGitlintConfig"
       fi
     - gitlint --config cfg/gitlint/gitlint.cfg
