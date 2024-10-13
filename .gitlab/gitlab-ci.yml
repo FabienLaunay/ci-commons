@@ -29,4 +29,17 @@ LintGitCommitMessages:
       curl --output cfg/gitlint/gitlint4.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
       echo "gitlint4.cfg:"
       cat cfg/gitlint/gitlint4.cfg
+      curl --output cfg/gitlint/gitlint5.cfg ${CI_API_V4_URL}/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages
+      echo "gitlint5.cfg:"
+      cat cfg/gitlint/gitlint5.cfg
+      curl --output cfg/gitlint/gitlint6.cfg "${CI_API_V4_URL}/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
+      echo "gitlint6.cfg:"
+      cat cfg/gitlint/gitlint6.cfg
+      curl --output cfg/gitlint/gitlint7.cfg https://gitlab.com/api/v4/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages
+      echo "gitlint7.cfg:"
+      cat cfg/gitlint/gitlint7.cfg
+      curl --output cfg/gitlint/gitlint8.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
+      echo "gitlint8.cfg:"
+      cat cfg/gitlint/gitlint8.cfg
+      echo ""
     - gitlint --config cfg/gitlint/gitlint.cfg
