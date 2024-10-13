@@ -4,14 +4,15 @@ stages:
 LintGitCommitMessages:
   stage: lint
   image:
-    name: jorisroovers/gitlint:0.19.1
-    entrypoint: [ "" ]
+    name: python:3.9-slim  # Use a different image with package manager
+    entrypoint: [""]
   script:
     - apt-get update && apt-get install -y curl
+    - pip install gitlint
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
         echo "Downloading gitlint.cfg from the ci-commons project..."
-        curl --output cfg/gitlint/gitlint.cfg "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
+        curl --output cfg/gitlint/gitlint.cfg "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/main/raw/.gitlab/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
       fi
     - gitlint --config cfg/gitlint/gitlint.cfg
   only:
