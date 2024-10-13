@@ -24,7 +24,7 @@ LintGitCommitMessages:
     - pip install gitlint
     - |      
       echo "Downloading gitlint.cfg from the ci-commons project..."
-      curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --output gitlint1.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
+      curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output gitlint1.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
       echo "################################"
       echo "gitlint1.cfg"
       echo "################################"
