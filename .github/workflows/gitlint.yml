@@ -22,7 +22,8 @@ jobs:
         run: |
           # Run Gitlint in a Docker container with the workspace mounted
           docker run --rm \
+            --entrypoint "" \
             -v ${{ github.workspace }}:/repo \
             -w /repo \
             jorisroovers/gitlint:0.19.1 \
-            sh -c "gitlint --config cfg/gitlint/gitlint.cfg"
+            gitlint --config cfg/gitlint/gitlint.cfg
