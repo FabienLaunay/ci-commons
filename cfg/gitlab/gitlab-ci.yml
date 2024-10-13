@@ -8,7 +8,7 @@ GenerateGitlintConfig:
     - echo "TEST"
   artifacts:
     paths:
-      - gitlint.cfg
+      - cfg/gitlint/gitlint.cfg
 
 LintGitCommitMessages:
   stage: lint
@@ -24,7 +24,8 @@ LintGitCommitMessages:
     - pip install gitlint
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
-        echo "Downloading gitlint.cfg from the ci-commons project..."
-        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output gitlint.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
+        echo "Downloading cfg/gitlint/gitlint.cfg from the ci-commons project..."
+        mkdir -p cfg/gitlint
+        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output cfg/gitlint/gitlint.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig"
       fi
-    - gitlint --config gitlint.cfg
+    - gitlint --config cfg/gitlint/gitlint.cfg
