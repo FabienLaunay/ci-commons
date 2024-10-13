@@ -1,13 +1,21 @@
 stages:
+  - generate-config
   - lint
+
+GenerateGitlintConfig:
+  stage: generate-config
+  script:
+    - echo "TEST"
+  artifacts:
+    paths:
+      - gitlint.cfg
 
 LintGitCommitMessages:
   stage: lint
   only:
     - main
-  artifacts:
-    paths:
-      - gitlint.cfg
+  dependencies:
+    - GenerateGitlintConfig
   image:
     name: python:3.9-slim
     entrypoint: [""]
