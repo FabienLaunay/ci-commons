@@ -7,6 +7,7 @@ LintGitCommitMessages:
     name: jorisroovers/gitlint:0.19.1
     entrypoint: [ "" ]
   script:
+    - apt-get update && apt-get install -y curl
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
         echo "Downloading gitlint.cfg from the ci-commons project..."
