@@ -1,21 +1,13 @@
 stages:
-  - generate-config
   - lint
-
-GenerateGitlintConfig:
-  stage: generate-config
-  script:
-    - echo "TEST"
-  artifacts:
-    paths:
-      - gitlint.cfg
 
 LintGitCommitMessages:
   stage: lint
   only:
     - main
-  dependencies:
-    - GenerateGitlintConfig
+  artifacts:
+    paths:
+      - gitlint.cfg
   image:
     name: python:3.9-slim
     entrypoint: [""]
@@ -24,18 +16,10 @@ LintGitCommitMessages:
     - pip install gitlint
     - |      
       echo "Downloading gitlint.cfg from the ci-commons project..."
-      curl --output gitlint1.cfg ${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig
+      curl --output gitlint1.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
       echo "gitlint1.cfg:"
-      curl --output gitlint2.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
+      curl --output gitlint2.cfg "https://gitlab.com/fabien.launay.public/ci-commons/-/raw/main/gitlint.cfg"
       echo "gitlint2.cfg:"
-      curl --output gitlint3.cfg https://gitlab.com/api/v4/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig
-      echo "gitlint3.cfg:"
-      curl --output gitlint4.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
-      echo "gitlint4.cfg:"
-      curl --output gitlint5.cfg "https://gitlab.com/fabien.launay.public/ci-commons/-/raw/main/gitlint.cfg"
-      echo "gitlint5.cfg:"
-      curl --output gitlint6.cfg "https://gitlab.com/fabien.launay.public/ci-commons/-/raw/main/gitlint.cfg?inline=false"
-      echo "gitlint6.cfg:"      
       echo ""
       ls -l
       echo ""
