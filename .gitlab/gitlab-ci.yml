@@ -18,6 +18,7 @@ LintGitCommitMessages:
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
         mkdir -p cfg/gitlint
         echo "Downloading gitlint.cfg from the ci-commons project..."
+        echo ${CI_API_V4_URL}
         echo 'curl --output cfg/gitlint/gitlint.cfg "${CI_API_V4_URL}/projects/fabien.launay.private%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"'
         curl --output cfg/gitlint/gitlint.cfg "${CI_API_V4_URL}/projects/fabien.launay.private%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
       fi
