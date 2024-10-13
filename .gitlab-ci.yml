@@ -51,6 +51,9 @@ LintGitCommitMessages:
       curl --output gitlint9.cfg "https://gitlab.com/fabien.launay.public/ci-commons/-/raw/main/gitlint.cfg"
       echo "gitlint9.cfg:"
       cat gitlint9.cfg
+      curl --output gitlint10.cfg "https://gitlab.com/fabien.launay.public/ci-commons/-/raw/main/gitlint.cfg?inline=false"
+      echo "gitlint10.cfg:"
+      cat gitlint10.cfg      
       echo ""
       ls -l
       echo ""
