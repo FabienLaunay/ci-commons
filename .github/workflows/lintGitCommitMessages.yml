@@ -3,6 +3,16 @@ name: LintGitCommitMessages
 run-name: Verify Git commit messages with Gitlint
 
 on:
+  # Trigger on push to the main branch
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  # Allow this workflow to be called as a reusable workflow
   workflow_call:
     inputs: {}
 
