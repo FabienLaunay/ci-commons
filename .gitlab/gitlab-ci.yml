@@ -13,6 +13,9 @@ LintGitCommitMessages:
       - cfg/gitlint/gitlint.cfg
   script:
     - apt-get update && apt-get install -y curl git
+    - |
+      echo "gitlint0.cfg:"
+      cat cfg/gitlint/gitlint0.cfg
     - pip install gitlint
     - |
       mkdir -p cfg/gitlint
