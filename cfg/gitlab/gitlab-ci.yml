@@ -9,6 +9,4 @@ LintGitCommitMessages:
     entrypoint: [ "" ]
   script:
     - gitlint --config cfg/gitlint/gitlint.cfg
-  only:
-    - main
   needs: [ ]
