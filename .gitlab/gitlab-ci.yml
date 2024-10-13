@@ -4,6 +4,8 @@ stages:
 
 GenerateGitlintConfig:
   stage: generate-config
+  script:
+    - echo "TEST"
   artifacts:
     paths:
       - cfg/gitlint/gitlint.cfg
@@ -15,9 +17,6 @@ LintGitCommitMessages:
   image:
     name: python:3.9-slim
     entrypoint: [""]
-  artifacts:
-    paths:
-      - cfg/gitlint/gitlint.cfg
   script:
     - apt-get update && apt-get install -y curl git
     - pip install gitlint
