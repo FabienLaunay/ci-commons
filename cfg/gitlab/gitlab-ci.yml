@@ -3,6 +3,7 @@ stages:
 
 LintGitCommitMessages:
   stage: Lint
+  description: "Verify Git commit messages with Gitlint"
   image:
     name: jorisroovers/gitlint:0.19.1
     entrypoint: [ "" ]
@@ -19,5 +20,4 @@ LintGitCommitMessages:
     - RESULT=$(gitlint --config cfg/gitlint/gitlint.cfg 2>&1) || exit_code=$?
     - handle_test_result $exit_code "$RESULT"
     - exit $exit_code
-  description: "Verify Git commit messages with Gitlint"
   needs: [ ]
