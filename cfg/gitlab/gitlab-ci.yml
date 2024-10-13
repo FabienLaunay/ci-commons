@@ -28,7 +28,7 @@ LintGitCommitMessages:
         curl \
           --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
           --output artifacts.zip \
-          "${CI_API_V4_URL}/projects/fabien.launay.private%2Fci-commons/jobs/artifacts/main/download?job=GenerateGitlintConfig"
+          "${CI_API_V4_URL}/projects/56935262/jobs/artifacts/main/download?job=GenerateGitlintConfig"
         ls -l
         unzip artifacts.zip
         ls -lR cfg
