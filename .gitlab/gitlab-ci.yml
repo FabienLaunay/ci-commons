@@ -13,9 +13,6 @@ LintGitCommitMessages:
       - cfg/gitlint/gitlint.cfg
   script:
     - apt-get update && apt-get install -y curl git
-    - |
-      echo "gitlint.cfg:"
-      cat cfg/gitlint/gitlint.cfg
     - pip install gitlint
     - |
       mkdir -p cfg/gitlint
@@ -44,5 +41,7 @@ LintGitCommitMessages:
       curl --output cfg/gitlint/gitlint8.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
       echo "gitlint8.cfg:"
       cat cfg/gitlint/gitlint8.cfg
+      echo "gitlint.cfg:"
+      cat cfg/gitlint/gitlint.cfg
       echo ""
     - gitlint --config cfg/gitlint/gitlint.cfg
