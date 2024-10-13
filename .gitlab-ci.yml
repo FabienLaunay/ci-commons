@@ -48,6 +48,9 @@ LintGitCommitMessages:
       curl --output gitlint8.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
       echo "gitlint8.cfg:"
       cat gitlint8.cfg
+      echo ""
+      ls -Rla
+      echo ""
       echo "gitlint.cfg:"
       cat gitlint.cfg
       echo ""
