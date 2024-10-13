@@ -7,5 +7,5 @@ LintGitCommitMessages:
     name: jorisroovers/gitlint:0.19.1
     entrypoint: [ "" ]
   script:
-    - RESULT=$(gitlint --config cfg/gitlint/gitlint.cfg 2>&1) || exit_code=$?
+    - gitlint --config cfg/gitlint/gitlint.cfg
   needs: [ ]
