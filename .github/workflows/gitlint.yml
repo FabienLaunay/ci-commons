@@ -15,20 +15,29 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
+      - name: Checkout code
       - uses: actions/checkout@v3
 
-      - name: Setup python
-        uses: actions/setup-python@v4.6.0
+      - name: Run Gitlint using Docker
+        uses: addnab/docker-run-action@v3  # Use the Docker run action
         with:
-          python-version: '3.x'
-
-      - name: Install gitlint
-        shell: bash
-        run: |
-          python -m pip install gitlint
-
-      - name: Run gitlint
-        shell: bash
-        run: |
-          # Lint everything from the base to the latest
-          gitlint --config cfg/gitlint/gitlint.cfg
+          image: jorisroovers/gitlint:0.19.1  # Use your Gitlint Docker image
+          options: --entrypoint ""  # Override entrypoint to empty (if needed)
+          run: |
+            # Lint everything from the base to the latest
+            gitlint --config cfg/gitlint/gitlint.cfg
+#      - name: Setup python
+#        uses: actions/setup-python@v4.6.0
+#        with:
+#          python-version: '3.x'
+#
+#      - name: Install gitlint
+#        shell: bash
+#        run: |
+#          python -m pip install gitlint
+#
+#      - name: Run gitlint
+#        shell: bash
+#        run: |
+#          # Lint everything from the base to the latest
+#          gitlint --config cfg/gitlint/gitlint.cfg
