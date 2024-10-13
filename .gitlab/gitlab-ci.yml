@@ -7,7 +7,7 @@ LintGitCommitMessages:
     name: python:3.9-slim  # Use a different image with package manager
     entrypoint: [""]
   script:
-    - apt-get update && apt-get install -y curl
+    - apt-get update && apt-get install -y curl git
     - pip install gitlint
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
