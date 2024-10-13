@@ -25,28 +25,28 @@ LintGitCommitMessages:
     - |
       mkdir -p cfg/gitlint
       echo "Downloading gitlint.cfg from the ci-commons project..."
-      curl --output cfg/gitlint/gitlint1.cfg ${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages
+      curl --output cfg/gitlint/gitlint1.cfg ${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig
       echo "gitlint1.cfg:"
       cat cfg/gitlint/gitlint1.cfg
-      curl --output cfg/gitlint/gitlint2.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
+      curl --output cfg/gitlint/gitlint2.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig"
       echo "gitlint2.cfg:"
       cat cfg/gitlint/gitlint2.cfg
-      curl --output cfg/gitlint/gitlint3.cfg https://gitlab.com/api/v4/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages
+      curl --output cfg/gitlint/gitlint3.cfg https://gitlab.com/api/v4/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig
       echo "gitlint3.cfg:"
       cat cfg/gitlint/gitlint3.cfg
-      curl --output cfg/gitlint/gitlint4.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
+      curl --output cfg/gitlint/gitlint4.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig"
       echo "gitlint4.cfg:"
       cat cfg/gitlint/gitlint4.cfg
-      curl --output cfg/gitlint/gitlint5.cfg ${CI_API_V4_URL}/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages
+      curl --output cfg/gitlint/gitlint5.cfg ${CI_API_V4_URL}/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig
       echo "gitlint5.cfg:"
       cat cfg/gitlint/gitlint5.cfg
-      curl --output cfg/gitlint/gitlint6.cfg "${CI_API_V4_URL}/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
+      curl --output cfg/gitlint/gitlint6.cfg "${CI_API_V4_URL}/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig"
       echo "gitlint6.cfg:"
       cat cfg/gitlint/gitlint6.cfg
-      curl --output cfg/gitlint/gitlint7.cfg https://gitlab.com/api/v4/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages
+      curl --output cfg/gitlint/gitlint7.cfg https://gitlab.com/api/v4/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig
       echo "gitlint7.cfg:"
       cat cfg/gitlint/gitlint7.cfg
-      curl --output cfg/gitlint/gitlint8.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=LintGitCommitMessages"
+      curl --output cfg/gitlint/gitlint8.cfg "https://gitlab.com/api/v4/projects/fabien.launay.public/ci-commons/jobs/artifacts/main/raw/cfg/gitlint/gitlint.cfg?job=GenerateGitlintConfig"
       echo "gitlint8.cfg:"
       cat cfg/gitlint/gitlint8.cfg
       echo "gitlint.cfg:"
