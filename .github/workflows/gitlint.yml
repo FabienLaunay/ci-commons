@@ -26,4 +26,7 @@ jobs:
             -v ${{ github.workspace }}:/repo \
             -w /repo \
             jorisroovers/gitlint:0.19.1 \
+            echo "#########################" \      
+            echo "#        Gitlint        #" \
+            echo "#########################" \    
             gitlint --config cfg/gitlint/gitlint.cfg
