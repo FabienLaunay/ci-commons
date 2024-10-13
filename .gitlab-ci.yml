@@ -25,9 +25,16 @@ LintGitCommitMessages:
     - |      
       echo "Downloading gitlint.cfg from the ci-commons project..."
       curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --output gitlint1.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
-      echo "gitlint1.cfg:"
+      echo "################################"
+      echo "gitlint1.cfg"
+      echo "################################"
+      cat gitlint1.cfg
+      echo ""
       curl --output gitlint2.cfg "https://gitlab.com/fabien.launay.public/ci-commons/-/raw/main/gitlint.cfg"
-      echo "gitlint2.cfg:"
+      echo "################################"
+      echo "gitlint2.cfg"
+      echo "################################"
+      cat gitlint2.cfg
       echo ""
       ls -l
       echo ""
