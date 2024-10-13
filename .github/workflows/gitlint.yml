@@ -18,10 +18,28 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Gitlint using Docker
         run: |
+          # Define color variables
+          BLUE="\033[0;34m"
+          NO_COLOR="\033[0m"
+          
+          # Echo colored header
+          echo -e "${BLUE}"
+          echo "#########################"
+          echo "#        Gitlint        #"
+          echo "#########################"
+          echo -e "${NO_COLOR}"
+
           # Run Gitlint in a Docker container with the workspace mounted
-          docker run --rm \
+          exit_code=0
+          RESULT=$(docker run --rm \
             --entrypoint "" \
             -v ${{ github.workspace }}:/repo \
             -w /repo \
             jorisroovers/gitlint:0.19.1 \
-            gitlint --config cfg/gitlint/gitlint.cfg
+            gitlint --config cfg/gitlint/gitlint.cfg 2>&1) || exit_code=$?
+          
+          # Handle the Gitlint exit result
+          if [ $exit_code -ne 0 ]; then
+            echo "$RESULT"
+            exit $exit_code
+          fi
