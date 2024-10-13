@@ -23,8 +23,6 @@ LintGitCommitMessages:
     - apt-get update && apt-get install -y curl git
     - pip install gitlint
     - |
-      if [ ! -f cfg/gitlint/gitlint.cfg ]; then
-        echo "Downloading gitlint.cfg from the ci-commons project..."
-        curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output gitlint.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
-      fi
+      echo "Downloading gitlint.cfg from the ci-commons project..."
+      curl --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" --output gitlint.cfg "${CI_API_V4_URL}/projects/fabien.launay.public%2Fci-commons/jobs/artifacts/main/raw/gitlint.cfg?job=GenerateGitlintConfig"
     - gitlint --config gitlint.cfg
