@@ -8,10 +8,7 @@ GenerateGitlintConfig:
     - echo "TEST"
   artifacts:
     paths:
-      - cfg/gitlint/gitlint.cfg
-      - cfg/gitlint/rules/TitleImperativeMood.py
-      - cfg/gitlint/rules/TitleVerbCapitalized.py
-      - cfg/gitlint/txt/Verbs.txt
+      - cfg/gitlint/
 
 LintGitCommitMessages:
   stage: lint
