@@ -1,20 +1,12 @@
 stages:
   - Lint
 
-LintCommitMessage:
+LintGitCommitMessages:
   stage: Lint
   image:
     name: jorisroovers/gitlint:0.19.1
     entrypoint: [ "" ]
   script:
-    - . .ci/common.bash
-    - |
-      #
-      echo -e $BLUE
-      echo "#########################"      
-      echo "#        Gitlint        #"
-      echo "#########################"
-      echo -e "$NO_COLOR"
     - exit_code=0
     - RESULT=$(gitlint --config cfg/gitlint/gitlint.cfg 2>&1) || exit_code=$?
     - handle_test_result $exit_code "$RESULT"
