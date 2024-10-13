@@ -1,7 +1,14 @@
 name: GitlintNamePlaceHolder
+
 run-name: Gitlint run name place holder
+
 on:
   push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   gitlintJobNamePlaceHolder:
@@ -9,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Install gitlint
         shell: bash
