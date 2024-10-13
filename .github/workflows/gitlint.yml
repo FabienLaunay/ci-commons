@@ -18,34 +18,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Debug workspace
-        run: |
-          ls -R
-
       - name: Run Gitlint using Docker
-        uses: addnab/docker-run-action@v3  # Use the Docker run action
-        with:
-          image: jorisroovers/gitlint:0.19.1  # Use your Gitlint Docker image
-          options: --entrypoint ""  # Override entrypoint to empty (if needed)
-          volumes: |
-            ${{ github.workspace }}:/repo  # Mount the GitHub workspace into /repo
-          run: |
-            # Change to the /repo directory where the code is mounted
-            cd /repo
-            # Lint everything from the base to the latest
+        run: |
+          # Run Gitlint in a Docker container with the workspace mounted
+          docker run --rm \
+            -v ${{ github.workspace }}:/repo \
+            -w /repo \
+            jorisroovers/gitlint:0.19.1 \
             gitlint --config cfg/gitlint/gitlint.cfg
-#      - name: Setup python
-#        uses: actions/setup-python@v4.6.0
-#        with:
-#          python-version: '3.x'
-#
-#      - name: Install gitlint
-#        shell: bash
-#        run: |
-#          python -m pip install gitlint
-#
-#      - name: Run gitlint
-#        shell: bash
-#        run: |
-#          # Lint everything from the base to the latest
-#          gitlint --config cfg/gitlint/gitlint.cfg
