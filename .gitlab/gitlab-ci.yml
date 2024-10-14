@@ -1,19 +1,22 @@
 stages:
-  - generate-config
-  - lint
+  - lint-ci-commons-project
+  - lint-other-projects
+  - build
 
-GenerateGitlintConfig:
-  stage: generate-config
+Lint-ci-commons-project:
+  stage: lint-ci-commons-project
   rules:
     - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_COMMIT_BRANCH == "main"'
+  image:
+    name: python:3.9-slim
+    entrypoint: [""]
   script:
-    - echo "TEST"
-  artifacts:
-    paths:
-      - cfg/gitlint/
+    - apt-get update && apt-get install -y git
+    - pip install gitlint
+    - gitlint --config cfg/gitlint/gitlint.cfg
 
-LintGitCommitMessages:
-  stage: lint
+Lint:
+  stage: lint-other-projects
   rules:
     - if: '$CI_PROJECT_NAME != "ci-commons" && $CI_COMMIT_BRANCH == "main"'
   image:
@@ -24,7 +27,7 @@ LintGitCommitMessages:
     - pip install gitlint
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
-        echo "Downloading artifacts.zip from the ci-commons project..."        
+        echo "Downloading artifacts.zip from 'ci-commons' project..."        
         curl \
           --location \
           --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
@@ -33,3 +36,14 @@ LintGitCommitMessages:
         unzip artifacts.zip
       fi
     - gitlint --config cfg/gitlint/gitlint.cfg
+
+Generate_artifacts:
+  stage: build
+  rules:
+    - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_COMMIT_BRANCH == "main"'
+  script:
+    - echo "Generating artifacts..."
+  artifacts:
+    paths:
+      - cfg/gitlint/
+
