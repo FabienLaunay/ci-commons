@@ -38,8 +38,8 @@ jobs:
         run: gitlint --config cfg/gitlint/gitlint.cfg
 
   Generate_artifacts:
-    runs-on: ubuntu-latest
-    if: github.repository == 'fabien-launay/ci-commons' && github.ref == 'refs/heads/main'
+    runs-on: "ubuntu-latest"
+    if: github.repository == 'FabienLaunay/ci-commons' && github.ref == 'refs/heads/main'
     steps:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
