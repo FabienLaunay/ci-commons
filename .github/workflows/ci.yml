@@ -75,7 +75,7 @@ jobs:
           echo ""
           curl \
             --location \
-            --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
+            --header "Authorization: Bearer ${{ secrets.CI_COMMONS_PAT }}" \
             --output cfg/gitlint/gitlint1.cfg \
             https://api.github.com/repos/FabienLaunay/ci-commons/contents/cfg/gitlint/gitlint.cfg?ref=main
           echo ""
