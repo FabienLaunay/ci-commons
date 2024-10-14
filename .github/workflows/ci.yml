@@ -39,6 +39,7 @@ jobs:
 
   Generate_artifacts:
     runs-on: "ubuntu-latest"
+    needs: Lint-ci-commons-project
     if: github.repository == 'FabienLaunay/ci-commons' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
