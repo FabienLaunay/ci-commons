@@ -36,3 +36,13 @@ jobs:
 
       - name: Run gitlint
         run: gitlint --config cfg/gitlint/gitlint.cfg
+
+  Generate_artifacts:
+    runs-on: ubuntu-latest
+    if: github.repository == 'fabien-launay/ci-commons' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts.zip
+          path: cfg/gitlint/
