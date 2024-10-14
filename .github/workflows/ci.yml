@@ -37,6 +37,37 @@ jobs:
       - name: Run gitlint
         run: gitlint --config cfg/gitlint/gitlint.cfg
 
+  Lint:
+    runs-on: "ubuntu-latest"
+    if: github.repository != 'FabienLaunay/ci-commons' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update 
+          sudo apt-get install -y curl unzip git
+          pip install gitlint
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts
+          path: cfg/gitlint/
+
+      - name: Unzip artifacts
+        run: |
+          unzip artifacts.zip
+
+      - name: Run gitlint
+        run: gitlint --config cfg/gitlint/gitlint.cfg
+
   Generate_artifacts:
     runs-on: "ubuntu-latest"
     needs: Lint-ci-commons-project
