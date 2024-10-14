@@ -16,8 +16,6 @@ GenerateGitlintConfig:
 
 LintGitCommitMessages:
   stage: lint
-  rules:
-    - if: '$CI_PROJECT_NAME != "ci-commons"'
   only:
     - main
   image:
