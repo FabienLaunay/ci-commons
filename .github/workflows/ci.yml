@@ -56,14 +56,32 @@ jobs:
           pip install gitlint
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: artifacts
-          path: cfg/gitlint/
-
-      - name: Unzip artifacts
         run: |
-          unzip artifacts.zip
+          echo "Downloading artifacts.zip from 'ci-commons' project..."
+          mkdir -p cfg/gitlint
+          curl \
+            --location \
+            --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
+            --output cfg/gitlint/gitlint.cfg \
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/gitlint.cfg
+          mkdir -p cfg/gitlint/rules
+          curl \
+            --location \
+            --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
+            --output cfg/gitlint/rules/TitleImperativeMood.py \
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/rules/TitleImperativeMood.py
+          curl \
+            --location \
+            --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
+            --output cfg/gitlint/rules/TitleVerbCapitalized.py \
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/rules/TitleVerbCapitalized.py
+          mkdir -p cfg/gitlint/txt
+          curl \
+            --location \
+            --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
+            --output cfg/gitlint/txt/Verbs.txt \
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/txt/Verbs.txt
+          ls -lR cfg
 
       - name: Run gitlint
         run: gitlint --config cfg/gitlint/gitlint.cfg
