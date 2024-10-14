@@ -22,7 +22,7 @@ Lint:
     name: python:3.9-slim
     entrypoint: [""]
   script:
-    - apt-get update && apt-get install -y curl git unzip
+    - apt-get update && apt-get install -y curl unzip git
     - pip install gitlint
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
@@ -31,8 +31,7 @@ Lint:
           --location \
           --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
           --output artifacts.zip \
-          "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=GenerateGitlintConfig"
-        cat artifacts.zip
+          "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate_artifacts"
         unzip artifacts.zip
       fi
     - gitlint --config cfg/gitlint/gitlint.cfg
