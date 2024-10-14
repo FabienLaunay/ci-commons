@@ -1,6 +1,6 @@
-name: CI
+name: CI commons
 
-run-name: CI run name
+run-name: CI commons
 
 on:
   # Trigger on push to the main branch
