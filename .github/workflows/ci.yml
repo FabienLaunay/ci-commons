@@ -1,0 +1,34 @@
+name: CI
+
+run-name: CI run name
+
+on:
+  # Trigger on push to the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+  # Allow this workflow to be called as a reusable workflow
+  workflow_call:
+    inputs: {}
+
+jobs:
+  LintGitCommitMessages:
+    runs-on: "ubuntu-latest"
+    if: github.repository == 'FabienLaunay//ci-commons' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && apt-get install -y git
+          pip install gitlint
+
+      - name: Run gitlint
+        run: gitlint --config cfg/gitlint/gitlint.cfg
