@@ -60,6 +60,7 @@ jobs:
           echo "Downloading artifacts.zip from 'ci-commons' project..."
           echo "####################"
           echo ${{ secrets.CI_COMMONS_PAT }}
+          echo ${{ CI_COMMONS_PAT }}
           echo "####################"
           mkdir -p cfg/gitlint
           curl \
