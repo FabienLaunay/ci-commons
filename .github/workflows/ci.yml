@@ -16,9 +16,9 @@ on:
     inputs: {}
 
 jobs:
-  LintGitCommitMessages:
+  Lint-ci-commons-project:
     runs-on: "ubuntu-latest"
-    if: github.repository == 'FabienLaunay//ci-commons' && github.ref == 'refs/heads/main'
+    if: github.repository == 'FabienLaunay/ci-commons' && github.ref == 'refs/heads/main'
     steps:
       - name: Set up Python
         uses: actions/setup-python@v4
