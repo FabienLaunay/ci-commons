@@ -22,7 +22,8 @@ Lint:
     name: python:3.9-slim
     entrypoint: [""]
   script:
-    - apt-get update && apt-get install -y curl unzip git
+    - apt-get update
+    - apt-get install -y curl unzip git
     - pip install gitlint
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
