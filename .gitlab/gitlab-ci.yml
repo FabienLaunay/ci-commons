@@ -5,8 +5,7 @@ stages:
 GenerateGitlintConfig:
   stage: generate-config
   rules:
-    - if: '$CI_PROJECT_NAME == "ci-commons"'
-    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_COMMIT_BRANCH == "main"'
   script:
     - echo "TEST"
   artifacts:
@@ -16,8 +15,7 @@ GenerateGitlintConfig:
 LintGitCommitMessages:
   stage: lint
   rules:
-    - if: '$CI_PROJECT_NAME != "ci-commons"'
-    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PROJECT_NAME != "ci-commons" && $CI_COMMIT_BRANCH == "main"'
   image:
     name: python:3.9-slim
     entrypoint: [""]
