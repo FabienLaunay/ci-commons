@@ -20,7 +20,11 @@ Lint-ci-commons-project:
 Lint:
   stage: lint
   rules:
-    - if: '$CI_PROJECT_NAME != "ci-commons" && $CI_COMMIT_BRANCH == "main"'
+    # Trigger on push to main branch
+    - if: '$CI_PROJECT_NAME != "ci-commons" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+    # Trigger on merge request to main branch
+    - if: '$CI_PROJECT_NAME != "ci-commons" && $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+
   image:
     name: python:3.9-slim
     entrypoint: [""]
@@ -43,7 +47,10 @@ Lint:
 Generate_artifacts:
   stage: build
   rules:
-    - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_COMMIT_BRANCH == "main"'
+    # Trigger on push to main branch
+    - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+    # Trigger on merge request to main branch
+    - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
   script:
     - echo "Generating artifacts..."
   artifacts:
