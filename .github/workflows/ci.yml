@@ -87,6 +87,29 @@ jobs:
           mkdir -p cfg/gitlint/rules
           curl \
             --location \
+            --header "Authorization: token ${{ secrets.GITHUB_TOKEN  }}" \
+            --output cfg/gitlint/gitlint2.cfg \
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/gitlint.cfg
+          echo ""
+          echo "####################"
+          echo "cfg/gitlint/gitlint2.cfg"
+          echo "####################"
+          cat cfg/gitlint/gitlint2.cfg
+          echo ""
+          curl \
+            --location \
+            --header "Authorization: Bearer ${{ secrets.GITHUB_TOKEN  }}" \
+            --output cfg/gitlint/gitlint3.cfg \
+            https://api.github.com/repos/FabienLaunay/ci-commons/contents/cfg/gitlint/gitlint.cfg?ref=main
+          echo ""
+          echo "####################"
+          echo "cfg/gitlint/gitlint3.cfg"
+          echo "####################"
+          cat cfg/gitlint/gitlint3.cfg
+          echo ""
+          mkdir -p cfg/gitlint/rules
+          curl \
+            --location \
             --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
             --output cfg/gitlint/rules/TitleImperativeMood.py \
              https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/rules/TitleImperativeMood.py
