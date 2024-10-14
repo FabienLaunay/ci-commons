@@ -1,6 +1,4 @@
-name: CI commons
-
-run-name: CI commons
+name: CI Commons
 
 on:
   # Trigger on push to the main branch
@@ -81,7 +79,6 @@ jobs:
             --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             --output cfg/gitlint/txt/Verbs.txt \
              https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/txt/Verbs.txt
-          ls -lR cfg
 
       - name: Run gitlint
         run: gitlint --config cfg/gitlint/gitlint.cfg
