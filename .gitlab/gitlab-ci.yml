@@ -1,10 +1,9 @@
 stages:
-  - lint-ci-commons-project
   - lint
   - build
 
 Lint-ci-commons-project:
-  stage: lint-ci-commons-project
+  stage: lint
   rules:
     - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_COMMIT_BRANCH == "main"'
   image:
