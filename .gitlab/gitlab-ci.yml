@@ -6,8 +6,7 @@ GenerateGitlintConfig:
   stage: generate-config
   rules:
     - if: '$CI_PROJECT_NAME == "ci-commons"'
-  only:
-    - main
+    - if: '$CI_COMMIT_BRANCH == "main"'
   script:
     - echo "TEST"
   artifacts:
@@ -16,6 +15,9 @@ GenerateGitlintConfig:
 
 LintGitCommitMessages:
   stage: lint
+  rules:
+    - if: '$CI_PROJECT_NAME != "ci-commons"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
   only:
     - main
   image:
