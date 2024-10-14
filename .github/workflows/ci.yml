@@ -66,24 +66,41 @@ jobs:
             --location \
             --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
             --output cfg/gitlint/gitlint.cfg \
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/gitlint.cfg
+          echo ""
+          echo "####################"
+          echo "cfg/gitlint/gitlint.cfg"
+          echo "####################"
+          cat cfg/gitlint/gitlint.cfg
+          echo ""
+          curl \
+            --location \
+            --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
+            --output cfg/gitlint/gitlint1.cfg \
             https://api.github.com/repos/FabienLaunay/ci-commons/contents/cfg/gitlint/gitlint.cfg?ref=main
+          echo ""
+          echo "####################"
+          echo "cfg/gitlint/gitlint1.cfg"
+          echo "####################"
+          cat cfg/gitlint/gitlint1.cfg
+          echo ""
           mkdir -p cfg/gitlint/rules
           curl \
             --location \
             --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
             --output cfg/gitlint/rules/TitleImperativeMood.py \
-             https://api.github.com/repos/FabienLaunay/ci-commons/main/cfg/gitlint/rules/TitleImperativeMood.py
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/rules/TitleImperativeMood.py
           curl \
             --location \
             --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
             --output cfg/gitlint/rules/TitleVerbCapitalized.py \
-             https://api.github.com/repos/FabienLaunay/ci-commons/main/cfg/gitlint/rules/TitleVerbCapitalized.py
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/rules/TitleVerbCapitalized.py
           mkdir -p cfg/gitlint/txt
           curl \
             --location \
             --header "Authorization: token ${{ secrets.CI_COMMONS_PAT }}" \
             --output cfg/gitlint/txt/Verbs.txt \
-             https://api.github.com/repos/FabienLaunay/ci-commons/main/cfg/gitlint/txt/Verbs.txt
+             https://raw.githubusercontent.com/FabienLaunay/ci-commons/main/cfg/gitlint/txt/Verbs.txt
           ls -lR cfg
 
       - name: Run gitlint
