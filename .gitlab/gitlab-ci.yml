@@ -13,7 +13,7 @@ Lint-ci-commons-project:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
-    - bash bsh/lintCiCommonsProjectBeforeScript.bash
+    - ./bsh/lintCiCommonsProjectBeforeScript.bash
   script:
     # Fetch all commits and branches
     - git fetch --all
