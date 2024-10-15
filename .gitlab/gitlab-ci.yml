@@ -13,8 +13,26 @@ Lint-ci-commons-project:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
+    - set +x
+    - echo "###################################################################"
+    - echo "Update Debian-based Gitlab Linux runner local package index."
+    - echo "###################################################################"
+    - echo ""
+    - set -x
     - apt-get update
-    - apt-get install -y git
+    - set +x
+    - echo "###################################################################"
+    - echo "Install the `git` package (prerequisite for gitlint)."
+    - echo "###################################################################"
+    - echo ""
+    - set -x
+    - apt-get install --yes git
+    - set +x
+    - echo "###################################################################"
+    - echo "Install the `gitlint` package using Python package installer."
+    - echo "###################################################################"
+    - echo ""
+    - set -x
     - pip install gitlint
   script:
     # Fetch all commits and branches
