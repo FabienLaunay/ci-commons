@@ -31,7 +31,7 @@ printCompletedL1TaskTextBoxAndIncrementCounter "$message" \
 # ==============================================================================
 
 # Print starting text box level 1.
-message="'Git' Debian package installation"
+message="'git' Debian package installation"
 printStartingL1TaskTextBox "$message"
 currentLvlOneTaskStartTimeStamp=$(date +%s)
 
