@@ -12,10 +12,21 @@ Lint-ci-commons-project:
   image:
     name: python:3.9-slim
     entrypoint: [""]
-  script:
-    - apt-get update && apt-get install -y git
+  before_script:
+    - apt-get update
+    - apt-get install -y git
     - pip install gitlint
-    - gitlint --config cfg/gitlint/gitlint.cfg
+  script:
+    # Fetch all commits and branches
+    - git fetch --all
+    # Find the common ancestor between the branch and main
+    - TARGET_BRANCH="main"
+    - MERGE_BASE=$(git merge-base HEAD origin/$TARGET_BRANCH)
+    # Lint all commits between the feature branch and the main branch
+    - |
+      gitlint \
+        --config cfg/gitlint/gitlint.cfg \
+        --commits $MERGE_BASE..HEAD
 
 Lint:
   stage: lint
