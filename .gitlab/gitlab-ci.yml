@@ -28,7 +28,7 @@ Lint:
   image:
     name: python:3.9-slim
     entrypoint: [""]
-  script:
+  before_script:
     - apt-get update
     - apt-get install -y curl unzip git
     - pip install gitlint
@@ -42,7 +42,17 @@ Lint:
           "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate_artifacts"
         unzip artifacts.zip
       fi
-    - gitlint --config cfg/gitlint/gitlint.cfg
+  script:
+    # Fetch all commits and branches
+    - git fetch --all
+    # Find the common ancestor between the branch and main
+    - TARGET_BRANCH="main"
+    - MERGE_BASE=$(git merge-base HEAD origin/$TARGET_BRANCH)
+    # Lint all commits between the feature branch and the main branch
+    - |
+      gitlint \
+        --config cfg/gitlint/gitlint.cfg \
+        --commits $MERGE_BASE..HEAD
 
 Generate_artifacts:
   stage: build
