@@ -18,25 +18,24 @@ jobs:
     runs-on: "ubuntu-latest"
     if: github.repository == 'FabienLaunay/ci-commons' && github.ref == 'refs/heads/main'
     steps:
-      - name: Checkout code
+      - name: STEP 1 of 6 - Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: STEP 2 of 6 - Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      - name: Update Gitlab runner local package index
+      - name: STEP 3 of 6 - Update Gitlab runner local package index
         run: sudo apt-get update
 
-      - name: Install 'git' Debian package
+      - name: STEP 4 of 6 - Install 'git' Debian package
         run: sudo apt-get install -y git
-          pip install gitlint
 
-      - name: Install 'gitlint' Python package installation
+      - name: STEP 5 of 6 - Install 'gitlint' Python package installation
         run: pip install gitlint
 
-      - name: Run gitlint
+      - name: STEP 6 of 6 - Run gitlint
         run: gitlint --config cfg/gitlint/gitlint.cfg
 
   Lint:
