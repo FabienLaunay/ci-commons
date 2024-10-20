@@ -76,7 +76,7 @@ Lint:
           --verbose \
           --location \
           --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
-          --output artifacts2.zip \
+          --output artifacts.zip \
             "https://gitlab.com/fabien.launay/ci-commons/jobs/artifacts/main/download?job=Generate-artifacts"
         echo "==========================="
         ls -la
@@ -85,17 +85,17 @@ Lint:
         echo "==========================="
         cat artifacts1.zip
         echo "==========================="
-        echo "cat artifacts2.zip"
+        echo "cat artifacts.zip"
         echo "==========================="
-        cat artifacts2.zip
+        cat artifacts.zip
         echo "==========================="
         echo "unzip artifacts1.zip"
         echo "==========================="
         unzip artifacts1.zip
         echo "==========================="
-        echo "unzip artifacts2.zip"
+        echo "unzip artifacts.zip"
         echo "==========================="
-        unzip artifacts2.zip
+        unzip artifacts.zip
       fi
       bash bsh/lintCiCommonsProjectScript.bash \
         "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
