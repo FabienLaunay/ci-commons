@@ -17,7 +17,7 @@
 # #############################################################################
 
 if [[ -n "$GITLAB_CI" ]]; then
-  NEW_LINE=' '
+  NEW_LINE='AAAAAAAAAAAAAAAAAAAAAAAAAAAA'
 else
   NEW_LINE=''
 fi
