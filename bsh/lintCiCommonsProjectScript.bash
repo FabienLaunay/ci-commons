@@ -78,17 +78,17 @@ currentLvlOneTaskStartTimeStamp=$(date +%s)
     fi
     printGuidanceHeader
     echo "1.Run the following command to open the default Git text editor:"
-    echo $NEW_LINE
+    echo "$NEW_LINE"
     echo "  $ git rebase --interactive HEAD~$totalL2TaskCount"
-    echo $NEW_LINE
+    echo "$NEW_LINE"
     echo "2.Replace the content of the editor by the following one:"
-    echo $NEW_LINE
+    echo "$NEW_LINE"
     printBorder 80 "#" $FG_COLOR_WHITE $BG_COLOR_BLACK
     for (( i=${#actions[@]}-1; i>=0; i-- )); do
       echo "${actions[i]}"
     done
     printBorder 80 "#" $FG_COLOR_WHITE $BG_COLOR_BLACK
-    echo $NEW_LINE
+    echo "$NEW_LINE"
     echo "3.Modify every Git commit message to fix errors reported above by Gitlint."
   fi
 
