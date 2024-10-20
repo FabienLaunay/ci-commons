@@ -44,13 +44,26 @@ Lint:
   script:
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
+        echo "Listing all jobs with artifacts in the main branch using https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main"
+          curl \
+            --verbose \
+            --location \
+            --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+              "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main"
+        echo "Listing all jobs with artifacts in the main branch using https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main"
+          curl \
+            --verbose \
+            --location \
+            --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+              "https://gitlab.com/fabien.launay/ci-commons/jobs/artifacts/main"
         echo "Downloading artifacts.zip from 'ci-commons' project...XXXX"
         curl \
           --verbose \
           --location \
           --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
-          --output artifacts.zip \
-          "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate-artifacts"
+          --output artifacts.zip \          
+            "https://gitlab.com/fabien.launay/ci-commons/jobs/artifacts/main/download?job=Generate-artifacts"
+#  "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate-artifacts"
         echo "==========================="
         ls -la
         echo "==========================="
