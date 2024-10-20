@@ -420,7 +420,7 @@ printSuccessMessage() {
 printErrorMessage() {
   local header="ERROR: "
   local message=$1
-  echo -e $FG_COLOR_RED$header$UNSET_STYLE_ALL$message
+  echo -e $FG_COLOR_BRIGHT_RED$header$UNSET_STYLE_ALL$message
   echo "$NEW_LINE"
 }
 
