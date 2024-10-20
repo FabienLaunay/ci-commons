@@ -32,7 +32,7 @@
 
 printBashScriptTasks() {
 	local tasks=$1
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	echo "This Bash script will perform the following task(s):"
 	echo -e "$tasks"
 	return 0
@@ -48,13 +48,13 @@ printBashScriptTasks() {
 # =============================================================================
 
 askUserToContinue() {
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	read \
 		-p "Press Y to continue or any other key to cancel: " \
 		-n 1 \
 		-r
-	echo $NEW_LINE
-	echo $NEW_LINE
+	echo "$NEW_LINE"
+	echo "$NEW_LINE"
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		return 0
 	else
@@ -186,7 +186,7 @@ printLargetTextBox() {
 	CHARACTER="#"
 	WIDTH=80
 
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 
 	printBorder $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN
 
@@ -235,7 +235,7 @@ printNormalTextBox() {
 	printBorder $WIDTH $character $fgColor $bgColor
 	printDelimitedLine $WIDTH $character $fgColor $bgColor "L" "$message"
 	printBorder $WIDTH $character $fgColor $bgColor
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 
 	return 0
 }
@@ -257,7 +257,7 @@ printNormalTextBox() {
 printStartingL1TaskTextBox() {
 	local message=$1
 
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 
 	printNormalTextBox \
 		$FG_COLOR_WHITE \
@@ -287,7 +287,7 @@ printCompletedL1TaskTextBoxAndIncrementCounter() {
 	local message=$1
 	local duration=$2
 
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 
 	# Store in the  `hhmmss` variable the task execution duration in the
 	# `hh:mm:ss` format.
@@ -323,7 +323,7 @@ printCompletedL1TaskTextBoxAndIncrementCounter() {
 printStartingL2TaskTextBox() {
 	local message=$1
 
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 
 	printNormalTextBox \
 		$FG_COLOR_WHITE \
@@ -353,7 +353,7 @@ printCompletedL2TaskTextBoxAndIncrementCounter() {
 	local message=$1
 	local duration=$2
 
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 
 	# Store in the  `hhmmss` variable the task execution duration in the
 	# `hh:mm:ss` format.
@@ -412,19 +412,19 @@ executeL2Task() {
 # =============================================================================
 
 printRemarksHeader() {
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	echo 'REMARKS(S):'
 	return 0
 }
 
 printTaskFailureWarningsHeader() {
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	echo 'WARNING(S): Above task(s) will fail if:'
 	return 0
 }
 
 printGuidanceHeader() {
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	echo 'GUIDANCE:'
 	return 0
 }
@@ -434,7 +434,7 @@ printWarningForFailureIfUnmetPrerequisites() {
 - The prerequisites are unmet.
   -> Run the "01_InstallSoftwarePrerequisites.bash" script to make sure all are
      met.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
@@ -442,7 +442,7 @@ printWarningFailureIfProjectBinaryTreeNotBuilt() {
 	echo -n '
 - The project binary trees are not built under the 'bld' directory.
   -> Run the "03_BuildProgramAndSourceCodeDoc.bash" script to do so.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
@@ -456,7 +456,7 @@ printInfoBrowseSourceCodeDocumentation() {
 	echo -n -e '
 - Browse the '$SET_STYLE_ITALIC'ReactorCodingChallenge01'$UNSET_STYLE_ALL' program source code documentation at:
   '$FG_COLOR_CYAN$SET_STYLE_UNDERLINE'bld/01_default/SourceCodeDocumentation/html/index.html'$UNSET_STYLE_ALL'.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
@@ -464,7 +464,7 @@ printInfoExecuteUnitTests() {
 	echo -n -e '
 - Execute unit tests for the '$SET_STYLE_ITALIC'ReactorCodingChallenge01'$UNSET_STYLE_ALL' program.
   -> Run the "05_RunUnitTests.bash" script.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
@@ -478,7 +478,7 @@ printInfoBrowseTestsSourceCodeCoverageReport() {
 	echo -n -e '
 - Browse the '$testType' tests source code coverage report at:
   '$FG_COLOR_CYAN$SET_STYLE_UNDERLINE'bld/'$configuration'/'$testType'TestsCoverageReport/html/index.html'$UNSET_STYLE_ALL'.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
@@ -486,7 +486,7 @@ printInfoExecuteFuzzTestsInUnitTestMode() {
 	echo -n -e '
 - Execute fuzz tests in unit test mode for the '$SET_STYLE_ITALIC'ReactorCodingChallenge01'$UNSET_STYLE_ALL' program.
   -> Run the "06_RunFuzzTestsInUnitTestMode.bash" script.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
@@ -494,7 +494,7 @@ printInfoExecuteFuzzTestsInFuzzingMode() {
 	echo -n -e '
 - Execute fuzz tests in fuzzing mode for the '$SET_STYLE_ITALIC'ReactorCodingChallenge01'$UNSET_STYLE_ALL' program.
   -> Run the "07_RunFuzzTestsInFuzzingMode.bash" script.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
@@ -502,7 +502,7 @@ printInfoExecuteIntegrationTests() {
 	echo -n -e '
 - Execute integration tests for the '$SET_STYLE_ITALIC'ReactorCodingChallenge01'$UNSET_STYLE_ALL' program.
   -> Run the "08_RunIntegrationTests.bash" script.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
@@ -510,15 +510,15 @@ printInfoExecuteGitPreCommitHooks() {
 	echo -n -e '
 - Execute Git pre-commit hooks for the '$SET_STYLE_ITALIC'ReactorCodingChallenge01'$UNSET_STYLE_ALL' project.
   -> Run the "09_RunGitPrecommitHooks.bash" script.'
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
 
 printExecutingCommand() {
 	local command=$1
 	echo "Executing the following command..."
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	echo -e $FG_COLOR_BRIGHT_MAGENTA"$command"$UNSET_STYLE_ALL
-	echo $NEW_LINE
+	echo "$NEW_LINE"
 	return 0
 }
