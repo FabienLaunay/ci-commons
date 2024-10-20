@@ -10,6 +10,7 @@
 # #############################################################################
 
 . bsh/utilities/format.bash
+. bsh/utilities/strings.bash
 
 # #############################################################################
 # This bash file contains functions that perform operations related to message
