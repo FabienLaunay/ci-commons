@@ -17,16 +17,20 @@ Lint-ci-commons-project:
   script:
     - |
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
-        bash bsh/lintCiCommonsProjectScript.bash "$CI_COMMIT_BEFORE_SHA" "$CI_COMMIT_SHA" 
+        bash bsh/lintCiCommonsProjectScript.bash \
+          "$CI_COMMIT_BEFORE_SHA" \
+          "$CI_COMMIT_SHA" 
       elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
-        bash bsh/lintCiCommonsProjectScript.bash "$CI_MERGE_REQUEST_DIFF_BASE_SHA" "$CI_COMMIT_SHA"        
+        bash bsh/lintCiCommonsProjectScript.bash \
+          "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
+          "$CI_COMMIT_SHA"        
       fi
 
 Lint:
   stage: lint
   rules:
     # Trigger on push to main branch
-    - if: '$CI_PROJECT_NAME != "ci-commons" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+    #- if: '$CI_PROJECT_NAME != "ci-commons" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
     # Trigger on merge request to main branch
     - if: '$CI_PROJECT_NAME != "ci-commons" && $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
 
@@ -49,11 +53,9 @@ Lint:
       fi
   script:
     - |
-      if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
-        bash bsh/lintCiCommonsProjectScript.bash "$CI_COMMIT_BEFORE_SHA" "$CI_COMMIT_SHA" 
-      elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
-        bash bsh/lintCiCommonsProjectScript.bash "$CI_MERGE_REQUEST_DIFF_BASE_SHA" "$CI_COMMIT_SHA"        
-      fi
+        bash bsh/lintCiCommonsProjectScript.bash \
+          "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
+          "$CI_COMMIT_SHA"              
 
 Generate-artifacts:
   stage: build
