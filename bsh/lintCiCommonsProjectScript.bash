@@ -29,13 +29,13 @@ for commit in $commits; do
   currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
   #Print command and run it.
-  command="gitlint --config cfg/gitlint/gitlint.cfg --commit $commit || {gitlintFailed=true}"
+  command="gitlint --config cfg/gitlint/gitlint.cfg --commit $commit"
   printExecutingCommand "$command"
   $command
-
-  if [[ "$gitlintFailed" == true ]]; then
-    printGuidanceHeader
-    echo "One or more gitlint commands failed."
+#  RESULT=$command
+  if [[ $? -ne 0 ]]; then
+      echo "RESULT=$RESULT"
+      gitlintFailed=true  # Set flag if gitlint fails
   fi
 
   # Print completed text box level 2.
@@ -43,6 +43,13 @@ for commit in $commits; do
   printCompletedL2TaskTextBoxAndIncrementCounter "$message" \
   "$((currentLvlTwoTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))"
 done
+
+
+  if [[ "$gitlintFailed" == true ]]; then
+    printGuidanceHeader
+    echo "One or more gitlint commands failed."
+  fi
+
 
 # Print completed text box level 1.
 currentLvlOneTaskEndTimeStamp=$(date +%s)
