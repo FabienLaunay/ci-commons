@@ -235,6 +235,10 @@ printNormalTextBox() {
 	printDelimitedLine $WIDTH $character $fgColor $bgColor "L" "$message"
 	printBorder $WIDTH $character $fgColor $bgColor
 	printf "\n"
+	echo "AAAAAAAAAAAAAAAAAAA"
+	printf "\n"
+	printf "\n"
+	echo "BBBBBBBBBBBBBBBBBBB"
 
 	return 0
 }
