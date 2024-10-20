@@ -54,6 +54,8 @@ Lint:
         echo "==========================="
         ls -la
         echo "==========================="
+        cat artifacts.zip
+        echo "==========================="
         unzip artifacts.zip
       fi
       bash bsh/lintCiCommonsProjectScript.bash \
