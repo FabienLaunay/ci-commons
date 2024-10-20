@@ -29,15 +29,17 @@ for commit in $commits; do
   printStartingL2TaskTextBox "$message"
   currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
+  commitMessage=$(git log -1 --pretty=%B $commit)
+
   #Print command and run it.
   command="gitlint --config cfg/gitlint/gitlint.cfg --commit $commit"
   printExecutingCommand "$command"
-  $command
-  commitMessage=$(git log -1 --pretty=%B $commit)
+  RESULT=$($command)
+
   if [[ $? -ne 0 ]]; then
-      ((failureCount++))
+    ((failureCount++))
       actions+=("reword $commit $commitMessage")
-    else
+  else
       actions+=("pick $commit $commitMessage")
   fi
 
@@ -71,9 +73,10 @@ currentLvlOneTaskStartTimeStamp=$(date +%s)
     if [[ $totalL2TaskCount -eq 1 ]]; then
       echo "Git commit message is not valid."
     else
-      echo "failureCount out of $totalL2TaskCount Git commit messages are not valid."
+      echo "$failureCount out of $totalL2TaskCount Git commit messages are not valid."
     fi
     echo "1.Run the following command to open the default Git text editor:"
+    echo $NEW_LINE
     echo "  $ git rebase --interactive HEAD~$totalL2TaskCount"
     echo $NEW_LINE
     echo "2.Replace the content of the editor by the following one:"
