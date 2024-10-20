@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . bsh/utilities/message.bash
+. bsh/utilities/strings.bash
 
 currentL1TaskNumber=4
 totalL1TaskCount=4
@@ -13,9 +14,6 @@ totalL1TaskCount=4
 message="Gitlint execution on new commits"
 printStartingL1TaskTextBox "$message"
 currentLvlOneTaskStartTimeStamp=$(date +%s)
-
-echo "arg1 = $1"
-echo "arg2 = $2"
 
 commits=$(git rev-list $1..$2)
 
