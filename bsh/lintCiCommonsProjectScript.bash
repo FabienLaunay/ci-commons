@@ -14,6 +14,9 @@ message="Gitlint execution on new commits"
 printStartingL1TaskTextBox "$message"
 currentLvlOneTaskStartTimeStamp=$(date +%s)
 
+echo "arg1 = $1"
+echo "arg2 = $2"
+
 commits=$(git rev-list $1..$2)
 for commit in commits; do
   # Print starting text box level 2.
