@@ -29,7 +29,7 @@ for commit in $commits; do
   currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
   #Print command and run it.
-  command="gitlint --config cfg/gitlint/gitlint.cfg --commit $commit || gitlintFailed=true"
+  command="gitlint --config cfg/gitlint/gitlint.cfg --commit $commit || {gitlintFailed=true}"
   printExecutingCommand "$command"
   $command
 
