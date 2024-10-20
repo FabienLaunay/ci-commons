@@ -81,8 +81,8 @@ currentLvlOneTaskStartTimeStamp=$(date +%s)
     echo $NEW_LINE
     echo "2.Replace the content of the editor by the following one:"
     echo "###################################"
-    for action in "${actions[@]}"; do
-      echo "$action"
+    for (( i=${#actions[@]}-1; i>=0; i-- )); do
+      echo "${actions[i]}"
     done
     echo "###################################"
   fi
