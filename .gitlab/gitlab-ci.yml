@@ -43,24 +43,34 @@ Lint:
     - pip install gitlint
   script:
     - |
-      if [ ! -f cfg/gitlint/gitlint.cfg ]; then
-        echo "==========================="
-        echo "Downloading artifacts.zip from 'ci-commons' project... using https://gitlab.com/fabien.launay/ci-commons/jobs/artifacts/main/download?job=Generate-artifacts"
-        echo "==========================="
-        curl \
-          --verbose \
-          --location \
-          --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
-          --output artifacts.zip \
-            "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate-artifacts"
-
-        echo "==========================="
-        ls -la
-        echo "==========================="
-        echo "cat artifacts.zip"
-        echo "==========================="
-        cat artifacts.zip
-      fi
+      mkdir -p cfg/gitlint
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output cfg/gitlint/gitlint.cfg \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/cfg/gitlint/gitlint.cfg
+      mkdir -p cfg/gitlint/rules
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output cfg/gitlint/gitlint.cfg \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/cfg/gitlint/rules/TitleImperativeMood.py
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output cfg/gitlint/gitlint.cfg \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/cfg/gitlint/rules/TitleVerbCapitalized.py
+      mkdir -p cfg/gitlint/txt
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output cfg/gitlint/gitlint.cfg \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/cfg/gitlint/txt/Verbs.txt
+      ls -la
       bash bsh/lintCiCommonsProjectScript.bash \
         "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
         "$CI_COMMIT_SHA"
