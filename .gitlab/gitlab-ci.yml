@@ -41,6 +41,7 @@ Lint:
     - apt-get update
     - apt-get install -y curl unzip git
     - pip install gitlint
+  script:
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
         echo "Downloading artifacts.zip from 'ci-commons' project..."        
@@ -51,11 +52,9 @@ Lint:
           "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate-artifacts"
         unzip artifacts.zip
       fi
-  script:
-    - |
-        bash bsh/lintCiCommonsProjectScript.bash \
-          "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
-          "$CI_COMMIT_SHA"              
+      bash bsh/lintCiCommonsProjectScript.bash \
+        "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
+        "$CI_COMMIT_SHA"              
 
 Generate-artifacts:
   stage: build
