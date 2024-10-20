@@ -257,7 +257,6 @@ printStartingL1TaskTextBox() {
 	local message=$1
 
 	echo "$NEW_LINE"
-	echo "$NEW_LINE"
 
 	printNormalTextBox \
 		$FG_COLOR_WHITE \
@@ -323,7 +322,6 @@ printCompletedL1TaskTextBoxAndIncrementCounter() {
 printStartingL2TaskTextBox() {
 	local message=$1
 
-	echo "$NEW_LINE"
 	echo "$NEW_LINE"
 
 	printNormalTextBox \
