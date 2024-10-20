@@ -24,7 +24,7 @@ totalL2TaskCount=$(echo "$commits" | wc -l)
 
 for commit in $commits; do
   # Print starting text box level 2.
-  message="Gitlint execution on commit $commit"
+  message="Gitlint execution on commit ${commit:0:7}"
   printStartingL2TaskTextBox "$message"
   currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
