@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bash DeleteBR1Branch
+bash DeleteBR1Branch.bash
 
 git checkout -b BR1
 
