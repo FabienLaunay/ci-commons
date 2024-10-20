@@ -94,7 +94,7 @@ printCompletedL1TaskTextBoxAndIncrementCounter "$message" \
   "$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))"
 
 if [[ $failureCount -eq 0 ]]; then
-  return 0
+  exit 0
 else
-  return 1
+  exit 1
 fi
