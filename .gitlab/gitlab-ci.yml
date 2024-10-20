@@ -81,18 +81,6 @@ Lint:
         echo "==========================="
         ls -la
         echo "==========================="
-        echo "cat artifacts1.zip"
-        echo "==========================="
-        cat artifacts1.zip
-        echo "==========================="
-        echo "cat artifacts.zip"
-        echo "==========================="
-        cat artifacts.zip
-        echo "==========================="
-        echo "unzip artifacts1.zip"
-        echo "==========================="
-        unzip artifacts1.zip
-        echo "==========================="
         echo "unzip artifacts.zip"
         echo "==========================="
         unzip artifacts.zip
