@@ -25,7 +25,8 @@ actions=()
 
 for commit in $commits; do
   # Print starting text box level 2.
-  message="Gitlint execution on commit ${commit:0:7}"
+  commitShort=${commit:0:7}
+  message="Gitlint execution on commit $commitShort"
   printStartingL2TaskTextBox "$message"
   currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
@@ -38,9 +39,9 @@ for commit in $commits; do
 
   if [[ $? -ne 0 ]]; then
     ((failureCount++))
-      actions+=("reword $commit $commitMessage")
+      actions+=("reword $commitShort $commitMessage")
   else
-      actions+=("pick $commit $commitMessage")
+      actions+=("pick $commitShort $commitMessage")
   fi
 
   # Print completed text box level 2.
@@ -91,3 +92,9 @@ currentLvlOneTaskStartTimeStamp=$(date +%s)
 currentLvlOneTaskEndTimeStamp=$(date +%s)
 printCompletedL1TaskTextBoxAndIncrementCounter "$message" \
   "$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))"
+
+if [[ $failureCount -eq 0 ]]; then
+  return 0
+else
+  return 1
+fi
