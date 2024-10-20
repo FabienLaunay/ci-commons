@@ -1,23 +1,26 @@
 #!/bin/bash
 
-date "+%y/%m/%d %T %N" > README.md
+d=$(date "+%y/%m/%d %T %N")
+date "$d" > README.md
 git add .
 git commit \
-  -m 'FEA1: Update README.md' \
-  -m 'Line 10' \
-  -m 'Line 11'
+  -m "FEA1: Update README.md with $d" \
+  -m "Line 10" \
+  -m "Line 11"
 
-date "+%y/%m/%d %T %N" > README.md
+d=$(date "+%y/%m/%d %T %N")
+date "$d" > README.md
 git add .
-git commit -m 'FEA2: Update README.md' \
-  -m 'Line 21' \
-  -m 'Line 22'
+git commit \
+  -m "FEA2: Update README.md with $d" \
+  -m "Line 20" \
+  -m "Line 21"
 
-
-date "+%y/%m/%d %T %N" > README.md
-git add .
-git commit -m 'FEA: Update Update README.md' \
-  -m 'Line 31' \
-  -m 'Line 32'
-
+  d=$(date "+%y/%m/%d %T %N")
+  date "$d" > README.md
+  git add .
+  git commit \
+    -m "FEA3: Update README.md with $d" \
+    -m "Line 30" \
+    -m "Line 31"
 git push
