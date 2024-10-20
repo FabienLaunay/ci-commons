@@ -29,7 +29,7 @@ for commit in $commits; do
   printStartingL2TaskTextBox "$message"
   currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
-  commitMessage=$(git log -1 --pretty=%B $commit)
+  commitMessage=$(git log -1 --pretty=%s $commit)
 
   #Print command and run it.
   command="gitlint --config cfg/gitlint/gitlint.cfg --commit $commit"
