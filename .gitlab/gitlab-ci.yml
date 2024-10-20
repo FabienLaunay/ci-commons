@@ -46,6 +46,7 @@ Lint:
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
         echo "Downloading artifacts.zip from 'ci-commons' project..."        
         curl \
+          --verbose \
           --location \
           --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
           --output artifacts.zip \
