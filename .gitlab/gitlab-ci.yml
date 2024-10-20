@@ -44,7 +44,7 @@ Lint:
   script:
     - |
       if [ ! -f cfg/gitlint/gitlint.cfg ]; then
-        echo "Downloading artifacts.zip from 'ci-commons' project..."        
+        echo "Downloading artifacts.zip from 'ci-commons' project...XXXX"
         curl \
           --verbose \
           --location \
