@@ -35,6 +35,16 @@ jobs:
       - name: STEP 5 of 6 - Install 'gitlint' Python package installation
         run: pip install gitlint
 
+#      # Fetch all commits and branches
+#      - git fetch --all
+#      # Find the common ancestor between the branch and main
+#      - MERGE_BASE=$(git merge-base HEAD origin/main)
+#      # Lint all commits between the feature branch and the main branch
+#      - |
+#        gitlint \
+#          --config cfg/gitlint/gitlint.cfg \
+#          --commits $MERGE_BASE..HEAD
+
       - name: STEP 6 of 6 - Run gitlint
         run: gitlint --config cfg/gitlint/gitlint.cfg
 
