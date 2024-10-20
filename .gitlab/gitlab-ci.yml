@@ -48,15 +48,12 @@ Lint:
         unzip artifacts.zip
       fi
   script:
-    # Fetch all commits and branches
-    - git fetch --all
-    # Find the common ancestor between the branch and main
-    - MERGE_BASE=$(git merge-base HEAD origin/main)
-    # Lint all commits between the feature branch and the main branch
     - |
-      gitlint \
-        --config cfg/gitlint/gitlint.cfg \
-        --commits $MERGE_BASE..HEAD
+      if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
+        bash bsh/lintCiCommonsProjectScript.bash "$CI_COMMIT_BEFORE_SHA" "$CI_COMMIT_SHA" 
+      elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
+        bash bsh/lintCiCommonsProjectScript.bash "$CI_MERGE_REQUEST_DIFF_BASE_SHA" "$CI_COMMIT_SHA"        
+      fi
 
 Generate-artifacts:
   stage: build
