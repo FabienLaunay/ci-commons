@@ -18,7 +18,11 @@ echo "arg1 = $1"
 echo "arg2 = $2"
 
 commits=$(git rev-list $1..$2)
-for commit in commits; do
+
+currentL2TaskNumber=1
+totalL2TaskCount=$(echo $commits | wc -l)
+
+for commit in $commits; do
   # Print starting text box level 2.
   message="Gitlint execution on commit $commit"
   printStartingL2TaskTextBox "$message"
