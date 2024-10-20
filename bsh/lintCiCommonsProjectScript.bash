@@ -20,9 +20,7 @@ commits=$(git rev-list $1..$2)
 currentL2TaskNumber=1
 totalL2TaskCount=$(echo "$commits" | wc -l)
 
-lintCount=0
 failureCount=0
-modifyFrom=-1
 actions=()
 
 for commit in $commits; do
@@ -35,18 +33,13 @@ for commit in $commits; do
   command="gitlint --config cfg/gitlint/gitlint.cfg --commit $commit"
   printExecutingCommand "$command"
   $command
-
+  commitMessage=$(git log -1 --pretty=%B $commit)
   if [[ $? -ne 0 ]]; then
-      if [[ $modifyFrom -eq -1 ]]; then
-        modifyFrom=$(($totalL2TaskCount-$lintCount))
-      fi
       ((failureCount++))
-      actions+=("reword $COMMIT $COMMIT_MESSAGE")
+      actions+=("reword $commit $commitMessage")
     else
-      actions+=("pick $COMMIT $COMMIT_MESSAGE")
+      actions+=("pick $commit $commitMessage")
   fi
-
-  ((lintCount++))
 
   # Print completed text box level 2.
   currentLvlTwoTaskEndTimeStamp=$(date +%s)
@@ -81,13 +74,13 @@ currentLvlOneTaskStartTimeStamp=$(date +%s)
       echo "failureCount out of $totalL2TaskCount Git commit messages are not valid."
     fi
     echo "1.Run the following command to open the default Git text editor:"
-    echo "  $ git rebase --interactive HEAD~$modifyFrom"
+    echo "  $ git rebase --interactive HEAD~$totalL2TaskCount"
     echo $NEW_LINE
     echo "2.Replace the content of the editor by the following one:"
     echo "###################################"
     for action in "${actions[@]}"; do
       echo "$action"
-    done    
+    done
     echo "###################################"
   fi
 
