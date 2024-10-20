@@ -43,6 +43,38 @@ Lint:
     - pip install gitlint
   script:
     - |
+      mkdir -p bsh
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output bsh/lintCiCommonsProjectBeforeScript.bash \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/bsh/lintCiCommonsProjectBeforeScript.bash
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output bsh/lintCiCommonsProjectScript.bash \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/bsh/lintCiCommonsProjectScript.bash
+      mkdir -p bsh/utilities
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output bsh/utilities/format.bash \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/bsh/utilities/format.bash
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output bsh/utilities/message.bash \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/bsh/utilities/message.bash
+      curl \
+        --verbose \
+        --location \
+        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
+        --output bsh/utilities/strings.bash \
+          https://gitlab.com/fabien.launay.private/ci-commons/-/raw/main/bsh/utilities/strigs.bash
       mkdir -p cfg/gitlint
       curl \
         --verbose \
