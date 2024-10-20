@@ -22,9 +22,12 @@ Lint-ci-commons-project:
         bash bsh/lintCiCommonsProjectScript.bash "$CI_MERGE_REQUEST_DIFF_BASE_SHA" "$CI_COMMIT_SHA"        
       fi
       echo "AAAAAAAAAAAAAAAAAAA"
-      printf "\n"
-      printf "\n"
+      printf " "
+      printf " "
       echo "BBBBBBBBBBBBBBBBBBB"
+      echo " "
+      echo " "
+      echo "CCCCCCCCCCCCCCCCCCC"
 
 Lint:
   stage: lint
