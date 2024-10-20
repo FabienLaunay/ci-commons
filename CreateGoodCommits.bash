@@ -1,5 +1,9 @@
 #!/bin/bash
 
+bash DeleteBR1Branch
+
+git checkout -b BR1
+
 date "+%y/%m/%d %T %N" > README.md
 git add .
 git commit \
@@ -20,4 +24,4 @@ git commit -m 'FEA: Update 3 README.md' \
   -m 'Line 31' \
   -m 'Line 32'
 
-git push
+git push all BR1
