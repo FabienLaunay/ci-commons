@@ -231,6 +231,7 @@ printNormalTextBox() {
 
 	WIDTH=80
 
+  echo
 	printBorder $WIDTH $character $fgColor $bgColor
 	printDelimitedLine $WIDTH $character $fgColor $bgColor "L" "$message"
 	printBorder $WIDTH $character $fgColor $bgColor

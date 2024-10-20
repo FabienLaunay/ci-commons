@@ -20,7 +20,7 @@ echo "arg2 = $2"
 commits=$(git rev-list $1..$2)
 
 currentL2TaskNumber=1
-totalL2TaskCount=$(echo $commits | wc -l)
+totalL2TaskCount=$(echo "$commits" | wc -l)
 
 for commit in $commits; do
   # Print starting text box level 2.
@@ -29,7 +29,7 @@ for commit in $commits; do
   currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
   #Print command and run it.
-  command="gitlint --config cfg/gitlint/gitlint.cfg \ --commits $commit"
+  command="gitlint --config cfg/gitlint/gitlint.cfg --commits $commit"
   printExecutingCommand "$command"
   $command
 
