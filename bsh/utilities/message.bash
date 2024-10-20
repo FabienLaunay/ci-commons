@@ -410,6 +410,19 @@ executeL2Task() {
 #
 # Prints to the terminal various messages shared across multiple Bash scripts.
 # =============================================================================
+printSuccessMessage() {
+    local header="SUCCESS: "
+    local message=$1
+    echo -e $FG_COLOR_GREEN$header$UNSET_STYLE_ALL$message
+    echo "$NEW_LINE"
+  }
+
+printErrorMessage() {
+  local header="ERROR: "
+  local message=$1
+  echo -e $FG_COLOR_RED$header$UNSET_STYLE_ALL$message
+  echo "$NEW_LINE"
+}
 
 printRemarksHeader() {
 	echo "$NEW_LINE"
@@ -424,9 +437,9 @@ printTaskFailureWarningsHeader() {
 }
 
 printGuidanceHeader() {
-	echo "$NEW_LINE"
-	echo 'GUIDANCE:'
-	return 0
+  local header="GUIDANCE: "
+  echo -e $FG_COLOR_BRIGHT_BLUE$header$UNSET_STYLE_ALL
+  echo "$NEW_LINE"
 }
 
 printWarningForFailureIfUnmetPrerequisites() {
@@ -521,4 +534,6 @@ printExecutingCommand() {
 	echo -e $FG_COLOR_BRIGHT_MAGENTA"$command"$UNSET_STYLE_ALL
 	echo "$NEW_LINE"
 	return 0
+}
+
 }
