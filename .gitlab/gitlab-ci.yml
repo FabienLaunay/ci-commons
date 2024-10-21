@@ -13,7 +13,7 @@ Lint-ci-commons-project:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
-    - bash bsh/lintCiCommonsProjectBeforeScript.bash
+    - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
   script:
     - |
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
@@ -38,9 +38,7 @@ Lint:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
-    - apt-get update
-    - apt-get install -y curl unzip git
-    - pip install gitlint
+     bash bsh/lintCiCommonsProjectBeforeScript.bash "curl unzip git"
   script:
     - |
       mkdir -p bsh
