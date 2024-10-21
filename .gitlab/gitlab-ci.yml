@@ -2,8 +2,6 @@ stages:
   - lint
   - build
 
-artifacts: true
-
 Lint-ci-commons-project:
   stage: lint
   rules:
