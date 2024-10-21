@@ -44,7 +44,6 @@ Lint:
     - |
       mkdir -p bsh
       curl \
-        --verbose \
         --location \
         --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
         --output bsh/lintCiCommonsProjectBeforeScript.bash \
