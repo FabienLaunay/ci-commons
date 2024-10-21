@@ -38,7 +38,8 @@ Lint:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
-     bash bsh/lintCiCommonsProjectBeforeScript.bash "curl unzip git"
+     - apt-get update
+     - apt-get install --yes "curl unzip"
   script:
     - |
       mkdir -p bsh
