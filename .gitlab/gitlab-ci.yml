@@ -39,7 +39,7 @@ Lint:
     entrypoint: [""]
   before_script:
      - apt-get update
-     - apt-get install --yes "curl unzip"
+     - apt-get install --yes curl
   script:
     - |
       mkdir -p bsh
