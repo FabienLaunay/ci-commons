@@ -7,26 +7,7 @@ packages="$1"
 printLargetTextBox "Git Commit Messages Linter"
 
 currentL1TaskNumber=1
-totalL1TaskCount=5
-
-# ==============================================================================
-# Update Debian-based Gitlab Linux runner local package index.
-# ==============================================================================
-
-# Print starting text box level 1.
-message="Gitlab runner local package index update"
-printStartingL1TaskTextBox "$message"
-currentLvlOneTaskStartTimeStamp=$(date +%s)
-
-#Print command and run it.
-command="apt-get update"
-printExecutingCommand "$command"
-$command
-
-# Print completed text box level 1.
-currentLvlOneTaskEndTimeStamp=$(date +%s)
-printCompletedL1TaskTextBoxAndIncrementCounter "$message" \
-  "$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))"
+totalL1TaskCount=4
 
 # ==============================================================================
 # Install Debian packages
