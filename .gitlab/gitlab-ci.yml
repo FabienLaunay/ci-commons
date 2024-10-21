@@ -1,21 +1,21 @@
-.CommonAnchor: &common
-  - |
-    # BEFORE SCRIPT COMMANDS
-    test(){
-      echo "TEST"
-    }
-    FG_COLOR_WHITE='\e[37m'
-    BG_COLOR_GREEN='\e[42m'
-    UNSET_STYLE_ALL='\e[0m'
-    width=80
-    character="#"
-    fgColor=$FG_COLOR_WHITE
-    bgColor=$BG_COLOR_GREEN
-    printf -v border "$character%.0s" $(seq 1 $width)
-    echo -e $fgColor$bgColor$border$UNSET_STYLE_ALL
-    test
-    test
-  - apt-get update
+#.CommonAnchor: &common
+#  - |
+#    # BEFORE SCRIPT COMMANDS
+#    test(){
+#      echo "TEST"
+#    }
+#    FG_COLOR_WHITE='\e[37m'
+#    BG_COLOR_GREEN='\e[42m'
+#    UNSET_STYLE_ALL='\e[0m'
+#    width=80
+#    character="#"
+#    fgColor=$FG_COLOR_WHITE
+#    bgColor=$BG_COLOR_GREEN
+#    printf -v border "$character%.0s" $(seq 1 $width)
+#    echo -e $fgColor$bgColor$border$UNSET_STYLE_ALL
+#    test
+#    test
+#  - apt-get update
 
 stages:
   - lint
@@ -32,7 +32,7 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
-    - *common
+    - apt-get update
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
   script:
     - |
@@ -58,9 +58,10 @@ Lint-Git-Commit-Messages:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
-     - *common
-     - apt-get install --yes curl unzip git
+     - apt-get update
+     - apt-get install --yes curl unzip
      - |
+       # Download Artifacts from 'ci-commons' project
        curl \
          --location \
          --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
