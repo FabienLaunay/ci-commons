@@ -39,13 +39,9 @@ Lint:
     entrypoint: [""]
   before_script:
      - apt-get update
-     - apt-get install --yes curl
+     - apt-get install --yes curl unzip
   script:
-    - |
-      mkdir -p bsh
-      echo "================================="
-      echo "CI_PERSONAL_ACCESS_TOKEN=$CI_PERSONAL_ACCESS_TOKEN"
-      echo "================================="
+    - |      
       curl \
         --verbose \
         --location \
@@ -53,7 +49,8 @@ Lint:
         --output artifacts.zip \
           "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate-artifacts"
       ls -la
-      cat artifacts.zip
+      unzip artifacts.zip
+      ls -lR
 
 Generate-artifacts:
   stage: build
@@ -66,5 +63,6 @@ Generate-artifacts:
     - echo "Generating artifacts..."
   artifacts:
     paths:
-      - cfg/gitlint/
+      - bsh/
+      - cfg/
 
