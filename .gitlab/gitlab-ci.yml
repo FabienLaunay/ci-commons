@@ -1,6 +1,9 @@
 .CommonAnchor: &common
   - |
-    # TEST
+    # BEFORE SCRIPT COMMANDS
+    test(){
+      echo "TEST"
+    }
     FG_COLOR_WHITE='\e[37m'
     BG_COLOR_GREEN='\e[42m'
     UNSET_STYLE_ALL='\e[0m'
@@ -10,6 +13,8 @@
     bgColor=$BG_COLOR_GREEN
     printf -v border "$character%.0s" $(seq 1 $width)
     echo -e $fgColor$bgColor$border$UNSET_STYLE_ALL
+    test
+    test
   - apt-get update
 
 stages:
