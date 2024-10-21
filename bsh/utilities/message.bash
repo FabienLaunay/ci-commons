@@ -181,7 +181,7 @@ printDelimitedLine() {
 # @return 0.
 # =============================================================================
 
-printLargetTextBox() {
+printLargeTextBox() {
 	message=$1
 	CHARACTER="#"
 	WIDTH=80
