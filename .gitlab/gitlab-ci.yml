@@ -1,4 +1,14 @@
 .CommonAnchor: &common
+  - |
+    FG_COLOR_WHITE='\e[37m'
+    BG_COLOR_GREEN='\e[42m'
+    UNSET_STYLE_ALL='\e[0m'
+    width=80
+    character="#"
+    fgColor=$FG_COLOR_WHITE
+    bgColor=$BG_COLOR_GREEN
+    printf -v border "$character%.0s" $(seq 1 $width)
+    echo -e $fgColor$bgColor$border$UNSET_STYLE_ALL
   - apt-get update
 
 stages:
@@ -16,6 +26,7 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
+    - *common
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
   script:
     - |
