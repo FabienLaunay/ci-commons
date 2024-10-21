@@ -5,8 +5,7 @@ stages:
   - lint
   - build
 
-Lint-ci-commons-project:
-  name: "Lint Git Commit Messages for `ci-commons` project"
+Lint-Git-Commit-Messages-For-ci-commons-Project:
   stage: lint
   rules:
     # Trigger on push to main branch
@@ -30,8 +29,7 @@ Lint-ci-commons-project:
           "$CI_COMMIT_SHA"        
       fi
 
-Lint:
-  name: "Lint Git Commit Messages"
+Lint-Git-Commit-Messages:
   stage: lint
   rules:
     # Trigger on push to main branch
@@ -50,7 +48,7 @@ Lint:
          --location \
          --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
          --output artifacts.zip \
-           "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate-artifacts"
+           "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/download?job=Generate-Artifacts"
      - unzip artifacts.zip
      - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
   script:
@@ -58,7 +56,7 @@ Lint:
         "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
         "$CI_COMMIT_SHA"
 
-Generate-artifacts:
+Generate-Artifacts:
   name: "Generate Artifacts"
   stage: build
   rules:
