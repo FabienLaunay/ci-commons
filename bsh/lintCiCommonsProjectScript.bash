@@ -3,8 +3,8 @@
 . bsh/utilities/message.bash
 . bsh/utilities/actions.bash
 
-currentL1TaskNumber=4
-totalL1TaskCount=5
+currentL1TaskNumber=3
+totalL1TaskCount=4
 
 # ==============================================================================
 # Run Gitlint on every commit between the provided range
