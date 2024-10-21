@@ -13,10 +13,7 @@ totalL1TaskCount=4
 # Install Debian packages
 # ==============================================================================
 
-# Print starting text box level 1.
-message="Debian packages installation"
-printStartingL1TaskTextBox "$message"
-currentLvlOneTaskStartTimeStamp=$(date +%s)
+printStartingL1TaskTextBox "Debian packages installation"
 
 currentL2TaskNumber=1
 
@@ -29,36 +26,25 @@ for package in $packages; do
   # Install one package at a time
   # ----------------------------------------------------------------------------
 
-  # Print starting text box level 2.
-  message="'$package' package installation"
-  printStartingL2TaskTextBox "$message"
+  printStartingL2TaskTextBox "'$package' package installation"
   currentLvlTwoTaskStartTimeStamp=$(date +%s)
-
 
   #Print command and run it.
   command="apt-get install --yes $package"
   printExecutingCommand "$command"
   $command
 
-  # Print completed text box level 2.
-  currentLvlTwoTaskEndTimeStamp=$(date +%s)
-  printCompletedL2TaskTextBoxAndIncrementCounter "$message" \
-    "$((currentLvlTwoTaskEndTimeStamp - currentLvlTwoTaskStartTimeStamp))"
+  printCompletedL2TaskTextBoxAndIncrementCounter
 
 done
 
-# Print completed text box level 1.
-currentLvlOneTaskEndTimeStamp=$(date +%s)
-printCompletedL1TaskTextBoxAndIncrementCounter "$message" \
-  "$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))"
+printCompletedL1TaskTextBoxAndIncrementCounter
 
 # ==============================================================================
 # Install the 'gitlint' package using Python package installer
 # ==============================================================================
 
-# Print starting text box level 1.
-message="'gitlint' Python package installation"
-printStartingL1TaskTextBox "$message"
+printStartingL1TaskTextBox "'gitlint' Python package installation"
 currentLvlOneTaskStartTimeStamp=$(date +%s)
 
 #Print command and run it.
@@ -66,7 +52,4 @@ command="pip install gitlint"
 printExecutingCommand "$command"
 $command
 
-# Print completed text box level 1.
-currentLvlOneTaskEndTimeStamp=$(date +%s)
-printCompletedL1TaskTextBoxAndIncrementCounter "$message" \
-  "$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))"
+printCompletedL1TaskTextBoxAndIncrementCounter

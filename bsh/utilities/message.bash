@@ -30,6 +30,11 @@
 # @return 0
 # =============================================================================
 
+currentLvlOneTaskStartTimeStamp=""
+currentLvlOneMessage=""
+currentLvlTwoTaskStartTimeStamp=""
+currentLvlTwoMessage=""
+
 printBashScriptTasks() {
 	local tasks=$1
 	echo "$NEW_LINE"
@@ -255,7 +260,7 @@ printNormalTextBox() {
 # =============================================================================
 
 printStartingL1TaskTextBox() {
-	local message=$1
+	currentLvlOneMessage=$1
 
 	echo "$NEW_LINE"
 
@@ -263,7 +268,9 @@ printStartingL1TaskTextBox() {
 		$FG_COLOR_WHITE \
 		$BG_COLOR_BLUE \
 		"=" \
-		"[$currentL1TaskNumber/$totalL1TaskCount] Starting $message..."
+		"[$currentL1TaskNumber/$totalL1TaskCount] Starting $currentLvlOneMessage..."
+
+  currentLvlOneTaskStartTimeStamp=$(date +%s)
 
 	return 0
 }
@@ -284,8 +291,9 @@ printStartingL1TaskTextBox() {
 # =============================================================================
 
 printCompletedL1TaskTextBoxAndIncrementCounter() {
-	local message=$1
-	local duration=$2
+
+  local currentLvlOneTaskEndTimeStamp=$(date +%s)
+  duration=$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))
 
 	echo "$NEW_LINE"
 
@@ -300,7 +308,7 @@ printCompletedL1TaskTextBoxAndIncrementCounter() {
 		$FG_COLOR_BLACK \
 		$BG_COLOR_BRIGHT_BLUE \
 		"=" \
-		"[$currentL1TaskNumber/$totalL1TaskCount] Completed $message in $hhmmss"
+		"[$currentL1TaskNumber/$totalL1TaskCount] Completed $currentLvlOneMessage in $hhmmss"
 	((currentL1TaskNumber++))
 
 	return 0
@@ -321,7 +329,7 @@ printCompletedL1TaskTextBoxAndIncrementCounter() {
 # =============================================================================
 
 printStartingL2TaskTextBox() {
-	local message=$1
+	currentLvlTwoMessage=$1
 
 	echo "$NEW_LINE"
 
@@ -329,7 +337,9 @@ printStartingL2TaskTextBox() {
 		$FG_COLOR_WHITE \
 		$BG_COLOR_YELLOW \
 		"+" \
-		"[$currentL2TaskNumber/$totalL2TaskCount] Starting $message..."
+		"[$currentL2TaskNumber/$totalL2TaskCount] Starting $currentLvlTwoMessage..."
+
+  currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
 	return 0
 }
@@ -350,8 +360,8 @@ printStartingL2TaskTextBox() {
 # =============================================================================
 
 printCompletedL2TaskTextBoxAndIncrementCounter() {
-	local message=$1
-	local duration=$2
+	local currentLvlTwoTaskEndTimeStamp=$(date +%s)
+  duration=$((currentLvlTwoTaskEndTimeStamp - currentLvlTwoTaskStartTimeStamp))
 
 	echo "$NEW_LINE"
 
@@ -366,7 +376,7 @@ printCompletedL2TaskTextBoxAndIncrementCounter() {
 		$FG_COLOR_BLACK \
 		$BG_COLOR_BRIGHT_YELLOW \
 		"+" \
-		"[$currentL2TaskNumber/$totalL2TaskCount] Completed $message in $hhmmss"
+		"[$currentL2TaskNumber/$totalL2TaskCount] Completed $currentLvlTwoMessage in $hhmmss"
 	((currentL2TaskNumber++))
 
 	return 0
@@ -397,10 +407,7 @@ executeL2Task() {
 	eval $command
 
 	# Store end date and print completed L2 task text box.
-	currentLvlTwoTaskEndTimeStamp=$(date +%s)
-	printCompletedL2TaskTextBoxAndIncrementCounter \
-		"$message" \
-		"$((currentLvlTwoTaskEndTimeStamp - currentLvlTwoTaskStartTimeStamp))"
+	printCompletedL2TaskTextBoxAndIncrementCounter
 
 	return 0
 }
