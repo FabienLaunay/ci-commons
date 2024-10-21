@@ -1,8 +1,12 @@
+.CommonAnchor: &common
+  - apt-get update
+
 stages:
   - lint
   - build
 
 Lint-ci-commons-project:
+  name: "Lint Git Commit Messages for `ci-commons` project"
   stage: lint
   rules:
     # Trigger on push to main branch
@@ -27,6 +31,7 @@ Lint-ci-commons-project:
       fi
 
 Lint:
+  name: "Lint Git Commit Messages"
   stage: lint
   rules:
     # Trigger on push to main branch
@@ -38,7 +43,7 @@ Lint:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
-     - apt-get update
+     - *common
      - apt-get install --yes curl unzip git
      - |
        curl \
@@ -54,6 +59,7 @@ Lint:
         "$CI_COMMIT_SHA"
 
 Generate-artifacts:
+  name: "Generate Artifacts"
   stage: build
   rules:
     # Trigger on push to main branch

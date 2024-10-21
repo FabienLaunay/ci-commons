@@ -535,5 +535,3 @@ printExecutingCommand() {
 	echo "$NEW_LINE"
 	return 0
 }
-
-}
