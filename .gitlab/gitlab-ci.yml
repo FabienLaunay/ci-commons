@@ -2,6 +2,8 @@ stages:
   - lint
   - build
 
+artifacts: true
+
 Lint-ci-commons-project:
   stage: lint
   rules:
@@ -43,6 +45,9 @@ Lint:
   script:
     - |
       mkdir -p bsh
+      echo "================================="
+      echo "CI_PERSONAL_ACCESS_TOKEN=$CI_PERSONAL_ACCESS_TOKEN"
+      echo "================================="
       curl \
         --verbose \
         --location \
