@@ -193,7 +193,7 @@ printLargetTextBox() {
 	printDelimitedLine $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN "L" \
 		""
 	printDelimitedLine $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN "C" \
-		"REACTOR CODING CHALLENGE 01 - Version 1.0.0"
+		"CI-COMMONS - Version 1.0.0"
 	printDelimitedLine $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN "L" \
 		""
 	printDelimitedLine $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN "C" \
