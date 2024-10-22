@@ -53,8 +53,8 @@ Lint-Git-Commit-Messages:
          --location \
          --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
          --output artifacts.zip \
-           "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/\
-            download?job=Generate-Artifacts"
+         "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/\
+          download?job=Generate-Artifacts"
      - apt-get install --yes unzip
      - unzip artifacts.zip
      - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
