@@ -19,8 +19,12 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
+    - echo -e "\e[0Ksection_start:`date +%s`:my_first_section[collapsed=true]\r\e[0KHeader of the 1st collapsible section"
     - apt-get update
+    - echo -e "\e[0Ksection_end:`date +%s`:my_first_section\r\e[0K"
+    - echo -e "\e[0Ksection_start:`date +%s`:my_second_section[collapsed=true]\r\e[0KHeader of the 2nd collapsible section"
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
+    - echo -e "\e[0Ksection_end:`date +%s`:my_second_section\r\e[0K"
   script:
     - |
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
