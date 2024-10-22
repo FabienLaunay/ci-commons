@@ -1,10 +1,21 @@
+################################################################################
+# Pipeline Stages Definition
+################################################################################
 stages:
   - lint
   - build
 
+################################################################################
+# Variables Definition
+################################################################################
 variables:
   FG_COLOR_CYAN: '\e[36m'
   UNSET_STYLE_ALL: '\e[0m'
+  SECTION_START: ''
+
+################################################################################
+# Jobs Definition
+################################################################################
 
 #===============================================================================
 # Lint Git Commit Messages for Self
@@ -29,8 +40,8 @@ Lint-Git-Commit-Messages-For-Self:
     # Start marker for before script commands section.
     - |
       # [IN ] Collapse before script commands
-      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
-      true]\r\e[0K$FG_COLOR_CYAN Before script commands\e[0m"
+      echo -e "\e[0Ksection_start:`date +%s`: before_script_section[collapsed=\
+      true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
     # Run job before script commands defined in bash script
@@ -44,7 +55,7 @@ Lint-Git-Commit-Messages-For-Self:
     - |
       # [IN ] Collapse script commands
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
-      true]\r\e[0K\e[36m  Script commands\e[0m"
+      true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
     # Run job script commands defined in bash script
     - |
       # Run 'bsh/lintCiCommonsProjectScript.bash'
@@ -78,7 +89,7 @@ Lint-Git-Commit-Messages-For-Caller:
     - |
       # [IN ] Collapse before script commands
       echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
-      true]\r\e[0K\e[36m  Before script commands\e[0m"
+      true]\r\e[0K$FG_COLOR_CYAN  Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
     # Install "cURL" Debian package.
@@ -107,7 +118,7 @@ Lint-Git-Commit-Messages-For-Caller:
     - |
       # [IN ] Collapse script commands
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
-      true]\r\e[0K\e[36m  Script commands\e[0m"
+      true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
     # Run job script commands defined in artifact from 'ci-commons' project
     - bash bsh/lintCiCommonsProjectScript.bash \
       "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
