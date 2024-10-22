@@ -17,7 +17,7 @@ variables:
   #=============================================================================
   # Identifier Constants
   #=============================================================================
-  PROJECT_NAME: 'ci-commons'
+  PROJECT_NAME: 'ci-jobs'
   PROJECT_ID: '56935262'
 
 ################################################################################
@@ -52,7 +52,7 @@ Lint-Git-Commit-Messages-For-Self:
     # Update Debian local package index.
     - apt-get update
     # Run job before script commands defined in bash script.
-    - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
+    - bash bsh/lintCiJobsProjectBeforeScript.bash "git"
     # End marker for before script commands section.
     - |
       # [OUT] Collapse before script commands 
@@ -65,13 +65,13 @@ Lint-Git-Commit-Messages-For-Self:
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
     # Run job script commands defined in bash script.
     - |
-      # Run 'bsh/lintCiCommonsProjectScript.bash'
+      # Run 'bsh/lintCiJobsProjectScript.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
-        bash bsh/lintCiCommonsProjectScript.bash \
+        bash bsh/lintCiJobsProjectScript.bash \
           "$CI_COMMIT_BEFORE_SHA" \
           "$CI_COMMIT_SHA" 
       elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
-        bash bsh/lintCiCommonsProjectScript.bash \
+        bash bsh/lintCiJobsProjectScript.bash \
           "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
           "$CI_COMMIT_SHA"        
       fi
@@ -104,9 +104,9 @@ Lint-Git-Commit-Messages-For-Caller:
     - apt-get update
     # Install "cURL" Debian package.
     - apt-get install --yes curl
-    # Download artifacts from 'ci-commons' project.
+    # Download artifacts from 'ci-jobs' project.
     - |
-      # Download Artifacts from 'ci-commons' project
+      # Download Artifacts from 'ci-jobs' project
       curl \
         --location \
         --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
@@ -117,8 +117,8 @@ Lint-Git-Commit-Messages-For-Caller:
     - apt-get install --yes unzip
     # Unzip downloaded artifacts.
     - unzip artifacts.zip
-    # Run job before script commands defined in artifact from 'ci-commons' proj.
-    - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
+    # Run job before script commands defined in artifact from 'ci-jobs' proj.
+    - bash bsh/lintCiJobsProjectBeforeScript.bash "git"
     # End marker for before script commands section.
     - |
       # [OUT] Collapse before script commands 
@@ -129,8 +129,8 @@ Lint-Git-Commit-Messages-For-Caller:
       # [IN ] Collapse script commands
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
-    # Run job script commands defined in artifact from 'ci-commons' project.
-    - bash bsh/lintCiCommonsProjectScript.bash \
+    # Run job script commands defined in artifact from 'ci-jobs' project.
+    - bash bsh/lintCiJobsProjectScript.bash \
       "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
       "$CI_COMMIT_SHA"
     # End marker for script commands section.

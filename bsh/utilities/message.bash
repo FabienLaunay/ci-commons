@@ -198,7 +198,7 @@ printLargeTextBox() {
 	printDelimitedLine $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN "L" \
 		""
 	printDelimitedLine $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN "C" \
-		"CI-COMMONS - Version 1.0.0"
+		"CI-JOBS - Version 1.0.0"
 	printDelimitedLine $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN "L" \
 		""
 	printDelimitedLine $WIDTH $CHARACTER $FG_COLOR_WHITE $BG_COLOR_GREEN "C" \
