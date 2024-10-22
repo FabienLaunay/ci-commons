@@ -1,0 +1,44 @@
+{#
+ #############################################################################
+ Copyright (C) 2023-2024 Fabien Launay. All Rights Reserved.
+ Author: Fabien Launay.
+ Email : fabien.launay.email@gmail.com.
+ Source: This file is part of the "Reactor Coding Challenge 01" project Git
+         repository developed by Fabien Launay for Woven by Toyota.
+ Usage : This copyright notice may not be removed from this file.
+ #############################################################################
+#}
+
+
+{#
+ #############################################################################
+ This file is used by the hpp2plantuml tool to adds a preamble to the PlantUML
+ files it generates from C++ header files.
+
+ For more details, please refer to the hpp2plantuml online documentation:
+ https://github.com/thibaultmarin/hpp2plantuml
+ #############################################################################
+#}
+
+{% extends 'default.puml' %}
+
+{% block preamble %}
+
+footer Generated automatically from //Reactor Coding Challenge 01// C++ header files.
+
+skinparam shadowing false
+
+skinparam package {
+    BackgroundColor #DDDDDD
+}
+
+skinparam class {
+    BackgroundColor #EEEEEE
+    AttributeIconSize 0
+    FontSize 20
+    AttributeFontSize 15
+    BorderColor #000000
+    ArrowColor #000000
+}
+
+{% endblock %}

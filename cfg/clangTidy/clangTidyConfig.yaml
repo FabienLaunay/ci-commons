@@ -1,0 +1,47 @@
+---
+# #############################################################################
+# Copyright (C) 2023-2024 Fabien Launay. All Rights Reserved.
+# Author: Fabien Launay.
+# Email : fabien.launay.email@gmail.com.
+# Source: This file is part of the "Reactor Coding Challenge 01" project Git
+#         repository developed by Fabien Launay for Woven by Toyota.
+# Usage : This copyright notice may not be removed from this file.
+# #############################################################################
+
+# #############################################################################
+# This file specifies configuration options for the Clang-Tidy lint tool.
+#
+# For more details, please refer to the Clang-Tidy online documentation:
+# https://clang.llvm.org/extra/clang-tidy
+# #############################################################################
+
+# #############################################################################
+#                                                                             #
+#                                  Checks                                     #
+#                                                                             #
+# #############################################################################
+
+# =============================================================================
+# RATIONALE: The list of globs:
+#
+# 1.Starts with the '*' character, which enables all default checks;
+#
+# 2.Continues with comma separated check names prefixed with the '-' character
+#   in order to disable them.
+# =============================================================================
+
+Checks: '*,-altera-unroll-loops,-cppcoreguidelines-avoid-c-arrays,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-cppcoreguidelines-pro-bounds-constant-array-index,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-fuchsia-default-arguments-calls,-hicpp-avoid-c-arrays,-hicpp-no-array-decay,-llvmlibc-*,-llvm-header-guard,-modernize-use-trailing-return-type,-modernize-avoid-c-arrays'
+
+# #############################################################################
+#                                                                             #
+#                               FormatStyle                                   #
+#                                                                             #
+# #############################################################################
+
+# =============================================================================
+# RATIONALE: The style for formatting code around applied fixes corresponds to
+# the Google C++ Style Guide, to keep consistency with other automation tools
+# used in this project (Cpplint from Google and Clang-Format from LLVM).
+# =============================================================================
+
+FormatStyle: google
