@@ -9,9 +9,16 @@ stages:
 # Variables Definition
 ################################################################################
 variables:
+  #=============================================================================
+  # Color Constants
+  #=============================================================================
   FG_COLOR_CYAN: '\e[36m'
   UNSET_STYLE_ALL: '\e[0m'
-  SECTION_START: ''
+  #=============================================================================
+  # Identifier Constants
+  #=============================================================================
+  PROJECT_NAME: 'ci-commons'
+  PROJECT_ID: '56935262'
 
 ################################################################################
 # Jobs Definition
@@ -23,14 +30,14 @@ variables:
 Lint-Git-Commit-Messages-For-Self:
   stage: lint
   rules:
-    # Trigger job on push to main branch
+    # Trigger job on push to main branch.
     - if: >
-        $CI_PROJECT_NAME == "ci-commons" &&
+        $CI_PROJECT_NAME == "$PROJECT_NAME" &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
-    # Trigger job on merge request to main branch
+    # Trigger job on merge request to main branch.
     - if: >
-        $CI_PROJECT_NAME == "ci-commons" &&
+        $CI_PROJECT_NAME == "$PROJECT_NAME" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   image:
@@ -44,7 +51,7 @@ Lint-Git-Commit-Messages-For-Self:
       true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
-    # Run job before script commands defined in bash script
+    # Run job before script commands defined in bash script.
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
     # End marker for before script commands section.
     - |
@@ -56,7 +63,7 @@ Lint-Git-Commit-Messages-For-Self:
       # [IN ] Collapse script commands
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
-    # Run job script commands defined in bash script
+    # Run job script commands defined in bash script.
     - |
       # Run 'bsh/lintCiCommonsProjectScript.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
@@ -73,12 +80,15 @@ Lint-Git-Commit-Messages-For-Self:
       # [OUT] Collapse script commands
       echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
 
+#===============================================================================
+# Lint Git Commit Messages for Caller
+#===============================================================================
 Lint-Git-Commit-Messages-For-Caller:
   stage: lint
   rules:
-    # Trigger job on merge request to main branch
+    # Trigger job on merge request to main branch.
     - if: >
-        $CI_PROJECT_NAME != "ci-commons" &&
+        $CI_PROJECT_NAME != "$PROJECT_NAME" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   image:
@@ -101,13 +111,13 @@ Lint-Git-Commit-Messages-For-Caller:
         --location \
         --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
         --output artifacts.zip \
-        "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/\
+        "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/\
       download?job=Generate-Artifacts"
     # Install "unzip" Debian package.
     - apt-get install --yes unzip
     # Unzip downloaded artifacts.
     - unzip artifacts.zip
-    # Run job before script commands defined in artifact from 'ci-commons' project
+    # Run job before script commands defined in artifact from 'ci-commons' proj.
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
     # End marker for before script commands section.
     - |
@@ -119,7 +129,7 @@ Lint-Git-Commit-Messages-For-Caller:
       # [IN ] Collapse script commands
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
-    # Run job script commands defined in artifact from 'ci-commons' project
+    # Run job script commands defined in artifact from 'ci-commons' project.
     - bash bsh/lintCiCommonsProjectScript.bash \
       "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
       "$CI_COMMIT_SHA"
@@ -128,17 +138,20 @@ Lint-Git-Commit-Messages-For-Caller:
       # [OUT] Collapse script commands
       echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
 
+#===============================================================================
+# Generate Artifacts
+#===============================================================================
 Generate-Artifacts:
   stage: build
   rules:
-    # Trigger job on push to main branch
+    # Trigger job on push to main branch.
     - if: >
-        $CI_PROJECT_NAME == "ci-commons" &&
+        $CI_PROJECT_NAME == "$PROJECT_NAME" &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
-    # Trigger job on merge request to main branch
+    # Trigger job on merge request to main branch.
     - if: >
-        $CI_PROJECT_NAME == "ci-commons" &&
+        $CI_PROJECT_NAME == "$PROJECT_NAME" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   script:
