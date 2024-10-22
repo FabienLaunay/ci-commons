@@ -21,7 +21,8 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
   before_script:
     - |
       # [IN ] Collapse before script commands
-      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=true]\r\e[0K\e[36m  Before script commands\e[0m"
+      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
+      true]\r\e[0K\e[36m  Before script commands\e[0m"
     - apt-get update
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
     - |
