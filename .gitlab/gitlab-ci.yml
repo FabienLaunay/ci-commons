@@ -19,19 +19,24 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
+    # Start marker for before script commands section.
     - |
       # [IN ] Collapse before script commands
       echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
       true]\r\e[0K\e[36m  Before script commands\e[0m"
+    # Update Debian local package index.
     - apt-get update
+    # Run before script bash script
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
+    # End marker for before script commands section.
     - |
       # [OUT] Collapse before script commands 
       echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
   script:
     - |
       # [IN ] Collapse script commands
-      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=true]\r\e[0K\e[36m  Script commands\e[0m"
+      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
+      true]\r\e[0K\e[36m  Script commands\e[0m"
     - |
       # Run 'bsh/lintCiCommonsProjectScript.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
@@ -54,11 +59,11 @@ Lint-Git-Commit-Messages:
         $CI_PROJECT_NAME != "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-
   image:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
+    # Update Debian local package index.
      - apt-get update
      - apt-get install --yes curl
      - |
@@ -71,6 +76,7 @@ Lint-Git-Commit-Messages:
        download?job=Generate-Artifacts"
      - apt-get install --yes unzip
      - unzip artifacts.zip
+     # Run before script bash script
      - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
   script:
       bash bsh/lintCiCommonsProjectScript.bash \
