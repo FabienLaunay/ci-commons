@@ -122,6 +122,7 @@ Generate-Artifacts:
         $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  script:
   artifacts:
     paths:
       - bsh/
