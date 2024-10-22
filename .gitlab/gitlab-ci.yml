@@ -19,13 +19,16 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
     name: python:3.9-slim
     entrypoint: [""]
   before_script:
-    - echo -e "\e[0Ksection_start:`date +%s`:my_first_section[collapsed=true]\r\e[0KHeader of the 1st collapsible section"
+    - |
+      # Collapse before script commands
+      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=true]\r\e[0KBefore script commands"
     - apt-get update
-    - echo -e "\e[0Ksection_end:`date +%s`:my_first_section\r\e[0K"
-    - echo -e "\e[0Ksection_start:`date +%s`:my_second_section[collapsed=true]\r\e[0KHeader of the 2nd collapsible section"
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
-    - echo -e "\e[0Ksection_end:`date +%s`:my_second_section\r\e[0K"
+    - echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
   script:
+    - |
+      # Collapse before script commands
+      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=true]\r\e[0KBefore script commands"
     - |
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
         bash bsh/lintCiCommonsProjectScript.bash \
@@ -36,6 +39,7 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
           "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
           "$CI_COMMIT_SHA"        
       fi
+      - echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
 
 Lint-Git-Commit-Messages:
   stage: lint
