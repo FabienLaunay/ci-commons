@@ -6,12 +6,12 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
   stage: lint
   rules:
     # Trigger on push to main branch
-    - if: >
+    - if: |
         $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
   # Trigger on merge request to main branch
-    - if: >
+    - if: |
         $CI_PROJECT_NAME == "ci-commons" && 
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
@@ -36,7 +36,7 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
 Lint-Git-Commit-Messages:
   stage: lint
   rules:
-    - if: >
+    - if: |
         $CI_PROJECT_NAME != "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
@@ -65,12 +65,12 @@ Generate-Artifacts:
   stage: build
   rules:
     # Trigger on push to main branch
-    - if: >
+    - if: |
         $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
     # Trigger on merge request to main branch
-    - if: >
+    - if: |
         $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
