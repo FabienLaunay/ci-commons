@@ -11,8 +11,8 @@ stages:
 variables:
   FG_COLOR_CYAN: '\e[36m'
   UNSET_STYLE_ALL: '\e[0m'
-  SECTION_START: ''
-
+  SECTION_START: '\e[0Ksection_start:`date +%s`'
+  
 ################################################################################
 # Jobs Definition
 ################################################################################
@@ -40,7 +40,7 @@ Lint-Git-Commit-Messages-For-Self:
     # Start marker for before script commands section.
     - |
       # [IN ] Collapse before script commands
-      echo -e "\e[0Ksection_start:`date +%s`: before_script_section[collapsed=\
+      echo -e "$SECTION_START:before_script_section[collapsed=\
       true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
