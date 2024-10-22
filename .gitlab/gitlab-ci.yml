@@ -30,7 +30,7 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
   script:
     - |
       # [IN ] Collapse script commands
-      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=true]\r\e[0K\e[96m... Script commands\e[0m
+      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=true]\r\e[0K\e[96m  Script commands\e[0m
     - |
       # Run 'bsh/lintCiCommonsProjectScript.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
