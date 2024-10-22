@@ -18,7 +18,6 @@ variables:
   # Identifier Constants
   #=============================================================================
   PROJECT_NAME: 'ci-commons'
-  PROJECT_ID: '56935262'
 
 ################################################################################
 # Jobs Definition
@@ -32,12 +31,12 @@ Lint-Git-Commit-Messages-For-Self:
   rules:
     # Trigger job on push to main branch.
     - if: >
-        $CI_PROJECT_NAME == "$PROJECT_NAME" &&
+        $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
     # Trigger job on merge request to main branch.
     - if: >
-        $CI_PROJECT_NAME == "$PROJECT_NAME" &&
+        $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   image:
@@ -88,7 +87,7 @@ Lint-Git-Commit-Messages-For-Caller:
   rules:
     # Trigger job on merge request to main branch.
     - if: >
-        $CI_PROJECT_NAME != "$PROJECT_NAME" &&
+        $CI_PROJECT_NAME != "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   image:
@@ -111,7 +110,7 @@ Lint-Git-Commit-Messages-For-Caller:
         --location \
         --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
         --output artifacts.zip \
-        "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/\
+        "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/\
       download?job=Generate-Artifacts"
     # Install "unzip" Debian package.
     - apt-get install --yes unzip
@@ -146,12 +145,12 @@ Generate-Artifacts:
   rules:
     # Trigger job on push to main branch.
     - if: >
-        $CI_PROJECT_NAME == "$PROJECT_NAME" &&
+        $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
     # Trigger job on merge request to main branch.
     - if: >
-        $CI_PROJECT_NAME == "$PROJECT_NAME" &&
+        $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   script:
