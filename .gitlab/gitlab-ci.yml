@@ -5,12 +5,12 @@ stages:
 Lint-Git-Commit-Messages-For-Self:
   stage: lint
   rules:
-    # Trigger on push to main branch
+    # Trigger job on push to main branch
     - if: >
         $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
-    # Trigger on merge request to main branch
+    # Trigger job on merge request to main branch
     - if: >
         $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
@@ -26,17 +26,19 @@ Lint-Git-Commit-Messages-For-Self:
       true]\r\e[0K\e[36m  Before script commands\e[0m"
     # Update Debian local package index.
     - apt-get update
-    # Run before script bash script
+    # Run job before script commands defined in bash script
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
     # End marker for before script commands section.
     - |
       # [OUT] Collapse before script commands 
       echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
   script:
+    # Start marker for script commands section.
     - |
       # [IN ] Collapse script commands
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
       true]\r\e[0K\e[36m  Script commands\e[0m"
+    # Run job script commands defined in bash script
     - |
       # Run 'bsh/lintCiCommonsProjectScript.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
@@ -48,6 +50,7 @@ Lint-Git-Commit-Messages-For-Self:
           "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
           "$CI_COMMIT_SHA"        
       fi
+    # End marker for script commands section.
     - |
       # [OUT] Collapse script commands
       echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
@@ -63,9 +66,16 @@ Lint-Git-Commit-Messages-For-Caller:
     name: python:3.9-slim
     entrypoint: [ "" ]
   before_script:
+    # Start marker for before script commands section.
+    - |
+      # [IN ] Collapse before script commands
+      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
+      true]\r\e[0K\e[36m  Before script commands\e[0m"
     # Update Debian local package index.
     - apt-get update
+    # Install "cURL" Debian package.
     - apt-get install --yes curl
+    # Download artifacts from 'ci-commons' project.
     - |
       # Download Artifacts from 'ci-commons' project
       curl \
@@ -74,30 +84,44 @@ Lint-Git-Commit-Messages-For-Caller:
         --output artifacts.zip \
         "https://gitlab.com/api/v4/projects/56935262/jobs/artifacts/main/\
       download?job=Generate-Artifacts"
+    # Install "unzip" Debian package.
     - apt-get install --yes unzip
+    # Unzip downloaded artifacts.
     - unzip artifacts.zip
-    # Run before script bash script
+    # Run job before script commands defined in artifact from 'ci-commons' project
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
+    # End marker for before script commands section.
+    - |
+      # [OUT] Collapse before script commands 
+      echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
   script:
-    bash bsh/lintCiCommonsProjectScript.bash \
-    "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
-    "$CI_COMMIT_SHA"
+    # Start marker for script commands section.
+    - |
+      # [IN ] Collapse script commands
+      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
+      true]\r\e[0K\e[36m  Script commands\e[0m"
+    # Run job script commands defined in artifact from 'ci-commons' project
+    - bash bsh/lintCiCommonsProjectScript.bash \
+      "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
+      "$CI_COMMIT_SHA"
+    # End marker for script commands section.
+    - |
+      # [OUT] Collapse script commands
+      echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
 
 Generate-Artifacts:
   stage: build
   rules:
-    # Trigger on push to main branch
+    # Trigger job on push to main branch
     - if: >
         $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
-    # Trigger on merge request to main branch
+    # Trigger job on merge request to main branch
     - if: >
         $CI_PROJECT_NAME == "ci-commons" &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-  script:
-    - echo "Generating artifacts..."
   artifacts:
     paths:
       - bsh/
