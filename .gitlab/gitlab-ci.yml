@@ -11,7 +11,10 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
   # Trigger on merge request to main branch
-    - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    - if: >
+        $CI_PROJECT_NAME == "ci-commons" &&
+        $CI_PIPELINE_SOURCE == "merge_request_event" &&
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   image:
     name: python:3.9-slim
     entrypoint: [""]
@@ -33,7 +36,10 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
 Lint-Git-Commit-Messages:
   stage: lint
   rules:
-    - if: '$CI_PROJECT_NAME != "ci-commons" && $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    - if: >
+        $CI_PROJECT_NAME != "ci-commons" &&
+        $CI_PIPELINE_SOURCE == "merge_request_event" &&
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
   image:
     name: python:3.9-slim
@@ -60,9 +66,15 @@ Generate-Artifacts:
   stage: build
   rules:
     # Trigger on push to main branch
-    - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+    - if: >
+        $CI_PROJECT_NAME == "ci-commons" &&
+        $CI_PIPELINE_SOURCE == "push" &&
+        $CI_COMMIT_BRANCH == "main"
     # Trigger on merge request to main branch
-    - if: '$CI_PROJECT_NAME == "ci-commons" && $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    - if: >
+        $CI_PROJECT_NAME == "ci-commons" &&
+        $CI_PIPELINE_SOURCE == "merge_request_event" &&
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   script:
     - echo "Generating artifacts..."
   artifacts:
