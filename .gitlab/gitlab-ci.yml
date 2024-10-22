@@ -31,7 +31,7 @@ Lint-Git-Commit-Messages-For-Self:
   rules:
     # Trigger job on push to main branch.
     - if: >
-        $CI_PROJECT_NAME == "ci-commons" &&
+        $CI_PROJECT_NAME == $PROJECT_NAME &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
     # Trigger job on merge request to main branch.
