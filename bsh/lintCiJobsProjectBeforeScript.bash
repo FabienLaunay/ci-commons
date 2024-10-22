@@ -22,19 +22,19 @@ totalL2TaskCount=$#
 
 for package in $packages; do
 
-  # ----------------------------------------------------------------------------
-  # Install one package at a time
-  # ----------------------------------------------------------------------------
+	# ----------------------------------------------------------------------------
+	# Install one package at a time
+	# ----------------------------------------------------------------------------
 
-  printStartingL2TaskTextBox "'$package' package installation"
-  currentLvlTwoTaskStartTimeStamp=$(date +%s)
+	printStartingL2TaskTextBox "'$package' package installation"
+	currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
-  #Print command and run it.
-  command="apt-get install --yes $package"
-  printExecutingCommand "$command"
-  $command
+	#Print command and run it.
+	command="apt-get install --yes $package"
+	printExecutingCommand "$command"
+	$command
 
-  printCompletedL2TaskTextBoxAndIncrementCounter
+	printCompletedL2TaskTextBoxAndIncrementCounter
 
 done
 

@@ -34,7 +34,7 @@ repos:
     hooks:
       - id: codespell
         name: <01/16> Check spelling in text files.
-        exclude: CHANGELOG.pdf
+        exclude: '(CHANGELOG.pdf|cfg/gitlint/txt/Verbs.txt)'
         args:
           - --ignore-words=cfg/codespell/ignoreWords.txt
 

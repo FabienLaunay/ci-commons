@@ -16,8 +16,8 @@
 #
 # #############################################################################
 
-if [[ -n "$GITLAB_CI" ]]; then
-  NEW_LINE=' '
+if [[ -n $GITLAB_CI ]]; then
+	NEW_LINE=' '
 else
-  NEW_LINE=''
+	NEW_LINE=''
 fi

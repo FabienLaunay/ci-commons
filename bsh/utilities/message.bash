@@ -270,7 +270,7 @@ printStartingL1TaskTextBox() {
 		"=" \
 		"[$currentL1TaskNumber/$totalL1TaskCount] Starting $currentLvlOneMessage..."
 
-  currentLvlOneTaskStartTimeStamp=$(date +%s)
+	currentLvlOneTaskStartTimeStamp=$(date +%s)
 
 	return 0
 }
@@ -292,8 +292,8 @@ printStartingL1TaskTextBox() {
 
 printCompletedL1TaskTextBoxAndIncrementCounter() {
 
-  local currentLvlOneTaskEndTimeStamp=$(date +%s)
-  duration=$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))
+	local currentLvlOneTaskEndTimeStamp=$(date +%s)
+	duration=$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))
 
 	echo "$NEW_LINE"
 
@@ -339,7 +339,7 @@ printStartingL2TaskTextBox() {
 		"+" \
 		"[$currentL2TaskNumber/$totalL2TaskCount] Starting $currentLvlTwoMessage..."
 
-  currentLvlTwoTaskStartTimeStamp=$(date +%s)
+	currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
 	return 0
 }
@@ -361,7 +361,7 @@ printStartingL2TaskTextBox() {
 
 printCompletedL2TaskTextBoxAndIncrementCounter() {
 	local currentLvlTwoTaskEndTimeStamp=$(date +%s)
-  duration=$((currentLvlTwoTaskEndTimeStamp - currentLvlTwoTaskStartTimeStamp))
+	duration=$((currentLvlTwoTaskEndTimeStamp - currentLvlTwoTaskStartTimeStamp))
 
 	echo "$NEW_LINE"
 
@@ -418,17 +418,17 @@ executeL2Task() {
 # Prints to the terminal various messages shared across multiple Bash scripts.
 # =============================================================================
 printSuccessMessage() {
-    local header="SUCCESS: "
-    local message=$1
-    echo -e $FG_COLOR_GREEN$header$UNSET_STYLE_ALL$message
-    echo "$NEW_LINE"
-  }
+	local header="SUCCESS: "
+	local message=$1
+	echo -e $FG_COLOR_GREEN$header$UNSET_STYLE_ALL$message
+	echo "$NEW_LINE"
+}
 
 printErrorMessage() {
-  local header="ERROR: "
-  local message=$1
-  echo -e $FG_COLOR_BRIGHT_RED$header$UNSET_STYLE_ALL$message
-  echo "$NEW_LINE"
+	local header="ERROR: "
+	local message=$1
+	echo -e $FG_COLOR_BRIGHT_RED$header$UNSET_STYLE_ALL$message
+	echo "$NEW_LINE"
 }
 
 printRemarksHeader() {
@@ -444,9 +444,9 @@ printTaskFailureWarningsHeader() {
 }
 
 printGuidanceHeader() {
-  local header="GUIDANCE: "
-  echo -e $FG_COLOR_BRIGHT_BLUE$header$UNSET_STYLE_ALL
-  echo "$NEW_LINE"
+	local header="GUIDANCE: "
+	echo -e $FG_COLOR_BRIGHT_BLUE$header$UNSET_STYLE_ALL
+	echo "$NEW_LINE"
 }
 
 printWarningForFailureIfUnmetPrerequisites() {
