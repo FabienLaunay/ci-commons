@@ -20,15 +20,17 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
     entrypoint: [""]
   before_script:
     - |
-      # Collapse before script commands
+      # [IN ] Collapse before script commands
       echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=true]\r\e[0KBefore script commands"
     - apt-get update
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
-    - echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
+    - |
+      # [OUT] Collapse before script commands 
+      echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
   script:
     - |
-      # Collapse before script commands
-      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=true]\r\e[Script commands"
+      # [IN ] Collapse before script commands
+      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=true]\r\e[0KScript commands"
     - |
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
         bash bsh/lintCiCommonsProjectScript.bash \
@@ -39,7 +41,9 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
           "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
           "$CI_COMMIT_SHA"        
       fi
-    - echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
+    - |
+      # [IN ] Collapse before script commands
+      echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
 
 Lint-Git-Commit-Messages:
   stage: lint
