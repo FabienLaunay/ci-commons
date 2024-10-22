@@ -21,7 +21,7 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
   before_script:
     - |
       # [IN ] Collapse before script commands
-      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=true]\r\e[0KBefore script commands"
+      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=true]\r\e[0K\e[96m  Before script commands\e[0m"
     - apt-get update
     - bash bsh/lintCiCommonsProjectBeforeScript.bash "git"
     - |
@@ -29,9 +29,10 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
       echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
   script:
     - |
-      # [IN ] Collapse before script commands
-      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=true]\r\e[0KScript commands"
+      # [IN ] Collapse script commands
+      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=true]\r\e[0K\e[96m... Script commands\e[0m
     - |
+      # Run 'bsh/lintCiCommonsProjectScript.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
         bash bsh/lintCiCommonsProjectScript.bash \
           "$CI_COMMIT_BEFORE_SHA" \
@@ -42,7 +43,7 @@ Lint-Git-Commit-Messages-For-ci-commons-Project:
           "$CI_COMMIT_SHA"        
       fi
     - |
-      # [IN ] Collapse before script commands
+      # [OUT] Collapse script commands
       echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
 
 Lint-Git-Commit-Messages:
