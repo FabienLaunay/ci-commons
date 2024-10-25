@@ -1,162 +1,33 @@
-################################################################################
-# Pipeline Stages Definition
-################################################################################
-stages:
-  - lint
+stages:          # List of stages for jobs, and their order of execution
   - build
+  - test
+  - deploy
 
-################################################################################
-# Variables Definition
-################################################################################
-variables:
-  #=============================================================================
-  # Color Constants
-  #=============================================================================
-  FG_COLOR_CYAN: '\e[36m'
-  UNSET_STYLE_ALL: '\e[0m'
-  #=============================================================================
-  # Identifier Constants
-  #=============================================================================
-  PROJECT_NAME: 'ci-commons'
-  PROJECT_ID: '56935262'
-
-################################################################################
-# Jobs Definition
-################################################################################
-
-#===============================================================================
-# Lint Git Commit Messages for Self
-#===============================================================================
-Lint-Git-Commit-Messages-For-Self:
-  stage: lint
+build-job:       # This job runs in the build stage, which runs first.
   rules:
-    # Trigger job on push to main branch.
-    - if: >
-        $CI_PROJECT_NAME == $PROJECT_NAME &&
-        $CI_PIPELINE_SOURCE == "push" &&
-        $CI_COMMIT_BRANCH == "main"
-    # Trigger job on merge request to main branch.
-    - if: >
-        $CI_PROJECT_NAME == $PROJECT_NAME &&
-        $CI_PIPELINE_SOURCE == "merge_request_event" &&
-        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-  image:
-    name: python:3.9-slim
-    entrypoint: [ "" ]
-  before_script:
-    # Start marker for before script commands section.
-    - |
-      # [IN ] Collapse before script commands
-      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
-      true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
-    # Update Debian local package index.
-    - apt-get update
-    # Run job before script commands defined in bash script.
-    - bash bsh/lintCiJobsProjectBeforeScript.bash "git"
-    # End marker for before script commands section.
-    - |
-      # [OUT] Collapse before script commands 
-      echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
-  script:
-    # Start marker for script commands section.
-    - |
-      # [IN ] Collapse script commands
-      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
-      true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
-    # Run job script commands defined in bash script.
-    - |
-      # Run 'bsh/lintCiJobsProjectScript.bash'
-      if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
-        bash bsh/lintCiJobsProjectScript.bash \
-          "$CI_COMMIT_BEFORE_SHA" \
-          "$CI_COMMIT_SHA" 
-      elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
-        bash bsh/lintCiJobsProjectScript.bash \
-          "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
-          "$CI_COMMIT_SHA"        
-      fi
-    # End marker for script commands section.
-    - |
-      # [OUT] Collapse script commands
-      echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
-
-#===============================================================================
-# Lint Git Commit Messages for Caller
-#===============================================================================
-Lint-Git-Commit-Messages-For-Caller:
-  stage: lint
-  rules:
-    # Trigger job on merge request to main branch.
-    - if: >
-        $CI_PROJECT_NAME != $PROJECT_NAME &&
-        $CI_PIPELINE_SOURCE == "merge_request_event" &&
-        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-  image:
-    name: python:3.9-slim
-    entrypoint: [ "" ]
-  before_script:
-    # Start marker for before script commands section.
-    - |
-      # [IN ] Collapse before script commands
-      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
-      true]\r\e[0K$FG_COLOR_CYAN  Before script commands$UNSET_STYLE_ALL"
-    # Update Debian local package index.
-    - apt-get update
-    # Install "cURL" Debian package.
-    - apt-get install --yes curl
-    # Download artifacts from 'ci-commons' project.
-    - |
-      # Download Artifacts from 'ci-commons' project
-      curl \
-        --location \
-        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
-        --output artifacts.zip \
-        "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/\
-      download?job=Generate-Artifacts"
-    # Install "unzip" Debian package.
-    - apt-get install --yes unzip
-    # Unzip downloaded artifacts.
-    - unzip artifacts.zip
-    # Run job before script commands defined in artifact from 'ci-commons' proj.
-    - bash bsh/lintCiJobsProjectBeforeScript.bash "git"
-    # End marker for before script commands section.
-    - |
-      # [OUT] Collapse before script commands 
-      echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
-  script:
-    # Start marker for script commands section.
-    - |
-      # [IN ] Collapse script commands
-      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
-      true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
-    # Run job script commands defined in artifact from 'ci-commons' project.
-    - bash bsh/lintCiJobsProjectScript.bash \
-      "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
-      "$CI_COMMIT_SHA"
-    # End marker for script commands section.
-    - |
-      # [OUT] Collapse script commands
-      echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
-
-#===============================================================================
-# Generate Artifacts
-#===============================================================================
-Generate-Artifacts:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
   stage: build
-  rules:
-    # Trigger job on push to main branch.
-    - if: >
-        $CI_PROJECT_NAME == $PROJECT_NAME &&
-        $CI_PIPELINE_SOURCE == "push" &&
-        $CI_COMMIT_BRANCH == "main"
-    # Trigger job on merge request to main branch.
-    - if: >
-        $CI_PROJECT_NAME == $PROJECT_NAME &&
-        $CI_PIPELINE_SOURCE == "merge_request_event" &&
-        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   script:
-    - echo "Generating artifacts..."
-  artifacts:
-    paths:
-      - bsh/
-      - cfg/
+    - echo "Compiling the code..."
+    - echo "Compile complete."
+
+unit-test-job:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  script:
+    - echo "Running unit tests... This will take about 2 seconds."
+    - sleep 2
+    - echo "Code coverage is 90%"
+
+lint-test-job:   # This job also runs in the test stage.
+  stage: test    # It can run at the same time as unit-test-job (in parallel).
+  script:
+    - echo "Linting code... This will take about 2 seconds."
+    - sleep 2
+    - echo "No lint issues found."
+
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  environment: production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
