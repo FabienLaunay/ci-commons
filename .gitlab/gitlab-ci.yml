@@ -6,10 +6,5 @@ variables:
 
 Lint-Git-Commit-Messages-For-Caller:
   stage: lint
-  rules:
-    - if: >
-        $CI_PROJECT_NAME != $PROJECT_NAME &&
-        $CI_PIPELINE_SOURCE == "merge_request_event" &&
-        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   script:
     - echo "AAAAAAAAAAAAAA"
