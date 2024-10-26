@@ -3,7 +3,6 @@ stages:
 
 variables:
   PROJECT_NAME: 'ci-commons'
-  PROJECT_ID: '56935262'
 
 Lint-Git-Commit-Messages-For-Caller:
   stage: lint
@@ -12,8 +11,5 @@ Lint-Git-Commit-Messages-For-Caller:
         $CI_PROJECT_NAME != $PROJECT_NAME &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-  image:
-    name: python:3.9-slim
-    entrypoint: [ "" ]
   script:
     - echo "AAAAAAAAAAAAAA"
