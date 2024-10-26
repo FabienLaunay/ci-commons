@@ -1,10 +1,6 @@
 stages:
-  - lint
-
-variables:
-  PROJECT_NAME: 'ci-commons'
-
-Lint-Git-Commit-Messages-For-Caller:
-  stage: lint
+  - stage1
+job1:
+  stage: stage1
   script:
-    - echo "AAAAAAAAAAAAAA"
+    - echo "Test"
