@@ -25,6 +25,62 @@ variables:
 ################################################################################
 
 #===============================================================================
+# Lint Git Commit Messages for Self
+#===============================================================================
+Lint-Git-Commit-Messages-For-Self:
+  stage: lint
+  rules:
+    # Trigger job on push to main branch.
+    - if: >
+        $CI_PROJECT_NAME == $PROJECT_NAME &&
+        $CI_PIPELINE_SOURCE == "push" &&
+        $CI_COMMIT_BRANCH == "main"
+    # Trigger job on merge request to main branch.
+    - if: >
+        $CI_PROJECT_NAME == $PROJECT_NAME &&
+        $CI_PIPELINE_SOURCE == "merge_request_event" &&
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  image:
+    name: python:3.9-slim
+    entrypoint: [ "" ]
+  before_script:
+    # Start marker for before script commands section.
+    - |
+      # [IN ] Collapse before script commands
+      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
+      true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
+    # Update Debian local package index.
+    - apt-get update
+    # Run job before script commands defined in bash script.
+    - bash bsh/lintCiJobsProjectBeforeScript.bash "git"
+    # End marker for before script commands section.
+    - |
+      # [OUT] Collapse before script commands 
+      echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
+  script:
+    # Start marker for script commands section.
+    - |
+      # [IN ] Collapse script commands
+      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
+      true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
+    # Run job script commands defined in bash script.
+    - |
+      # Run 'bsh/lintCiJobsProjectScript.bash'
+      if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
+        bash bsh/lintCiJobsProjectScript.bash \
+          "$CI_COMMIT_BEFORE_SHA" \
+          "$CI_COMMIT_SHA" 
+      elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
+        bash bsh/lintCiJobsProjectScript.bash \
+          "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
+          "$CI_COMMIT_SHA"        
+      fi
+    # End marker for script commands section.
+    - |
+      # [OUT] Collapse script commands
+      echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
+
+#===============================================================================
 # Generate Artifacts
 #===============================================================================
 Generate-Artifacts:
