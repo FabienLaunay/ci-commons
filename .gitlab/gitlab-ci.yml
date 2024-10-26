@@ -81,6 +81,23 @@ Lint-Git-Commit-Messages-For-Self:
       echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"
 
 #===============================================================================
+# Lint Git Commit Messages for Caller
+#===============================================================================
+Lint-Git-Commit-Messages-For-Caller:
+  stage: lint
+  rules:
+    # Trigger job on merge request to main branch.
+    - if: >
+        $CI_PROJECT_NAME != $PROJECT_NAME &&
+        $CI_PIPELINE_SOURCE == "merge_request_event" &&
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  image:
+    name: python:3.9-slim
+    entrypoint: [ "" ]
+  script:
+    - echo "AAAAAAAAAAAAAA"
+
+#===============================================================================
 # Generate Artifacts
 #===============================================================================
 Generate-Artifacts:
