@@ -32,8 +32,7 @@ for commit in $commits; do
 	commitMessage=$(git log -n 1 --format=%s $commit)
 
 	#Print command and run it.
-	#command="echo \"$commitMessage\" | codespell --ignore-words=cfg/codespell/ignoreWords.txt"
-  command="git show --pretty="" --name-only $commit | tail -n +6 | codespell --ignore-words=cfg/codespell/ignoreWords.txt"
+	command="echo \"$commitMessage\" | codespell --ignore-words=cfg/codespell/ignoreWords.txt"
 	printExecutingCommand "$command"
 	RESULT=$($command)
 
