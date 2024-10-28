@@ -33,6 +33,10 @@ for commit in $commits; do
 	commitMessageFile="commitMessage"
 	echo "$commitMessage" > "$commitMessageFile"
 	#Print command and run it.
+
+cat $commitMessageFile
+
+
   command="codespell $commitMessageFile --ignore-words=cfg/codespell/ignoreWords.txt"
   printExecutingCommand "$command"
   echo "A"
