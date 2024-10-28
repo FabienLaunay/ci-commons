@@ -27,7 +27,7 @@ Lint-Git-Commit-Messages-For-Self:
     # Install Git.
     - bash bsh/02_InstallDebianPackages.bash "1" "4" "git"
     # Install Gitlint.
-    - bash bsh/03_InstallPythonPackages.bash "2" "4" "git"
+    - bash bsh/03_InstallPythonPackages.bash "2" "4" "gitlint"
     # End marker for before script commands section.
     - |
       # [OUT] Collapse before script commands 

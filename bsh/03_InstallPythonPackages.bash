@@ -6,7 +6,7 @@ currentL1TaskNumber="$1"
 totalL1TaskCount="$2"
 packages="$3"
 
-printStartingL1TaskTextBox "Debian packages installation"
+printStartingL1TaskTextBox "Python packages installation"
 
 currentL2TaskNumber=1
 
