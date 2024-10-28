@@ -14,6 +14,22 @@ Spell-Check-Git-Commit-Messages-For-Self:
   image:
     name: python:3.9-slim
     entrypoint: [ "" ]
+  before_script:
+    # Start marker for before script commands section.
+    - |
+      # [IN ] Collapse before script commands
+      echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
+      true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
+    # Update Debian local package index.
+    - apt-get update
+    # Print splash screen.
+    - bash bsh/01_SplashScreen.bash "Git Commit Messages Spell Checker"
+    # Install Codspell.
+    - bash bsh/02_InstallDebianPackages.bash "1" "3" "codespell"
+    # End marker for before script commands section.
+    - |
+      # [OUT] Collapse before script commands 
+      echo -e "\e[0Ksection_end:`date +%s`:before_script_section\r\e[0K"
   script:
     # Start marker for script commands section.
     - |
@@ -21,7 +37,17 @@ Spell-Check-Git-Commit-Messages-For-Self:
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
     # Run job script commands defined in bash script.
-    - codespell --version
+    - |
+      # Run 'bsh/lintCiJobsProjectScript.bash'
+      if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
+        bash bsh/spellCheckGitCommitMessages.bash \
+          "$CI_COMMIT_BEFORE_SHA" \
+          "$CI_COMMIT_SHA" 
+      elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
+        bash bsh/spellCheckGitCommitMessages.bash \
+          "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
+          "$CI_COMMIT_SHA"        
+      fi
     # End marker for script commands section.
     - |
       # [OUT] Collapse script commands

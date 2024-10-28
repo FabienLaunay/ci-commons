@@ -4,8 +4,6 @@
 
 packages="$1"
 
-printLargeTextBox "Git Commit Messages Linter"
-
 currentL1TaskNumber=1
 totalL1TaskCount=4
 

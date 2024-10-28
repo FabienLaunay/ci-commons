@@ -29,7 +29,7 @@ for commit in $commits; do
 	printStartingL2TaskTextBox "$message"
 	currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
-	commitMessage=$(git log -1 --pretty=%s $commit)
+	commitSubjct=$(git log -n 1 --format=%s $commit)
 
 	#Print command and run it.
 	command="gitlint --config cfg/gitlint/gitlint.cfg --commit $commitShort"
@@ -38,9 +38,9 @@ for commit in $commits; do
 
 	if [[ $? -ne 0 ]]; then
 		((failureCount++))
-		actions+=("reword $commitShort $commitMessage")
+		actions+=("reword $commitShort $commitSubjct")
 	else
-		actions+=("pick $commitShort $commitMessage")
+		actions+=("pick $commitShort $commitSubjct")
 	fi
 
 	# Print completed text box level 2.
@@ -55,7 +55,7 @@ printCompletedL1TaskTextBoxAndIncrementCounter "$message" \
 	"$((currentLvlOneTaskEndTimeStamp - currentLvlOneTaskStartTimeStamp))"
 
 # ==============================================================================
-# Run Gitlint on every commit between the provided range
+# Generate Gitlint report
 # ==============================================================================
 
 # Print starting text box level 1.

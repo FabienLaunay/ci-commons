@@ -22,8 +22,12 @@ Lint-Git-Commit-Messages-For-Self:
       true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
-    # Run job before script commands defined in bash script.
-    - bash bsh/lintCiJobsProjectBeforeScript.bash "git"
+    # Print splash screen.
+    - bash bsh/01_SplashScreen.bash "Git Commit Messages Linter"
+    # Install Git.
+    - bash bsh/02_InstallDebianPackages.bash "1" "4" "git"
+    # Install Gitlint.
+    - bash bsh/03_InstallPythonPackages.bash "2" "4" "git"
     # End marker for before script commands section.
     - |
       # [OUT] Collapse before script commands 
@@ -38,11 +42,11 @@ Lint-Git-Commit-Messages-For-Self:
     - |
       # Run 'bsh/lintCiJobsProjectScript.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
-        bash bsh/lintCiJobsProjectScript.bash \
+        bash bsh/lintGitCommitMessages.bash \
           "$CI_COMMIT_BEFORE_SHA" \
           "$CI_COMMIT_SHA" 
       elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
-        bash bsh/lintCiJobsProjectScript.bash \
+        bash bsh/lintGitCommitMessages.bash \
           "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
           "$CI_COMMIT_SHA"        
       fi
