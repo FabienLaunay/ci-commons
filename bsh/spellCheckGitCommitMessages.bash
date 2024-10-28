@@ -30,11 +30,15 @@ for commit in $commits; do
 	currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
 	commitMessage=$(git log -n 1 --format=%s $commit)
+	commitMessageFile="commitMessage.txt"
+	echo "$commitMessage" > "$commitMessageFile"
 
 	#Print command and run it.
-	command="echo \"$commitMessage\" | codespell --ignore-words=cfg/codespell/ignoreWords.txt"
+	command="codespell $commitMessageFile --ignore-words=cfg/codespell/ignoreWords.txt"
 	printExecutingCommand "$command"
 	RESULT=$($command)
+
+  rm "$commitMessageFile"
 
 	if [[ $? -ne 0 ]]; then
 		((failureCount++))
