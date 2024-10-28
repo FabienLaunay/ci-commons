@@ -33,9 +33,14 @@ for commit in $commits; do
 	commitMessageFile="commitMessage"
 	echo "$commitMessage" > "$commitMessageFile"
 	#Print command and run it.
-	command="codespell $commitMessageFile --ignore-words=cfg/codespell/ignoreWords.txt"
-	printExecutingCommand "$command"
-	$command
+  command="codespell $commitMessageFile --ignore-words=cfg/codespell/ignoreWords.txt"
+  printExecutingCommand "$command"
+  echo "A"
+  $command
+  echo "B"
+  RESULT=$($command)
+  echo "C"
+  echo "CI_PROJECT_DIR=$CI_PROJECT_DIR"
 
 #  rm "$commitMessageFile"
 
