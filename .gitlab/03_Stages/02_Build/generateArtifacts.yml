@@ -1,0 +1,22 @@
+#-------------------------------------------------------------------------------
+# Generate Artifacts
+#-------------------------------------------------------------------------------
+Generate-Artifacts:
+  stage: build
+  rules:
+    # Trigger job on push to main branch.
+    - if: >
+        $CI_PROJECT_NAME == $PROJECT_NAME &&
+        $CI_PIPELINE_SOURCE == "push" &&
+        $CI_COMMIT_BRANCH == "main"
+    # Trigger job on merge request to main branch.
+    - if: >
+        $CI_PROJECT_NAME == $PROJECT_NAME &&
+        $CI_PIPELINE_SOURCE == "merge_request_event" &&
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  script:
+    - echo "Generating artifacts..."
+  artifacts:
+    paths:
+      - bsh/
+      - cfg/
