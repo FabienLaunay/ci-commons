@@ -40,6 +40,8 @@ for commit in $commits; do
   echo "B"
   RESULT=$($command)
   echo "C"
+  codespell $commitMessageFile --ignore-words=cfg/codespell/ignoreWords.txt
+  echo "D"
   echo "CI_PROJECT_DIR=$CI_PROJECT_DIR"
 
 #  rm "$commitMessageFile"
