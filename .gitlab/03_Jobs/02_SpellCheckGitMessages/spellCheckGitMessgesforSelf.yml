@@ -1,0 +1,28 @@
+Spell-Check-Git-Commit-Messages-For-Self:
+  stage: check
+  rules:
+    # Trigger job on push to main branch.
+    - if: >
+        $CI_PROJECT_NAME == $PROJECT_NAME &&
+        $CI_PIPELINE_SOURCE == "push" &&
+        $CI_COMMIT_BRANCH == "main"
+    # Trigger job on merge request to main branch.
+    - if: >
+        $CI_PROJECT_NAME == $PROJECT_NAME &&
+        $CI_PIPELINE_SOURCE == "merge_request_event" &&
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  image:
+    name: python:3.9-slim
+    entrypoint: [ "" ]
+  script:
+    # Start marker for script commands section.
+    - |
+      # [IN ] Collapse script commands
+      echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
+      true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
+    # Run job script commands defined in bash script.
+    - codespell --version
+    # End marker for script commands section.
+    - |
+      # [OUT] Collapse script commands
+      echo -e "\e[0Ksection_end:`date +%s`:script_section\r\e[0K"

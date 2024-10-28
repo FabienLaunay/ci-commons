@@ -3,4 +3,5 @@ include:
   - local: .gitlab/02_Variables/variables.yml
   - local: .gitlab/03_Stages/01_LintGitCommitMessages/lintGitCommitMessagesForSelf.yml
   - local: .gitlab/03_Stages/01_LintGitCommitMessages/lintGitCommitMessagesForCaller.yml
-  - local: .gitlab/03_Stages/02_Build/generateArtifacts.yml
+  - local: .gitlab/03_Stages/02_SpellCheckGitMessages/spellCheckGitMessagesforSelf.yml
+  - local: .gitlab/03_Stages/03_Build/generateArtifacts.yml
