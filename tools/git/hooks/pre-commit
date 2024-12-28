@@ -1,0 +1,45 @@
+#!/bin/bash
+
+. tools/common/bsh/message.bash
+
+printLargeTextBoxForGitHooks "Pre-Commit Hook"
+
+script_dir=$(dirname "$(realpath "$0")")
+suffix="ci-commons/tools/git/hooks"
+
+currentL1TaskNumber="1"
+totalL1TaskCount="1"
+
+if [[ "$script_dir" == *"$suffix" ]]; then
+  ((totalL1TaskCount++))
+  printStartingL1TaskTextBox "'tools' directory copy to 'ci-commons'"
+  rsync \
+    --archive \
+    --delete \
+    --verbose \
+    --checksum \
+    tools ci-commons/tools
+    printCompletedL1TaskTextBoxAndIncrementCounter
+fi
+
+# start templated
+INSTALL_PYTHON='C:\ProgramFiles\Code\Python\python.exe'
+ARGS=(hook-impl '--config=tools\pre-commit\preCommitConfig.yaml' --hook-type=pre-commit)
+# end templated
+
+HERE="$(cd "$(dirname "$0")" && pwd)"
+ARGS+=(--hook-dir "$HERE" -- "$@")
+
+message="pre-commit hooks execution"
+if [ -x "$INSTALL_PYTHON" ]; then
+  printStartingL1TaskTextBox "$message"
+  "$INSTALL_PYTHON" -mpre_commit "${ARGS[@]}"
+  printCompletedL1TaskTextBoxAndIncrementCounter
+elif command -v pre-commit >/dev/null; then
+  printStartingL1TaskTextBox "$message"
+  pre-commit "${ARGS[@]}"
+  printCompletedL1TaskTextBoxAndIncrementCounter
+else
+  echo '`pre-commit` not found.  Did you forget to activate your virtualenv?' 1>&2
+  exit 1
+fi

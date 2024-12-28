@@ -3,6 +3,10 @@ import os
 import configparser
 import re
 
+def printError(message):
+    RED = '\033[31m'
+    RESET = '\033[0m'
+    print(f"{RED}ERROR: {RESET}{message}")
 
 # Function to extract allowed types
 def getTypesArray():
@@ -52,6 +56,7 @@ def getTypesMap(typesArray):
     return typesMap
 
 
+
 typesArray = getTypesArray()
 
 # Read the commit message
@@ -68,7 +73,8 @@ typesMap = getTypesMap(typesArray)
 matching_key = next((key for key in typesMap if commitMessage.startswith(key)), None)
 
 if not matching_key:
-    print(f"Error: Type not valid in Git commit message '{commitMessage}'")
+    message = "Type not valid in Git commit message."
+    printError(message)
     sys.exit(1)
 
 newCommitMessage = f"{typesMap[matching_key]}{commitMessage}"

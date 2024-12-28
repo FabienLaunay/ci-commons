@@ -1,0 +1,39 @@
+#!/bin/bash
+
+. tools/common/bsh/message.bash
+
+printLargeTextBoxForGitHooks "Commit Message Hook"
+
+currentL1TaskNumber="1"
+totalL1TaskCount="2"
+
+INSTALL_PYTHON='C:\ProgramFiles\Code\Python\python.exe'
+if [ ! -x "$INSTALL_PYTHON" ]; then
+  echo '`pre-commit` not found.  Did you forget to activate your virtualenv?' 1>&2
+  exit 1
+fi
+
+printStartingL1TaskTextBox "addition of emoji to Git commit message"
+command="$INSTALL_PYTHON tools/emojiPrefix/emojiPrefix.py $1"
+printExecutingCommand "$command"
+$command
+
+if [[ $? -ne 0 ]]; then
+  printCompletedL1TaskTextBoxAndIncrementCounter
+  exit 1
+fi
+printCompletedL1TaskTextBoxAndIncrementCounter
+
+printStartingL1TaskTextBox "linting of Git commit message"
+command="gitlint --config tools/gitlint/gitlint.cfg --msg-filename $1"
+printExecutingCommand "$command"
+$command
+
+if [[ $? -ne 0 ]]; then
+  echo ''
+  printErrorMessage "Git commit message linting failed. Please fix the issues listed above."
+  printCompletedL1TaskTextBoxAndIncrementCounter
+  exit 1
+fi
+
+printCompletedL1TaskTextBoxAndIncrementCounter
