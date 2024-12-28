@@ -37,7 +37,7 @@ repos:
         exclude: >
           (CHANGELOG.pdf|
           cfg/gitlint/txt/Verbs.txt|
-          cfg/gitlint/txt/Verbs.txt
+          cfg/codespell/ignoreWords.txt
           )
         args:
           - --ignore-words=ci-commons/cfg/codespell/ignoreWords.txt
