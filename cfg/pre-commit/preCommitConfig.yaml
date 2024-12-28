@@ -26,6 +26,13 @@
 # #############################################################################
 
 repos:
+#  - repo: local
+#    hooks:
+#      - id: emojiPrefix
+#        name: <01/02> Prefix commit message subject with emoji
+#        entry: python3 emojiPrefix/emojiPrefix.py
+#        language: python
+#        files: ^commit-msg$
   #############################################################################
   # Check spelling in text files
   #############################################################################
@@ -33,7 +40,7 @@ repos:
     rev: v2.2.6
     hooks:
       - id: codespell
-        name: <01/16> Check spelling in text files.
+        name: <02/02> Check spelling in text files.
         exclude: >
           (CHANGELOG.pdf|
           cfg/gitlint/txt/Verbs.txt|
