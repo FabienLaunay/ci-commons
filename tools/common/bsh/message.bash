@@ -9,8 +9,8 @@
 # Usage : This copyright notice may not be removed from this file.
 # #############################################################################
 
-. tools/common/bsh/format.bash
-. tools/common/bsh/strings.bash
+. $(dirname "$(realpath "$0")")/../../common/bsh/format.bash
+. $(dirname "$(realpath "$0")")/../../common/bsh/strings.bash
 
 # #############################################################################
 # This bash file contains functions that perform operations related to message
