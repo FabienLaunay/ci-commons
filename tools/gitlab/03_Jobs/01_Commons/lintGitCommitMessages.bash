@@ -1,6 +1,13 @@
 #!/bin/bash
 
-. ci-commons/tools/common/bsh/message.bash
+messageBash=""
+
+if [[ ! -z "$1" ]]; then
+  messageBash="$1/"
+fi
+
+messageBash+="tools/common/bsh/message.bash"
+. $messageBash
 
 currentL1TaskNumber=3
 totalL1TaskCount=4
@@ -14,7 +21,7 @@ message="Gitlint execution on new commits"
 printStartingL1TaskTextBox "$message"
 currentLvlOneTaskStartTimeStamp=$(date +%s)
 
-commits=$(git rev-list $1..$2)
+commits=$(git rev-list $2..$3)
 
 currentL2TaskNumber=1
 totalL2TaskCount=$(echo "$commits" | wc -l)
