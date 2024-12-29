@@ -1,5 +1,6 @@
 add
 fix
+merge
 move
 remove
 split
