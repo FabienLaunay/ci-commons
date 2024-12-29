@@ -34,7 +34,7 @@ fi
 printStartingL1TaskTextBox "prefix Git commit message title with emoji"
 
 command="$python
-  tools/emojiPrefix/emojiPrefix.py
+  ci-commons/tools/emojiPrefix/emojiPrefix.py
   $1"
 printExecutingCommand "$command"
 $command
@@ -51,7 +51,7 @@ printCompletedL1TaskTextBoxAndIncrementCounter
 
 printStartingL1TaskTextBox "linting of Git commit message"
 command="gitlint
-  --config tools/gitlint/gitlint.cfg
+  --config ci-commons/tools/gitlint/gitlint.cfg
   --msg-filename $1"
 printExecutingCommand "$command"
 $command
