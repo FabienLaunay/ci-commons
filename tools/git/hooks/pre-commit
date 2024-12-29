@@ -6,7 +6,9 @@
 
 script_dir=$(dirname "$(realpath "$0")")
 
-suffix="ci-commons/ci-commons/tools/git/hooks"
+echo "script_dir='$script_dir'"
+
+ls -l "$script_dir/../../../copyToolsToCiCommons"
 
 if [[ -e "$script_dir/../../../copyToolsToCiCommons" ]]; then
   rsync \
