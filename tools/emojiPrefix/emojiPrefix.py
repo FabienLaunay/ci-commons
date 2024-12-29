@@ -73,7 +73,7 @@ typesMap = getTypesMap(typesArray)
 matching_key = next((key for key in typesMap if commitMessage.startswith(key)), None)
 
 if not matching_key:
-    message = "Type not valid in Git commit message."
+    message = "Git commit message title does not start with a valid type."
     printError(message)
     sys.exit(1)
 

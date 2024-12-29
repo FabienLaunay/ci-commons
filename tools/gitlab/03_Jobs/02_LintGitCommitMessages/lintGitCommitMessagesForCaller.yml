@@ -33,11 +33,11 @@ Lint-Git-Commit-Messages-For-Caller:
     # Unzip downloaded artifacts.
     - unzip artifacts.zip
     # Print splash screen.
-    - bash bsh/01_SplashScreen.bash "Git Commit Messages Linter"
+    - bash tools/gitlab/03_Jobs/01_Commons/01_SplashScreen.bash "Git Commit Messages Linter"
     # Install Git.
-    - bash bsh/02_InstallDebianPackages.bash "1" "4" "git"
+    - bash tools/gitlab/03_Jobs/01_Commons/02_InstallDebianPackages.bash "1" "4" "git"
     # Install Gitlint.
-    - bash bsh/03_InstallPythonPackages.bash "2" "4" "gitlint"
+    - bash tools/gitlab/03_Jobs/01_Commons/03_InstallPythonPackages.bash "2" "4" "gitlint"
     # End marker for before script commands section.
     - |
       # [OUT] Collapse before script commands 
@@ -49,7 +49,7 @@ Lint-Git-Commit-Messages-For-Caller:
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
     # Run job script commands defined in artifact from 'ci-commons' project.
-    - bash bsh/lintGitCommitMessages.bash \
+    - bash tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
       "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
       "$CI_COMMIT_SHA"
     # End marker for script commands section.

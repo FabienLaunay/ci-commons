@@ -4,42 +4,73 @@
 
 printLargeTextBoxForGitHooks "Pre-Commit Hook"
 
-script_dir=$(dirname "$(realpath "$0")")
-suffix="ci-commons/tools/git/hooks"
-
 currentL1TaskNumber="1"
 totalL1TaskCount="1"
+
+# ==============================================================================
+# Copy 'tools' to 'ci-commons' if Git hooks used within 'ci-commons' project.
+# ==============================================================================
+
+script_dir=$(dirname "$(realpath "$0")")
+suffix="ci-commons/tools/git/hooks"
 
 if [[ "$script_dir" == *"$suffix" ]]; then
   ((totalL1TaskCount++))
   printStartingL1TaskTextBox "'tools' directory copy to 'ci-commons'"
-  rsync \
-    --archive \
-    --delete \
-    --verbose \
-    --checksum \
-    tools ci-commons/tools
-    printCompletedL1TaskTextBoxAndIncrementCounter
+  command="rsync
+  --archive
+  --delete
+  --verbose
+  --checksum
+  tools
+  ci-commons"
+  printExecutingCommand "$command"
+  $command
+  printCompletedL1TaskTextBoxAndIncrementCounter
 fi
 
-# start templated
-INSTALL_PYTHON='C:\ProgramFiles\Code\Python\python.exe'
-ARGS=(hook-impl '--config=tools\pre-commit\preCommitConfig.yaml' --hook-type=pre-commit)
-# end templated
+# ==============================================================================
+# Execute Git pre-commit hooks.
+# ==============================================================================
 
-HERE="$(cd "$(dirname "$0")" && pwd)"
-ARGS+=(--hook-dir "$HERE" -- "$@")
+printStartingL1TaskTextBox "pre-commit hooks execution"
 
-message="pre-commit hooks execution"
-if [ -x "$INSTALL_PYTHON" ]; then
-  printStartingL1TaskTextBox "$message"
-  "$INSTALL_PYTHON" -mpre_commit "${ARGS[@]}"
-  printCompletedL1TaskTextBoxAndIncrementCounter
+python='C:\ProgramFiles\Code\Python\python.exe'
+
+command=""
+if [ -x "$python" ]; then
+  command="$python
+  -mpre_commit"
 elif command -v pre-commit >/dev/null; then
-  printStartingL1TaskTextBox "$message"
-  pre-commit "${ARGS[@]}"
-  printCompletedL1TaskTextBoxAndIncrementCounter
-else
-  echo '`pre-commit` not found.  Did you forget to activate your virtualenv?' 1>&2
+  command="pre-commit"
+fi
+
+if [[ "$command" == "" ]]; then
+  echo ''
+  printErrorMessage "pre-commit not found." 1>&2
   exit 1
 fi
+
+command+="
+  hook-impl
+    --config=tools/pre-commit/preCommitConfig.yaml
+    --hook-type=pre-commit
+    --hook-dir=$script_dir"
+
+# Remove the lock file (if any) at the start
+rm -f "$LOCK_FILE"
+
+LOCK_FILE="tools/git/hooks/pre-commit-failed"
+
+printExecutingCommand "$command"
+$command
+if [[ $? -ne 0 ]]; then
+  touch "$LOCK_FILE"
+  echo ''
+  printErrorMessage "Git pre-commit hook(s) failed. Please fix the issues" \
+    "listed above."
+  printCompletedL1TaskTextBoxAndIncrementCounter
+  exit 1
+fi
+printCompletedL1TaskTextBoxAndIncrementCounter
+exit 0

@@ -2,19 +2,28 @@
 
 . tools/common/bsh/message.bash
 
+LOCK_FILE="tools/git/hooks/pre-commit-failed"
+
+if [ -f "$LOCK_FILE" ]; then
+  exit 1
+fi
+
 printLargeTextBoxForGitHooks "Commit Message Hook"
 
 currentL1TaskNumber="1"
 totalL1TaskCount="2"
 
-INSTALL_PYTHON='C:\ProgramFiles\Code\Python\python.exe'
-if [ ! -x "$INSTALL_PYTHON" ]; then
-  echo '`pre-commit` not found.  Did you forget to activate your virtualenv?' 1>&2
+python='C:\ProgramFiles\Code\Python\python.exe'
+if [ ! -x "$python" ]; then
+  echo 'python not found.' 1>&2
   exit 1
 fi
 
-printStartingL1TaskTextBox "addition of emoji to Git commit message"
-command="$INSTALL_PYTHON tools/emojiPrefix/emojiPrefix.py $1"
+printStartingL1TaskTextBox "prefix Git commit message title with emoji"
+
+command="$python
+  tools/emojiPrefix/emojiPrefix.py
+  $1"
 printExecutingCommand "$command"
 $command
 

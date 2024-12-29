@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. bsh/utilities/message.bash
+. tools/common/bsh/message.bash
 
 currentL1TaskNumber=2
 totalL1TaskCount=3

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-. bsh/utilities/message.bash
+. tools/common/bsh/message.bash
 
 printLargeTextBox "$1"

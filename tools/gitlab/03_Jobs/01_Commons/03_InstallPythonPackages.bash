@@ -1,12 +1,12 @@
 #!/bin/bash
 
-. bsh/utilities/message.bash
+. tools/common/bsh/message.bash
 
 currentL1TaskNumber="$1"
 totalL1TaskCount="$2"
 packages="$3"
 
-printStartingL1TaskTextBox "Debian packages installation"
+printStartingL1TaskTextBox "Python packages installation"
 
 currentL2TaskNumber=1
 
@@ -15,11 +15,11 @@ totalL2TaskCount=$#
 
 for package in $packages; do
 
-	printStartingL2TaskTextBox "'$package' package installation"
+	printStartingL2TaskTextBox "'$package' Python package installation"
 	currentLvlTwoTaskStartTimeStamp=$(date +%s)
 
 	#Print command and run it.
-	command="apt-get install --yes $package"
+	command="pip install $package"
 	printExecutingCommand "$command"
 	$command
 
