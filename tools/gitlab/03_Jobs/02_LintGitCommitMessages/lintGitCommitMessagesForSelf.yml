@@ -44,12 +44,10 @@ Lint-Git-Commit-Messages-For-Self:
       # Run 'tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
         bash tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
-          "" \
           "$CI_COMMIT_BEFORE_SHA" \
           "$CI_COMMIT_SHA" 
       elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
         bash tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
-          "" \
           "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
           "$CI_COMMIT_SHA"        
       fi

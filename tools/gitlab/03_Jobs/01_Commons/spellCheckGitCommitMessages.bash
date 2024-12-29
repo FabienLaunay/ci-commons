@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ci-commons/tools/common/bsh/message.bash
+. $(dirname "$(realpath "$0")")/../../../common/bsh/message.bash
 
 currentL1TaskNumber=2
 totalL1TaskCount=3

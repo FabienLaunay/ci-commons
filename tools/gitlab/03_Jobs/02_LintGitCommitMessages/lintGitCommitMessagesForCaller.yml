@@ -51,7 +51,6 @@ Lint-Git-Commit-Messages-For-Caller:
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
     # Run job script commands defined in artifact from 'ci-commons' project.
     - bash ci-commons/tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
-      "ci-commons" \
       "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
       "$CI_COMMIT_SHA"
     # End marker for script commands section.

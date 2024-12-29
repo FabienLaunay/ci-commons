@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ci-commons/tools/common/bsh/message.bash
+. $(dirname "$(realpath "$0")")/../../../common/bsh/message.bash
 
 packages="$1"
 
