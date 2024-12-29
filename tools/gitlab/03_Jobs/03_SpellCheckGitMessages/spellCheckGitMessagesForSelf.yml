@@ -24,7 +24,6 @@ Spell-Check-Git-Commit-Messages-For-Self:
     - apt-get update
     # Print splash screen.
     - bash tools/gitlab/03_Jobs/01_Commons/01_SplashScreen.bash \
-      "" \
       "Git Commit Messages Spell Checker"
     # Install Git and Codspell.
     - bash tools/gitlab/03_Jobs/01_Commons/02_InstallDebianPackages.bash "1" "3" "git codespell"

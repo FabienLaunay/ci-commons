@@ -34,7 +34,6 @@ Lint-Git-Commit-Messages-For-Caller:
     - unzip artifacts.zip
     # Print splash screen.
     - bash tools/gitlab/03_Jobs/01_Commons/01_SplashScreen.bash \
-      "ci-commons" \
       "Git Commit Messages Linter"
     # Install Git.
     - bash tools/gitlab/03_Jobs/01_Commons/02_InstallDebianPackages.bash "1" "4" "git"
