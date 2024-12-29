@@ -15,5 +15,4 @@ Generate-Artifacts:
     - echo "Generating artifacts..."
   artifacts:
     paths:
-      - bsh/
-      - cfg/
+      - tools/
