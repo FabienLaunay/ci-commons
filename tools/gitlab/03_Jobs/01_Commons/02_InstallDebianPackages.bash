@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. tools/common/bsh/message.bash
+. ci-commons/tools/common/bsh/message.bash
 
 currentL1TaskNumber="$1"
 totalL1TaskCount="$2"

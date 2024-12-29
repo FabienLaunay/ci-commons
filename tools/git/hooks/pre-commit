@@ -1,12 +1,5 @@
 #!/bin/bash
 
-. tools/common/bsh/message.bash
-
-printLargeTextBoxForGitHooks "Pre-Commit Hook"
-
-currentL1TaskNumber="1"
-totalL1TaskCount="1"
-
 # ==============================================================================
 # Copy 'tools' to 'ci-commons' if Git hooks used within 'ci-commons' project.
 # ==============================================================================
@@ -15,23 +8,36 @@ script_dir=$(dirname "$(realpath "$0")")
 suffix="ci-commons/tools/git/hooks"
 
 if [[ "$script_dir" == *"$suffix" ]]; then
-  ((totalL1TaskCount++))
-  printStartingL1TaskTextBox "'tools' directory copy to 'ci-commons'"
-  command="rsync
-  --archive
-  --delete
-  --verbose
-  --checksum
-  tools
-  ci-commons"
-  printExecutingCommand "$command"
-  $command
-  printCompletedL1TaskTextBoxAndIncrementCounter
+  rsync \
+    --archive \
+    --delete \
+    --checksum \
+    tools \
+    ci-commons
+#  ((totalL1TaskCount++))
+#  printStartingL1TaskTextBox "'tools' directory copy to 'ci-commons'"
+#  command="rsync
+#  --archive
+#  --delete
+#  --verbose
+#  --checksum
+#  tools
+#  ci-commons"
+#  printExecutingCommand "$command"
+#  $command
+#  printCompletedL1TaskTextBoxAndIncrementCounter
 fi
 
 # ==============================================================================
 # Execute Git pre-commit hooks.
 # ==============================================================================
+
+. ci-commons/tools/common/bsh/message.bash
+
+printLargeTextBoxForGitHooks "Pre-Commit Hook"
+
+currentL1TaskNumber="1"
+totalL1TaskCount="1"
 
 printStartingL1TaskTextBox "pre-commit hooks execution"
 

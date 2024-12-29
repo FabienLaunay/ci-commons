@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. tools/common/bsh/message.bash
+. ci-commons/tools/common/bsh/message.bash
 
 packages="$1"
 
