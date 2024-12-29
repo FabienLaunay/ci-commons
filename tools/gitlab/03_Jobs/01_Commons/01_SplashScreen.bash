@@ -1,5 +1,9 @@
 #!/bin/bash
 
+script_dir=$(dirname "$(realpath "$0")")
+
+echo "script_dir ='$script_dir'"
+
 messageBash=""
 
 if [[ ! -z "$1" ]]; then
