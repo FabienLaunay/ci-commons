@@ -32,7 +32,9 @@ for commit in $commits; do
 	commitSubject=$(git log -n 1 --format=%s $commit)
 
 	#Print command and run it.
-	command="gitlint --config tools/gitlint/gitlint.cfg --commit $commitShort"
+	command="gitlint
+	--config tools/gitlint/gitlgitint.cfg
+	--commit $commitShort"
 	printExecutingCommand "$command"
 	RESULT=$($command)
 
