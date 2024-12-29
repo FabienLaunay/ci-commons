@@ -13,6 +13,6 @@ echo "script_dir ='$script_dir'"
 #messageBash+="tools/common/bsh/message.bash"
 #. $messageBash
 
-. ../../../common/bsh/message.bash
+. $script_dir/../../../common/bsh/message.bash
 
 printLargeTextBox "$1"
