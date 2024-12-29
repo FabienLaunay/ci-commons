@@ -5,9 +5,10 @@
 # ==============================================================================
 
 script_dir=$(dirname "$(realpath "$0")")
-suffix="ci-commons/tools/git/hooks"
 
-if [[ "$script_dir" == *"$suffix" ]]; then
+suffix="ci-commons/ci-commons/tools/git/hooks"
+
+if [[ -e "$script_dir/../../../copyToolsToCiCommons" ]]; then
   rsync \
     --archive \
     --delete \
@@ -64,9 +65,8 @@ command+="
     --hook-dir=$script_dir"
 
 # Remove the lock file (if any) at the start
-rm -f "$LOCK_FILE"
-
 LOCK_FILE="tools/git/hooks/pre-commit-failed"
+rm -f "$LOCK_FILE"
 
 printExecutingCommand "$command"
 $command

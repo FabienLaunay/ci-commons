@@ -25,3 +25,5 @@
 /iml
 
 /ci-commons
+
+/tools/git/hooks/pre-commit-failed
