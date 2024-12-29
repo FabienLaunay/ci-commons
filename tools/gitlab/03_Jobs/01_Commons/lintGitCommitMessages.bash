@@ -33,7 +33,7 @@ for commit in $commits; do
 
 	#Print command and run it.
 	command="gitlint
-	--config tools/gitlint/gitlgitint.cfg
+	--config tools/gitlint/gitlint.cfg
 	--commit $commitShort"
 	printExecutingCommand "$command"
 	RESULT=$($command)
