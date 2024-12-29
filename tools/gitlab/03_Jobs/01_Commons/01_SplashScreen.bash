@@ -2,7 +2,7 @@
 
 script_dir=$(dirname "$(realpath "$0")")
 
-#echo "script_dir ='$script_dir'"
+echo "script_dir ='$script_dir'"
 
 #messageBash=""
 
