@@ -40,7 +40,7 @@ Lint-Git-Commit-Messages-For-Self:
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
     # Run job script commands defined in bash script.
     - |
-      # Run 'bsh/lintCiJobsProjectScript.bash'
+      # Run 'tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash'
       if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
         bash tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
           "$CI_COMMIT_BEFORE_SHA" \
