@@ -1,5 +1,6 @@
 add
 fix
 move
+remove
 split
 update
