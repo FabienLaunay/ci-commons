@@ -5,6 +5,10 @@
 currentL1TaskNumber=3
 totalL1TaskCount=4
 
+if [[ ! -z "$3" ]]; then
+  ls -l $(dirname "$(realpath "$0")")/../../gitlint/gitlint.cfg
+fi
+
 # ==============================================================================
 # Run Gitlint on every commit between the provided range
 # ==============================================================================
@@ -33,7 +37,7 @@ for commit in $commits; do
 
 	#Print command and run it.
 	command="gitlint
-	--config tools/gitlint/gitlint.cfg
+	--config $3tools/gitlint/gitlint.cfg
 	--commit $commitShort"
 	printExecutingCommand "$command"
 	RESULT=$($command)

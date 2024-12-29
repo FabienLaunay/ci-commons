@@ -52,7 +52,8 @@ Lint-Git-Commit-Messages-For-Caller:
     # Run job script commands defined in artifact from 'ci-commons' project.
     - bash ci-commons/tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
       "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
-      "$CI_COMMIT_SHA"
+      "$CI_COMMIT_SHA" \
+      "ci-commons/"
     # End marker for script commands section.
     - |
       # [OUT] Collapse script commands
