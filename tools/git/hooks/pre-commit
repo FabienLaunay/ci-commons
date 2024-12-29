@@ -58,7 +58,7 @@ fi
 
 command+="
   hook-impl
-    --config=tools/pre-commit/preCommitConfig.yaml
+    --config=ci-commons/tools/pre-commit/preCommitConfig.yaml
     --hook-type=pre-commit
     --hook-dir=$script_dir"
 
