@@ -35,6 +35,8 @@ for commit in $commits; do
 
 	commitSubject=$(git log -n 1 --format=%s $commit)
 
+echo "Execution path: '$pwd'"
+
 	#Print command and run it.
 	command="gitlint
 	--config $3tools/gitlint/gitlint.cfg
