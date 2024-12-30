@@ -1,9 +1,12 @@
-Lint-Git-Commit-Messages-For-Caller:
+Lint-Git-Commit-Messages:
   stage: lint
   rules:
+    # Trigger job on push to main branch.
+    - if: >
+        $CI_PIPELINE_SOURCE == "push" &&
+        $CI_COMMIT_BRANCH == "main"
     # Trigger job on merge request to main branch.
     - if: >
-        $CI_PROJECT_NAME != $PROJECT_NAME &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   image:
@@ -14,24 +17,24 @@ Lint-Git-Commit-Messages-For-Caller:
     - |
       # [IN ] Collapse before script commands
       echo -e "\e[0Ksection_start:`date +%s`:before_script_section[collapsed=\
-      true]\r\e[0K$FG_COLOR_CYAN  Before script commands$UNSET_STYLE_ALL"
+      true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
-    # Install "cURL" Debian package.
-    - apt-get install --yes curl
-    # Download artifacts from 'ci-commons' project.
-    - |
-      # Download Artifacts from 'ci-commons' project
-      curl \
-        --location \
-        --header "PRIVATE-TOKEN: $CI_PERSONAL_ACCESS_TOKEN" \
-        --output artifacts.zip \
-        "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/\
-      download?job=Generate-Artifacts"
-    # Install "unzip" Debian package.
-    - apt-get install --yes unzip
-    # Unzip downloaded artifacts.
-    - unzip artifacts.zip
+    - if [ ! "$CI_PROJECT_NAME = "$PROJECT_NAME" ]; then
+        # Install "cURL" Debian package.
+        apt-get install --yes curl;
+        # Download artifacts from 'ci-commons' project.
+        curl \
+          --location \
+          --header "PRIVATE-TOKEN:$CI_PERSONAL_ACCESS_TOKEN" \
+          --output artifacts.zip \
+          "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/\
+        download?job=Generate-Artifacts"
+        # Install "unzip" Debian package.
+        apt-get install --yes unzip;
+        # Unzip downloaded artifacts.
+        unzip artifacts.zip;
+      fi
     # Print splash screen.
     - bash tools/gitlab/03_Jobs/01_Commons/01_SplashScreen.bash \
       "Git Commit Messages Linter"
@@ -49,10 +52,18 @@ Lint-Git-Commit-Messages-For-Caller:
       # [IN ] Collapse script commands
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
-    # Run job script commands defined in artifact from 'ci-commons' project.
-    - bash tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
-      "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
-      "$CI_COMMIT_SHA"
+    # Run job script commands defined in bash script.
+    - |
+      # Run 'tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash'
+      if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
+        bash tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
+          "$CI_COMMIT_BEFORE_SHA" \
+          "$CI_COMMIT_SHA" 
+      elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
+        bash tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
+          "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
+          "$CI_COMMIT_SHA"
+      fi
     # End marker for script commands section.
     - |
       # [OUT] Collapse script commands

@@ -1,7 +1,6 @@
 include:
   - local: tools/gitlab/01_Stages/stages.yml
   - local: tools/gitlab/02_Variables/variables.yml
-  - local: tools/gitlab/03_Jobs/02_LintGitCommitMessages/lintGitCommitMessagesForSelf.yml
-  - local: tools/gitlab/03_Jobs/02_LintGitCommitMessages/lintGitCommitMessagesForCaller.yml
+  - local: tools/gitlab/03_Jobs/02_LintGitCommitMessages/lintGitCommitMessages.yml
   - local: tools/gitlab/03_Jobs/03_SpellCheckGitMessages/spellCheckGitMessagesForSelf.yml
   - local: tools/gitlab/03_Jobs/04_Build/generateArtifacts.yml
