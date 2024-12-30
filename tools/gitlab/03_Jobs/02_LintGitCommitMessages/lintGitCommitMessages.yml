@@ -21,18 +21,29 @@ Lint-Git-Commit-Messages:
     # Update Debian local package index.
     - apt-get update
     - |
-      # Install cURL/unzip packages, download/unzip artifacts from 'ci-commons'.
+      # Install "cURL" Debian package.
       if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
         # Install "cURL" Debian package.
         apt-get install --yes curl;
-        # Download artifacts from 'ci-commons' project.
+      fi
+    - |
+      # Download artifacts from 'ci-commons' project.
+      if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
         curl \
           --location \
           --header "PRIVATE-TOKEN:$CI_PERSONAL_ACCESS_TOKEN" \
           --output artifacts.zip \
           "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/download?job=Generate-Artifacts"
+      fi
+    - |
+      # Install "unzip" Debian package.
+      if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
         # Install "unzip" Debian package.
         apt-get install --yes unzip;
+      fi
+    - |
+      # Unzip downloaded artifacts.
+      if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
         # Unzip downloaded artifacts.
         unzip artifacts.zip;
       fi
