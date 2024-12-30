@@ -51,11 +51,12 @@ printCompletedL1TaskTextBoxAndIncrementCounter
 
 printStartingL1TaskTextBox "linting of Git commit message"
 
+cd ci-commons
 echo "[commit-msg] Execution path: '$(pwd)'"
 
 command="gitlint
-  --config ci-commons/tools/gitlint/gitlint.cfg
-  --msg-filename $1"
+  --config tools/gitlint/gitlint.cfg
+  --msg-filename ../$1"
 printExecutingCommand "$command"
 $command
 
