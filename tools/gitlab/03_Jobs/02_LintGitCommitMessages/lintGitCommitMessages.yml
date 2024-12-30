@@ -31,11 +31,13 @@ Lint-Git-Commit-Messages:
     - |
       # Download artifacts from 'ci-commons' project.
       if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
+        url="https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main"
+        url="${url}/download?job=Generate-Artifacts"
         curl \
           --location \
           --header "PRIVATE-TOKEN:$CI_PERSONAL_ACCESS_TOKEN" \
           --output artifacts.zip \
-          "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/download?job=Generate-Artifacts"
+          $url
       fi
     # Install "unzip" Debian package.
     - |

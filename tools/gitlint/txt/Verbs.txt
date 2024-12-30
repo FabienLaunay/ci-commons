@@ -3,6 +3,7 @@ change
 fix
 merge
 move
+refactor
 remove
 split
 update
