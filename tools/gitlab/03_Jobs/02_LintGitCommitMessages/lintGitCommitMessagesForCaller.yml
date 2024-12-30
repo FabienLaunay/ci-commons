@@ -50,10 +50,7 @@ Lint-Git-Commit-Messages-For-Caller:
       echo -e "\e[0Ksection_start:`date +%s`:script_section[collapsed=\
       true]\r\e[0K$FG_COLOR_CYAN  Script commands$UNSET_STYLE_ALL"
     # Run job script commands defined in artifact from 'ci-commons' project.
-    - ls -l
-    - ls -l ci-commons/tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash
-    - echo -e "Execution directory = '$(pwd)'"
-    - bash ci-commons/tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
+    - bash tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
       "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
       "$CI_COMMIT_SHA" \
       "ci-commons/"
