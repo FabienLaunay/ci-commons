@@ -20,7 +20,9 @@ Lint-Git-Commit-Messages:
       true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
-    - if [ ! "$CI_PROJECT_NAME = "$PROJECT_NAME" ]; then
+    # Install cURL/unzip packages, download/unzip artifacts from 'ci-commons'.
+    - |
+      if [ ! "$CI_PROJECT_NAME = "$PROJECT_NAME" ]; then
         # Install "cURL" Debian package.
         apt-get install --yes curl;
         # Download artifacts from 'ci-commons' project.
