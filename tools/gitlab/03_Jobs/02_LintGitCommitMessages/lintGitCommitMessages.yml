@@ -22,7 +22,7 @@ Lint-Git-Commit-Messages:
     - apt-get update
     # Install cURL/unzip packages, download/unzip artifacts from 'ci-commons'.
     - |
-      if [[ ! "$CI_PROJECT_NAME == "$PROJECT_NAME" ]]; then
+      if [[ "$CI_PROJECT_NAME != "$PROJECT_NAME" ]]; then
         # Install "cURL" Debian package.
         apt-get install --yes curl;
         # Download artifacts from 'ci-commons' project.
