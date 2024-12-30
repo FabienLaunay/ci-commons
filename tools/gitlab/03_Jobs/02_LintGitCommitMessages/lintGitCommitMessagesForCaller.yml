@@ -52,7 +52,7 @@ Lint-Git-Commit-Messages-For-Caller:
     # Run job script commands defined in artifact from 'ci-commons' project.
     - ls -l
     - ls -l ci-commons/tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash
-    - echo "Execution directory: '$(pwd)'"
+    - echo -e "Execution directory = '$(pwd)'"
     - bash ci-commons/tools/gitlab/03_Jobs/01_Commons/lintGitCommitMessages.bash \
       "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
       "$CI_COMMIT_SHA" \
