@@ -20,8 +20,8 @@ Lint-Git-Commit-Messages:
       true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
-    # Install cURL/unzip packages, download/unzip artifacts from 'ci-commons'.
     - |
+      # Install cURL/unzip packages, download/unzip artifacts from 'ci-commons'.
       if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
         # Install "cURL" Debian package.
         apt-get install --yes curl;
@@ -30,8 +30,7 @@ Lint-Git-Commit-Messages:
           --location \
           --header "PRIVATE-TOKEN:$CI_PERSONAL_ACCESS_TOKEN" \
           --output artifacts.zip \
-          "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/\
-        download?job=Generate-Artifacts"
+          "https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main/download?job=Generate-Artifacts"
         # Install "unzip" Debian package.
         apt-get install --yes unzip;
         # Unzip downloaded artifacts.
