@@ -19,17 +19,34 @@ fi
 printLargeTextBoxForGitHooks "Commit Message Hook"
 
 currentL1TaskNumber="1"
-totalL1TaskCount="2"
-
-# ==============================================================================
-# Prefix Git commit message title with emoji
-# ==============================================================================
+totalL1TaskCount="3"
 
 python='C:\ProgramFiles\Code\Python\python.exe'
 if [ ! -x "$python" ]; then
   echo 'python not found.' 1>&2
   exit 1
 fi
+
+# ==============================================================================
+# Check user e-mail address
+# ==============================================================================
+
+printStartingL1TaskTextBox "user e-mail address verification"
+
+command="$python
+  ci-commons/tools/git/hooks/py/emailAddressCheck.py"
+printExecutingCommand "$command"
+$command
+
+if [[ $? -ne 0 ]]; then
+  printCompletedL1TaskTextBoxAndIncrementCounter
+  exit 1
+fi
+printCompletedL1TaskTextBoxAndIncrementCounter
+
+# ==============================================================================
+# Prefix Git commit message title with emoji
+# ==============================================================================
 
 printStartingL1TaskTextBox "prefix Git commit message title with emoji"
 

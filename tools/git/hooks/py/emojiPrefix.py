@@ -22,7 +22,7 @@ def getTypesArray():
         sys.exit(1)
 
     # Initialize ConfigParser and read the config file
-    config = configparser.ConfigParser()
+    config = configparser.ConfigParser(interpolation=None)
     config.read(config_file_path, encoding='utf-8')
 
     # Check if the 'title-match-regex' section and 'regex' option exist
