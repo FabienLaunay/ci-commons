@@ -1,1 +1,4 @@
-pre-commit run --config cfg/pre-commit/preCommitConfig.yaml
+pre-commit \
+  run \
+    --config \
+    cfg/pre-commit/preCommitConfig.yaml
