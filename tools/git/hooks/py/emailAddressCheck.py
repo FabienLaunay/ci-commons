@@ -51,12 +51,11 @@ def get_git_user_email():
         sys.exit(1)
 
 email_regex = get_email_regex()
-print(f"email_regex='{email_regex}'")
 compiled_regex = re.compile(email_regex)
 
 git_user_email = get_git_user_email()
 
 if not re.search(compiled_regex,git_user_email):
-    message = "Git user e-mail address '{git_user_email}' does not satisfy regular expression '{email_regex}'."
+    message = f"Git user e-mail address '{git_user_email}' does not satisfy regular expression '{email_regex}'."
     printError(message)
     sys.exit(1)
