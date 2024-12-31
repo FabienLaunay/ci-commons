@@ -14,7 +14,7 @@ def getTypesArray():
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Define the relative path to the configuration file
-    config_file_path = os.path.join(script_dir, '../gitlint/gitlint.cfg')
+    config_file_path = os.path.join(script_dir, '../../../gitlint/gitlint.cfg')
 
     # Check if the config file exists
     if not os.path.exists(config_file_path):

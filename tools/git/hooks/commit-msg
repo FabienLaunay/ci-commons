@@ -34,7 +34,7 @@ fi
 printStartingL1TaskTextBox "prefix Git commit message title with emoji"
 
 command="$python
-  ci-commons/tools/emojiPrefix/emojiPrefix.py
+  ci-commons/tools/git/hooks/py/emojiPrefix.py
   $1"
 printExecutingCommand "$command"
 $command
