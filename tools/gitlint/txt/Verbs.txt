@@ -1,9 +1,11 @@
 add
 change
+define
 fix
 merge
 move
 refactor
 remove
+set
 split
 update
