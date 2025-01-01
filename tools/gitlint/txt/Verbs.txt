@@ -2,6 +2,7 @@ add
 change
 define
 fix
+make
 merge
 move
 refactor

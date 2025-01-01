@@ -3,12 +3,10 @@ Spell-Check-Git-Commit-Messages-For-Self:
   rules:
     # Trigger job on push to main branch.
     - if: >
-        $CI_PROJECT_NAME == $PROJECT_NAME &&
         $CI_PIPELINE_SOURCE == "push" &&
         $CI_COMMIT_BRANCH == "main"
     # Trigger job on merge request to main branch.
     - if: >
-        $CI_PROJECT_NAME == $PROJECT_NAME &&
         $CI_PIPELINE_SOURCE == "merge_request_event" &&
         $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   image:
@@ -22,11 +20,47 @@ Spell-Check-Git-Commit-Messages-For-Self:
       true]\r\e[0K$FG_COLOR_CYAN Before script commands$UNSET_STYLE_ALL"
     # Update Debian local package index.
     - apt-get update
+    # Install "cURL" Debian package.
+    - |
+      # Install "cURL" Debian package.
+      if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
+        # Install "cURL" Debian package.
+        apt-get install --yes curl;
+      fi
+    # Download artifacts from 'ci-commons' project.
+    - |
+      # Download artifacts from 'ci-commons' project.
+      if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
+        url="https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main"
+        url="${url}/download?job=Generate-Artifacts"        
+        curl \
+          --location \
+          --header "PRIVATE-TOKEN:$CI_PERSONAL_ACCESS_TOKEN" \
+          --output artifacts.zip \
+          $url
+      fi
+    # Install "unzip" Debian package.
+    - |
+      # Install "unzip" Debian package.
+      if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
+        # Install "unzip" Debian package.
+        apt-get install --yes unzip;
+      fi
+    # Unzip downloaded artifacts.
+    - |
+      # Unzip downloaded artifacts.
+      if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
+        # Unzip downloaded artifacts.
+        unzip artifacts.zip;
+        ls -l
+      fi
     # Print splash screen.
     - bash tools/gitlab/03_Jobs/01_Commons/01_SplashScreen.bash \
       "Git Commit Messages Spell Checker"
-    # Install Git and Codspell.
-    - bash tools/gitlab/03_Jobs/01_Commons/02_InstallDebianPackages.bash "1" "3" "git codespell"
+    # Install Git.
+    - bash tools/gitlab/03_Jobs/01_Commons/02_InstallDebianPackages.bash "1" "3" "git"
+    # Install Codspell.
+    - bash tools/gitlab/03_Jobs/01_Commons/02_InstallDebianPackages.bash "2" "3" "codespell"
     # End marker for before script commands section.
     - |
       # [OUT] Collapse before script commands 
@@ -47,7 +81,7 @@ Spell-Check-Git-Commit-Messages-For-Self:
       elif [[ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" == "main" ]]; then
         bash tools/gitlab/03_Jobs/01_Commons/spellCheckGitCommitMessages.bash \
           "$CI_MERGE_REQUEST_DIFF_BASE_SHA" \
-          "$CI_COMMIT_SHA"        
+          "$CI_COMMIT_SHA"
       fi
     # End marker for script commands section.
     - |
