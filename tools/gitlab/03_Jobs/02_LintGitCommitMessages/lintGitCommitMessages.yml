@@ -33,6 +33,7 @@ Lint-Git-Commit-Messages:
       if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
         url="https://gitlab.com/api/v4/projects/$PROJECT_ID/jobs/artifacts/main"
         url="${url}/download?job=Generate-Artifacts"
+        echo "url='${url}'"
         curl \
           --location \
           --header "PRIVATE-TOKEN:$CI_PERSONAL_ACCESS_TOKEN" \
