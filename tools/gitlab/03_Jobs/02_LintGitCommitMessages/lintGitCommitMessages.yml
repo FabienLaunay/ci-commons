@@ -51,6 +51,7 @@ Lint-Git-Commit-Messages:
       # Unzip downloaded artifacts.
       if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
         # Unzip downloaded artifacts.
+        ls -la
         unzip artifacts.zip;
       fi
     # Print splash screen.
