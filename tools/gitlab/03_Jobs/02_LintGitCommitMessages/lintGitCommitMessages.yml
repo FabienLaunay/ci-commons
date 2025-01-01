@@ -52,7 +52,9 @@ Lint-Git-Commit-Messages:
       if [[ "$CI_PROJECT_NAME" != "$PROJECT_NAME" ]]; then
         # Unzip downloaded artifacts.
         ls -la
-        unzip artifacts.zip;
+        file artifacts.zip
+        ls -lh artifacts.zip
+        unzip -v artifacts.zip;
       fi
     # Print splash screen.
     - bash tools/gitlab/03_Jobs/01_Commons/01_SplashScreen.bash \
