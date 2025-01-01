@@ -19,7 +19,7 @@ fi
 printLargeTextBoxForGitHooks "Commit Message Hook"
 
 currentL1TaskNumber="1"
-totalL1TaskCount="3"
+totalL1TaskCount="4"
 
 python='C:\ProgramFiles\Code\Python\python.exe'
 if [ ! -x "$python" ]; then
@@ -80,6 +80,28 @@ $command
 if [[ $? -ne 0 ]]; then
   echo ''
   printErrorMessage "Git commit message linting failed. Please fix the issues listed above."
+  printCompletedL1TaskTextBoxAndIncrementCounter
+  exit 1
+fi
+
+printCompletedL1TaskTextBoxAndIncrementCounter
+
+# ==============================================================================
+# Check Git commit message spelling
+# ==============================================================================
+
+printStartingL1TaskTextBox "spell check of Git commit message"
+
+command="codespell
+  ../$1
+  --ignore-words=tools/codespell/ignoreWords.txt"
+
+printExecutingCommand "$command"
+$command
+
+if [[ $? -ne 0 ]]; then
+  echo ''
+  printErrorMessage "Git commit message spell check failed. Please fix the issues listed above."
   printCompletedL1TaskTextBoxAndIncrementCounter
   exit 1
 fi
