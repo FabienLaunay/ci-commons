@@ -31,8 +31,6 @@ for commit in $commits; do
 
 	commitSubject=$(git log -n 1 --format=%s $commit)
 
-echo "[lintGitCommitMessages.bash] Execution path: '$(pwd)'"
-
 	#Print command and run it.
 	command="gitlint
 	--config tools/gitlint/gitlint.cfg

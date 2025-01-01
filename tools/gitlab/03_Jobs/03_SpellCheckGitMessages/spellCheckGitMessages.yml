@@ -1,4 +1,4 @@
-Spell-Check-Git-Commit-Messages-For-Self:
+Spell-Check-Git-Commit-Messages:
   stage: check
   rules:
     # Trigger job on push to main branch.
