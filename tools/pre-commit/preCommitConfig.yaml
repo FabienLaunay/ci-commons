@@ -35,8 +35,7 @@ repos:
       - id: codespell
         name: <01/01> Check spelling in text files.
         exclude: >
-          (CHANGELOG.pdf|
-          ci-commons/tools/gitlint/txt/Verbs.txt|
+          (ci-commons/tools/gitlint/txt/Verbs.txt|
           ci-commons/tools/codespell/ignoreWords.txt
           )
         args:

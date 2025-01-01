@@ -8,5 +8,6 @@ move
 refactor
 remove
 set
+simplify
 split
 update
