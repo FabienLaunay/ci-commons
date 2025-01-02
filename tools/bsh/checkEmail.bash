@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the regex pattern for valid email
-regex="^[a-zA-Z0-9._%+-]+@gmail\.cxm$"
+regex="^[a-zA-Z0-9._%+-]+@gmail\.com$"
 
 # Get the user email from Git config
 email=$(git config --get user.email)

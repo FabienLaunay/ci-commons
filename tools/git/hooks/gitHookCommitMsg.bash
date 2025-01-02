@@ -1,9 +1,12 @@
 #!/bin/bash
 
-script_dir=$(dirname "$(realpath "$0")")
-echo "[gitHookCommitMsg.bash] script_dir='${script_dir}'"
+scriptDirectory=$(dirname "$(realpath "$0")")
+echo "[gitHookCommitMsg.bash] scriptDirectory ='${scriptDirectory}'"
 
-. ci-commons/tools/common/bsh/message.bash
+workindDirectory=$(pwd)
+echo "[gitHookCommitMsg.bash] workindDirectory='${workindDirectory}'"
+
+. tools/common/bsh/message.bash
 
 # ==============================================================================
 # Print header
@@ -20,7 +23,7 @@ totalL1TaskCount="1"
 
 printStartingL1TaskTextBox "user e-mail address verification"
 
-command="bsh/checkEmail.bash"
+command="tools/bsh/checkEmail.bash"
 printExecutingCommand "$command"
 $command
 
