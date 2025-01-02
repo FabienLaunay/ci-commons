@@ -7,7 +7,7 @@ toolsDirectory="${scriptDirectory%/git/hooks}"
 
 echo "[gitHookCommitMsg.bash] toolsDirectory  ='${toolsDirectory}'"
 
-. tools/common/bsh/message.bash
+. $toolsDirectory/common/bsh/message.bash
 
 # ==============================================================================
 # Print header
@@ -24,7 +24,7 @@ totalL1TaskCount="1"
 
 printStartingL1TaskTextBox "user e-mail address verification"
 
-command="tools/bsh/checkEmail.bash"
+command="$toolsDirectory/bsh/checkEmail.bash"
 printExecutingCommand "$command"
 $command
 
