@@ -13,18 +13,6 @@ if [[ -e "$script_dir/../../../copyToolsToCiCommons" ]]; then
     --checksum \
     tools \
     ci-commons
-#  ((totalL1TaskCount++))
-#  printStartingL1TaskTextBox "'tools' directory copy to 'ci-commons'"
-#  command="rsync
-#  --archive
-#  --delete
-#  --verbose
-#  --checksum
-#  tools
-#  ci-commons"
-#  printExecutingCommand "$command"
-#  $command
-#  printCompletedL1TaskTextBoxAndIncrementCounter
 fi
 
 # ==============================================================================
@@ -78,3 +66,15 @@ if [[ $? -ne 0 ]]; then
 fi
 printCompletedL1TaskTextBoxAndIncrementCounter
 exit 0
+
+# ==============================================================================
+# Check comment header.
+# ==============================================================================
+
+#printStartingL1TaskTextBox "comment header check"
+#
+#command="../../common/bsh/checkCommentHeader.bash"
+#printExecutingCommand "$command"
+#$command
+#
+#printCompletedL1TaskTextBoxAndIncrementCounter

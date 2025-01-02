@@ -1,0 +1,45 @@
+:!row:
+.Checks.
+[cols="35,5,5,5,6,24"]
+|===
+.2+^|Action
+2+^|Git Hook
+3+^|CI Job
+^|#
+^|Type
+^|#
+^|Stage
+^|Name
+
+a|*Spellcheck files*
+
+`tools/bash/SpellCheckFiles.bash`
+>a|{counter:row}
+a|PC
+a|3
+a|check
+a|`Spellcheck-Files`
+
+a|*Check email*
+
+`tools/bash/CheckEmail.bash`
+>a|{counter:row}
+a|CM
+a|1
+a|check
+a|`Check-Email`
+
+a|*Format commit message*
+>a|{counter:row}
+a|CM
+a|-
+a|-
+a|-
+
+a|*Lint commit message*
+>a|{counter:row}
+a|CM
+a|2
+a|-
+a|-
+|===
