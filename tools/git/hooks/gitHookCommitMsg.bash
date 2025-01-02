@@ -3,14 +3,29 @@
 script_dir=$(dirname "$(realpath "$0")")
 echo "[gitHookCommitMsg.bash] script_dir='${script_dir}'"
 
+. ci-commons/tools/common/bsh/message.bash
+
 # ==============================================================================
-# Abort if Git pre-commit hook failed
+# Print header
 # ==============================================================================
 
-LOCK_FILE="tools/git/locks/pre-commit-failed"
+printLargeTextBoxForGitHooks "Commit Message Hook"
 
-if [ -f "$LOCK_FILE" ]; then
-  echo "[gitHookCommitMsg.bash] Git pre-commit hook failed."
+currentL1TaskNumber="1"
+totalL1TaskCount="1"
+
+# ==============================================================================
+# Check user e-mail address
+# ==============================================================================
+
+printStartingL1TaskTextBox "user e-mail address verification"
+
+command="bsh/checkEmail.bash"
+printExecutingCommand "$command"
+$command
+
+if [[ $? -ne 0 ]]; then
+  printCompletedL1TaskTextBoxAndIncrementCounter
   exit 1
 fi
-
+printCompletedL1TaskTextBoxAndIncrementCounter
