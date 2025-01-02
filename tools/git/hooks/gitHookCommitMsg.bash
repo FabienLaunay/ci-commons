@@ -1,11 +1,11 @@
 #!/bin/bash
 
 scriptDirectory=$(dirname "$(realpath "$0")")
-echo "[gitHookCommitMsg.bash] scriptDirectory ='${scriptDirectory}'"
+#echo "[gitHookCommitMsg.bash] scriptDirectory ='${scriptDirectory}'"
 
 toolsDirectory="${scriptDirectory%/git/hooks}"
 
-echo "[gitHookCommitMsg.bash] toolsDirectory  ='${toolsDirectory}'"
+#echo "[gitHookCommitMsg.bash] toolsDirectory  ='${toolsDirectory}'"
 
 . $toolsDirectory/bsh/message.bash
 
