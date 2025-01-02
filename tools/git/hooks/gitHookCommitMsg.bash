@@ -7,7 +7,7 @@ toolsDirectory="${scriptDirectory%/git/hooks}"
 
 echo "[gitHookCommitMsg.bash] toolsDirectory  ='${toolsDirectory}'"
 
-. $toolsDirectory/common/bsh/message.bash
+. $toolsDirectory/bsh/message.bash
 
 # ==============================================================================
 # Print header
